@@ -14,6 +14,6 @@ public interface InvestmentRepository extends JpaRepository<Investment, Long> {
 
     Collection<Investment> findAllByUser(User user);
 
-    Collection<Investment> findAllByUser(Startup startup);
+    Collection<Investment> findAllByStartup(Startup startup);
 
 }
