@@ -8,4 +8,6 @@ import java.io.Serializable;
 public class Investment implements Serializable {
     private long id;
     private int amount;
+    private User user;
+    private Startup startup;
 }
