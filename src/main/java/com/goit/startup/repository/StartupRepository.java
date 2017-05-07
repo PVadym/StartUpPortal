@@ -8,8 +8,6 @@ import java.util.Collection;
 
 
 /**
- * TODO добавить метод поиска, который будет искать введенное слово в названии и в описании одновременно
- *
  * Interface provides a set of methods for the operation with entity {@link Startup}
  *
  * @author Slava Makhinich
@@ -32,5 +30,19 @@ public interface StartupRepository extends JpaRepository<Startup, Long> {
      */
     void deleteByName(Startup name);
 
+    /**
+     * The method finds all startups in database that were created by entered user
+     *
+     * @param user the user whose startups we are looking for
+     * @return collection of startups that were created by entered user
+     */
     Collection<Startup> findAllByUser(User user);
+
+    /**
+     * The method finds all startups in database that contain in their name or description entered keyWord
+     *
+     * @param keyWord a word that we are traing to find in startups name and description
+     * @return a collection of startups that contain entered word in thair name or description
+     */
+    Collection<Startup> findAllByNameOrDescriptionIgnoreCaseContaining(String keyWord);
 }
