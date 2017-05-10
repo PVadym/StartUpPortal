@@ -13,7 +13,7 @@ import java.util.Collection;
  * @author Slava Makhinich
  * @version 1.0
  */
-public interface UserRepository extends JpaRepository<User, Long> {
+public interface UserRepository extends DataRepository<User> {
 
     /**
      * The method finds user in database by name

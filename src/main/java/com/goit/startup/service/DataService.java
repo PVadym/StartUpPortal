@@ -9,6 +9,7 @@ import java.util.Collection;
  *
  * @param <T> Entity type, extends {@link Model}.
  * @author Вадим
+ * @version 1.0
  */
 public interface DataService<T extends Model> {
 

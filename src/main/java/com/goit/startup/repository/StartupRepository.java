@@ -13,7 +13,7 @@ import java.util.Collection;
  * @author Slava Makhinich
  * @version 1.0
  */
-public interface StartupRepository extends JpaRepository<Startup, Long> {
+public interface StartupRepository extends DataRepository<Startup> {
 
     /**
      * The method find product by name from database
@@ -28,7 +28,7 @@ public interface StartupRepository extends JpaRepository<Startup, Long> {
      *
      * @param name a name of product, which must be removed
      */
-    void deleteByName(Startup name);
+    void deleteByName(String name);
 
     /**
      * The method finds all startups in database that contain in their name or description entered keyWord

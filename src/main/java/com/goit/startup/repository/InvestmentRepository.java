@@ -13,6 +13,6 @@ import java.util.Collection;
  * @author Slava Makhinich
  * @version 1.0
  */
-public interface InvestmentRepository extends JpaRepository<Investment, Long> {
+public interface InvestmentRepository extends DataRepository<Investment> {
 
 }
