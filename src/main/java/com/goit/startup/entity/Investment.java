@@ -1,68 +1,94 @@
 package com.goit.startup.entity;
 
-import java.io.Serializable;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 /**
- * TODO
+ * The entity class, describe investment entity, implements a set of standard methods for working with this entity
+ * and extends {@link Model}
+ *
+ * @author Vadym Pylypchenko
+ * @version 1.0
  */
-public class Investment implements Serializable {
-    private long id;
+
+@Entity
+@Table(name = "investment")
+public class Investment extends Model {
+
+    /**
+     * Amount of investment
+     */
+    @Column(name = "amount", nullable = false)
     private int amount;
-    private User user;
-    private Startup startup;
 
-    private Investment() {
+    /**
+     * Default constructor
+     */
+    public Investment() {
+        this.amount = 0;
     }
 
-    public static Builder newBuilder() {
-        return new Investment().new Builder();
-    }
-
-    public class Builder {
-
-        private Builder() {
-            // private constructor
-        }
-
-        public Builder setId(long id) {
-            Investment.this.id = id;
-
-            return this;
-        }
-
-        public Builder setAmount(int amount) {
-            Investment.this.amount = amount;
-
-            return this;
-        }
-
-        public Builder setUser(User user) {
-            Investment.this.user = user;
-
-            return this;
-        }
-
-        public Builder setStartup(Startup startup) {
-            Investment.this.startup = startup;
-
-            return this;
-        }
-
-        public Investment build() {
-            return Investment.this;
-        }
-
-
-    }
-
+    /**
+     * Method return a string representation of the investment.
+     *
+     * @return a string representation of the investment.
+     */
     @Override
     public String toString() {
-        return "Investment{" +
-                "id=" + id +
-                ", amount=" + amount +
-                ", user=" + user +
-                ", startup=" + startup +
-                '}';
+        return "Investment{" + super.toString() +
+                "amount=" + amount +
+                "} " ;
     }
+
+    /**
+     * Indicates whether some other object is "equal to" this one.
+     *
+     * @param object The reference object with which to compare.
+     * @return true if this object is the same as the obj argument
+     */
+
+    @Override
+    public boolean equals(Object object) {
+
+        if (!super.equals(object)) return false;
+
+        Investment that = (Investment) object;
+
+        return amount == that.amount;
+
+    }
+
+    /**
+     * Method for getting a hashcode value of the instance
+     *
+     * @return an integer, hash code value of the instance
+     */
+    @Override
+    public int hashCode() {
+        int res = 31*this.amount;
+        return res;
+    }
+
+    /**
+     * A getter for the field amount.
+     *
+     * @return a amount of investment.
+     */
+    public int getAmount() {
+        return amount;
+    }
+
+    /**
+     * A setter for the field amount.
+     *
+     * @param amount a amount of investment.
+     */
+    public void setAmount(int amount) {
+        this.amount = amount > 0 ? amount:0;
+    }
+
+
 
 }
