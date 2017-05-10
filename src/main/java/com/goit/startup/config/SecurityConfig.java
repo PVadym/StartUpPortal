@@ -22,7 +22,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 
 @Configuration
 @EnableWebSecurity
-@ComponentScan(basePackages = "com.management.product.service")
+@ComponentScan(basePackages = "com.goit.startup.service")
 @PropertySource("classpath:security.properties")
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 

@@ -26,8 +26,8 @@ import javax.sql.DataSource;
  */
 @Configuration
 @EnableTransactionManagement
-@EnableJpaRepositories(basePackages = "com.management.product.repository")
-@ComponentScan(basePackages = "com.management.product.entity")
+@EnableJpaRepositories(basePackages = "com.goit.startup.repository")
+@ComponentScan(basePackages = "com.goit.startup.entity")
 @PropertySource(value = "classpath:database.properties")
 public class RootConfig {
 
