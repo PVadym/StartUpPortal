@@ -30,14 +30,6 @@ public interface StartupRepository extends JpaRepository<Startup, Long> {
      */
     void deleteByName(Startup name);
 
-//    /**
-//     * The method finds all startups in database that were created by entered user
-//     *
-//     * @param user the user whose startups we are looking for
-//     * @return collection of startups that were created by entered user
-//     */
-//    Collection<Startup> findAllByUser(User user);
-
     /**
      * The method finds all startups in database that contain in their name or description entered keyWord
      *
