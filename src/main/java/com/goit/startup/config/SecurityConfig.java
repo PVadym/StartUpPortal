@@ -1,7 +1,6 @@
 package com.goit.startup.config;
 
 import com.goit.startup.enums.UserRole;
-import com.management.product.enums.UserRole;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.ComponentScan;
