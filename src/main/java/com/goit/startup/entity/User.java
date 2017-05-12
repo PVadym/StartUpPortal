@@ -73,6 +73,20 @@ public class User extends Model implements UserDetails {
     }
 
     /**
+     * Constructor
+     *
+     * @param username user's name
+     * @param password user's password
+     * @param role     user's role
+     */
+    public User(String username, String password, UserRole role) {
+        super();
+        setUsername(username);
+        setRole(role);
+        setPassword(password);
+    }
+
+    /**
      * Method for getting string representation of instances of the User class.
      *
      * @return a string representation of the instance.
