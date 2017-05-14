@@ -13,27 +13,14 @@
 <body>
 <%@include file="/WEB-INF/views/navbar.jsp" %>
 <div class="container">
-    <hr>
     <div class="row">
-         <div class="col-lg-9">
+        <div class="col-lg-5">
             <div class="jumbotron ">
-
-                    <div class="row">
-                        <h4 class="col-lg-3">Name:</h4>
-                        <div class="well col-lg-6">${user.name}</div>
-                    </div>
-                    <a class="btn btn-block btn-primary" role="button"
-                       href="<c:url value="/wp/add/${selectedProject.id}"/>">Add new WP</a>
-
-
+                <h4 class="col-lg-5">Name: ${user.username}</h4>
             </div>
-            <a class="btn btn-block btn-primary" role="button" href="<c:url value="/projects/add"/>">Add new Project</a>
-
         </div>
-
     </div>
-
-
+    <a class="btn btn-primary" role="button" href="<c:url value='/startups/add'/>">Add StartUp</a>
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>

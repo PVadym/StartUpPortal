@@ -8,7 +8,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * The entity class, describe user entity, implements a set of standard methods for working with this entity.
@@ -52,14 +53,14 @@ public class User extends Model implements UserDetails {
      */
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
-    private List<Startup> startups;
+    private Set<Startup> startups;
 
     /**
      * A list of investments that the user made
      */
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
-    private List<Investment> investments;
+    private Set<Investment> investments;
 
     /**
      * Default constructor
@@ -68,8 +69,8 @@ public class User extends Model implements UserDetails {
         username = "";
         password = "";
         role = UserRole.USER;
-        startups = new ArrayList<>();
-        investments = new ArrayList<>();
+        startups = new HashSet<>();
+        investments = new HashSet<>();
     }
 
     /**
@@ -274,7 +275,7 @@ public class User extends Model implements UserDetails {
      *
      * @return a list of this users startups
      */
-    public List<Startup> getStartups() {
+    public Set<Startup> getStartups() {
         return startups;
     }
 
@@ -283,7 +284,7 @@ public class User extends Model implements UserDetails {
      *
      * @param startups a list of startups.
      */
-    public void setStartups(List<Startup> startups) {
+    public void setStartups(Set<Startup> startups) {
         this.startups = startups;
     }
 
@@ -292,7 +293,7 @@ public class User extends Model implements UserDetails {
      *
      * @return a list of this users investments.
      */
-    public List<Investment> getInvestments() {
+    public Set<Investment> getInvestments() {
         return investments;
     }
 
@@ -301,7 +302,7 @@ public class User extends Model implements UserDetails {
      *
      * @param investments a list of investments.
      */
-    public void setInvestments(List<Investment> investments) {
+    public void setInvestments(Set<Investment> investments) {
         this.investments = investments;
     }
 }
