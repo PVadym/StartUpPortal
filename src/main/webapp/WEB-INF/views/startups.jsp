@@ -27,9 +27,9 @@
             <c:forEach items="${startups}" var="startup">
                 <tr>
                     <td>${startup.name}</td>
-                    <td>${startup.targetInvestment}</td>
-                    <td>${startup.minimalInvestment}</td>
-                    <td>${startup.currentInvestment}</td>
+                    <td>${startup.needInvestment}</td>
+                    <td>${startup.minInvestment}</td>
+                    <td>${startup.getCurrentInvestments()}</td>
                     <td>
                         <a class="btn btn-xs btn-primary active" role="button" style="margin: 5px"
                            href="<c:url value='/product/${product.id}'/>">Details</a>

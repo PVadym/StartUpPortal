@@ -19,6 +19,13 @@
                 <div class="col-lg-12">
                     <form class="form-horizontal" action="/startups/add" method="post" role="form"
                           style="display: block;" modelAttribute="startUp">
+
+                        <div class="form-group">
+                            <div class="col-sm-10">
+                                <input type="text" name="user.id" class="form-control"
+                                       value="${startUp.user.id}">
+                            </div>
+                        </div>
                         <div class="form-group">
                             <label class="control-label col-sm-2" for="name">Name:</label>
                             <div class="col-sm-10">

@@ -20,7 +20,7 @@
             </div>
         </div>
     </div>
-    <a class="btn btn-primary" role="button" href="<c:url value='/startups/add'/>">Add StartUp</a>
+    <a class="btn btn-primary" role="button" href="<c:url value='/startups/add/${user.id}'/>">Add StartUp</a>
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>

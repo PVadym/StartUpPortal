@@ -1,8 +1,11 @@
 package com.goit.startup.entity;
 
+import javax.jws.soap.SOAPBinding;
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * The entity class, describe startup entity, implements a set of standard methods for working with this entity.
@@ -42,9 +45,14 @@ public class Startup extends Model {
     /**
      * A list of investments that users already  made in this startup
      */
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @JoinColumn(name = "startup_id")
-    private List<Investment> investments;
+    private Set<Investment> investments;
+
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     /**
      * Default constructor
@@ -54,7 +62,7 @@ public class Startup extends Model {
         description = "";
         minInvestment = 0;
         needInvestment = 0;
-        investments = new ArrayList<>();
+        investments = new HashSet<>();
     }
 
     @Override
@@ -180,7 +188,7 @@ public class Startup extends Model {
      *
      * @return A list of investments that users already  made in this startup.
      */
-    public List<Investment> getInvestments() {
+    public Set<Investment> getInvestments() {
         return investments;
     }
 
@@ -189,7 +197,23 @@ public class Startup extends Model {
      *
      * @param investments a list of investments.
      */
-    public void setInvestments(List<Investment> investments) {
+    public void setInvestments(Set<Investment> investments) {
         this.investments = investments;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public int getCurrentInvestments(){
+        int sum = 0;
+        for (Investment investment : investments) {
+            sum += investment.getAmount();
+        }
+        return sum;
     }
 }

@@ -2,10 +2,13 @@ package com.goit.startup.controller;
 
 import com.goit.startup.entity.Startup;
 import com.goit.startup.service.StartupService;
+import com.goit.startup.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import sun.misc.Contended;
 
@@ -22,15 +25,21 @@ public class StartUpController {
 
     private StartupService startupService;
 
+    private UserService userService;
+
     @Autowired
-    public StartUpController(StartupService startupService) {
+    public StartUpController(StartupService startupService, UserService userService) {
         this.startupService = startupService;
+        this.userService = userService;
     }
 
-    @RequestMapping(value = "/add", method = RequestMethod.GET)
-    public ModelAndView addStartupPage(){
+
+    @RequestMapping(value = "/add/{userId}", method = RequestMethod.GET)
+    public ModelAndView addStartupPage(@PathVariable(name = "userId") long userId){
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("startUp", new Startup());
+        Startup startup = new Startup();
+        startup.setUser(userService.get(userId));
+        modelAndView.addObject("startUp", startup);
         modelAndView.setViewName("addStartUp");
         return modelAndView;
     }
@@ -38,6 +47,8 @@ public class StartUpController {
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String addStartup(Startup startup){
+        long userId = startup.getUser().getId();
+        startup.setUser(userService.get(userId));
         startupService.add(startup);
         return "redirect:/";
     }

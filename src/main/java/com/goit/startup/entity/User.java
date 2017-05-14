@@ -51,8 +51,7 @@ public class User extends Model implements UserDetails {
     /**
      * A list of startups that the user create
      */
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private Set<Startup> startups;
 
     /**
@@ -305,4 +304,6 @@ public class User extends Model implements UserDetails {
     public void setInvestments(Set<Investment> investments) {
         this.investments = investments;
     }
+
+
 }
