@@ -32,5 +32,5 @@ public interface StartupService extends DataService<Startup> {
      * @param keyWord a word that we are trying to find in startups name and description
      * @return a collection of startups that contain entered word in thair name or description
      */
-    Collection<Startup> findAllByKeyWord(String keyWord);
+//    Collection<Startup> findAllByKeyWord(String keyWord);
 }
