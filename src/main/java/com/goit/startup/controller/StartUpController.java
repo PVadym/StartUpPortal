@@ -38,7 +38,7 @@ public class StartUpController {
     public ModelAndView addStartupPage(@PathVariable(name = "userId") long userId){
         ModelAndView modelAndView = new ModelAndView();
         Startup startup = new Startup();
-        startup.setUser(userService.get(userId));
+        startup.setAuthor(userService.get(userId));
         modelAndView.addObject("startUp", startup);
         modelAndView.setViewName("addStartUp");
         return modelAndView;
@@ -47,8 +47,8 @@ public class StartUpController {
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String addStartup(Startup startup){
-        long userId = startup.getUser().getId();
-        startup.setUser(userService.get(userId));
+        long userId = startup.getAuthor().getId();
+        startup.setAuthor(userService.get(userId));
         startupService.add(startup);
         return "redirect:/";
     }

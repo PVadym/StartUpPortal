@@ -34,6 +34,9 @@ public class User extends Model implements UserDetails {
     @Column(name = "password", nullable = false)
     private String password;
 
+    @Column(name = "contacts", nullable = false)
+    private String contacts;
+
     /**
      * User's role
      */
@@ -51,14 +54,14 @@ public class User extends Model implements UserDetails {
     /**
      * A list of startups that the user create
      */
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private Set<Startup> startups;
 
     /**
      * A list of investments that the user made
      */
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "investor_id")
     private Set<Investment> investments;
 
     /**
@@ -67,6 +70,7 @@ public class User extends Model implements UserDetails {
     public User() {
         username = "";
         password = "";
+        contacts = "";
         role = UserRole.USER;
         startups = new HashSet<>();
         investments = new HashSet<>();
@@ -96,6 +100,7 @@ public class User extends Model implements UserDetails {
         return "User{" + super.toString() +
                 "username='" + username + '\'' +
                 ", password='" + password + '\'' +
+                ", contacts='" + contacts + '\'' +
                 ", role=" + role +
                 ", isLocked=" + isLocked +
                 ", startups=" + startups +
@@ -118,6 +123,7 @@ public class User extends Model implements UserDetails {
 
         if (username != null ? !username.equals(user.username) : user.username != null) return false;
         if (password != null ? !password.equals(user.password) : user.password != null) return false;
+        if (contacts != null ? !contacts.equals(user.contacts) : user.contacts != null) return false;
         if (role != user.role) return false;
         if (startups != null ? !startups.equals(user.startups) : user.startups != null) return false;
         return investments != null ? investments.equals(user.investments) : user.investments == null;
@@ -132,6 +138,7 @@ public class User extends Model implements UserDetails {
     public int hashCode() {
         int result = username != null ? username.hashCode() : 0;
         result = 31 * result + (password != null ? password.hashCode() : 0);
+        result = 31 * result + (contacts != null ? contacts.hashCode() : 0);
         result = 31 * result + (role != null ? role.hashCode() : 0);
         result = 31 * result + (startups != null ? startups.hashCode() : 0);
         result = 31 * result + (investments != null ? investments.hashCode() : 0);
@@ -233,6 +240,24 @@ public class User extends Model implements UserDetails {
     }
 
     /**
+     * A getter for the contacts.
+     *
+     * @return user's contacts.
+     */
+    public String getContacts() {
+        return contacts;
+    }
+
+    /**
+     * A setter for the contacts.
+     *
+     * @param contacts user's contacts.
+     */
+    public void setContacts(String contacts) {
+        this.contacts = contacts;
+    }
+
+    /**
      * A getter for the field role
      *
      * @return user's role
@@ -304,6 +329,5 @@ public class User extends Model implements UserDetails {
     public void setInvestments(Set<Investment> investments) {
         this.investments = investments;
     }
-
 
 }

@@ -50,9 +50,12 @@ public class Startup extends Model {
     private Set<Investment> investments;
 
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    /**
+     * An author of this startup
+     */
+    @ManyToOne(cascade = CascadeType.REFRESH)
+    @JoinColumn(name = "author_id")
+    private User author;
 
     /**
      * Default constructor
@@ -91,6 +94,7 @@ public class Startup extends Model {
 
         if (minInvestment != startup.minInvestment) return false;
         if (needInvestment != startup.needInvestment) return false;
+        if (author != startup.author) return false;
         if (!name.equals(startup.name)) return false;
         if (description != null ? !description.equals(startup.description) : startup.description != null) return false;
         return investments != null ? investments.equals(startup.investments) : startup.investments == null;
@@ -105,10 +109,24 @@ public class Startup extends Model {
     public int hashCode() {
         int result = name.hashCode();
         result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + (author != null ? author.hashCode() : 0);
         result = 31 * result + minInvestment;
         result = 31 * result + needInvestment;
         result = 31 * result + (investments != null ? investments.hashCode() : 0);
         return result;
+    }
+
+    /**
+     * The method returns the current amount of investment in this startup
+     *
+     * @return the current amount of investment in this startup
+     */
+    public int getCurrentInvestments(){
+        int sum = 0;
+        for (Investment investment : investments) {
+            sum += investment.getAmount();
+        }
+        return sum;
     }
 
     /**
@@ -201,19 +219,22 @@ public class Startup extends Model {
         this.investments = investments;
     }
 
-    public User getUser() {
-        return user;
+    /**
+     * A getter for the field author
+     *
+     * @return this startup's author
+     */
+    public User getAuthor() {
+        return author;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    /**
+     * A setter for the field author
+     *
+     * @param user this startup's author
+     */
+    public void setAuthor(User user) {
+        this.author = user;
     }
 
-    public int getCurrentInvestments(){
-        int sum = 0;
-        for (Investment investment : investments) {
-            sum += investment.getAmount();
-        }
-        return sum;
-    }
 }
