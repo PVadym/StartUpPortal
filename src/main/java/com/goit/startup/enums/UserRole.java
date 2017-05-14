@@ -7,5 +7,5 @@ package com.goit.startup.enums;
  * @version 1.0
  */
 public enum UserRole {
-    USER, ADMIN, GUEST
+    USER, ADMIN
 }
