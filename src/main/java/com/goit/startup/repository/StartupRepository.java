@@ -36,5 +36,5 @@ public interface StartupRepository extends DataRepository<Startup> {
      * @param keyWord a word that we are traing to find in startups name and description
      * @return a collection of startups that contain entered word in thair name or description
      */
-    Collection<Startup> findAllByNameOrDescriptionIgnoreCaseContaining(String keyWord);
+//    Collection<Startup> findAllByNameOrDescriptionIgnoreCaseContaining(String keyWord);
 }
