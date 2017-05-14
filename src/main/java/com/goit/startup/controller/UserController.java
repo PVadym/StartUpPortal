@@ -78,7 +78,7 @@ public class UserController {
         User userToAdd = new User(username, password, role);
         userToAdd.setLocked(isLocked);
         userService.add(userToAdd);
-        return "redirect:/users";
+        return "redirect:/";
     }
 
     /**

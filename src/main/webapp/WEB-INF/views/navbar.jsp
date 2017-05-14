@@ -5,13 +5,13 @@
     <div class="panel-heading">
         <div class="row">
             <h4 class="col-lg-3">
-                <a href="<c:url value='/home'/>">Product Management System</a>
+                <a href="<c:url value='/'/>">User: ${pageContext.request.userPrincipal.name}</a>
             </h4>
             <div class="btn-group pull-right">
-                <a class="btn btn-primary" role="button" href="<c:url value='/home'/>">Products</a>
-                <a class="btn btn-primary" role="button" href="<c:url value='/users'/>">Users</a>
+                <a class="btn btn-primary" role="button" href="<c:url value='/'/>">StartUps</a>
                 <c:choose>
                     <c:when test="${is_admin}">
+                        <a class="btn btn-primary" role="button" href="<c:url value='/users'/>">Users</a>
                         <a class="btn btn-primary" role="button" href="<c:url value='/logout'/>">Logout</a>
                     </c:when>
                     <c:otherwise>
