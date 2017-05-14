@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.jws.WebParam;
+
 
 /**
  * The class provides a set of methods for operations with User entity
@@ -37,6 +39,30 @@ public class UserController {
     @Autowired
     public UserController(UserService userService) {
         this.userService = userService;
+    }
+
+
+    @RequestMapping(value = "/user/{userName}")
+    public ModelAndView getUserPage(@PathVariable(name = "userName") String userName) {
+        ModelAndView modelAndView = new ModelAndView();
+        System.out.println(userName);
+
+        User requestFromUser = userService.getByUsername(userName);
+        System.out.println(requestFromUser);
+        User authenticatedUser = this.userService.getAuthenticatedUser();
+        System.out.println(authenticatedUser);
+
+        if (requestFromUser.equals(authenticatedUser)) {
+
+            modelAndView.addObject("user", requestFromUser);
+            modelAndView.setViewName("userPage");
+            System.out.println("here 1");
+        } else {
+            modelAndView.setViewName("redirect:/login");
+            System.out.println("here 2");
+        }
+
+        return modelAndView;
     }
 
     /**

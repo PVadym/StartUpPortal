@@ -21,6 +21,8 @@
             <h5>You have successfully logged out.</h5>
         </div>
     </c:if>
+
+
     <form action="<c:url value='/login'/>" method='post'>
         <div class="form-group">
             <input id="username" class="form-control" type="text" name="username" required autofocus
@@ -38,6 +40,9 @@
             </a>
         </div>
     </form>
+
+
+
 </div>
 </body>
 </html>
