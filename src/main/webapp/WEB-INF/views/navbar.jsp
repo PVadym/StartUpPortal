@@ -5,7 +5,9 @@
     <div class="panel-heading">
         <div class="row">
             <h4 class="col-lg-3">
-                <a href="<c:url value='/'/>">User: ${pageContext.request.userPrincipal.name}</a>
+                <a href="<c:url value='/user/${pageContext.request.userPrincipal.name}'/>">
+                    User: ${pageContext.request.userPrincipal.name}
+                </a>
             </h4>
             <div class="btn-group pull-right">
                 <a class="btn btn-primary" role="button" href="<c:url value='/'/>">StartUps</a>
