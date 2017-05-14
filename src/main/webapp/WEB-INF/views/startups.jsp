@@ -15,18 +15,18 @@
     <div class="table-responsive">
         <table class="table table-striped">
             <tr>
-                <th>Name</th>
+                <th align="center">Name</th>
                 <th>Target Investment</th>
                 <th>Minimal Investment</th>
                 <th>Current Investments</th>
+                <th>Details</th>
                 <c:if test="${is_admin}">
-                    <th>Edit</th>
                     <th>Delete</th>
                 </c:if>
             </tr>
             <c:forEach items="${startups}" var="startup">
-                <tr>
-                    <td>${startup.name}</td>
+                <tr align="center">
+                    <td width="50%" align="left">${startup.name}</td>
                     <td>${startup.needInvestment}</td>
                     <td>${startup.minInvestment}</td>
                     <td>${startup.getCurrentInvestments()}</td>
@@ -35,10 +35,10 @@
                            href="<c:url value='/product/${product.id}'/>">Details</a>
                     </td>
                     <c:if test="${is_admin}">
-                        <td>
-                            <a class="btn btn-xs btn-primary active" role="button" style="margin: 5px"
-                               href="<c:url value='/admin/product/edit/${product.id}'/>">Edit</a>
-                        </td>
+                        <%--<td>--%>
+                            <%--<a class="btn btn-xs btn-primary active" role="button" style="margin: 5px"--%>
+                               <%--href="<c:url value='/admin/product/edit/${product.id}'/>">Edit</a>--%>
+                        <%--</td>--%>
                         <td>
                             <a class="btn btn-xs btn-danger active" role="button" style="margin: 5px"
                                href="<c:url value="/admin/product/delete/${product.id}"/>">Delete</a>
