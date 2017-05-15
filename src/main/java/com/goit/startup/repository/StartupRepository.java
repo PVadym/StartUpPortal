@@ -3,6 +3,8 @@ package com.goit.startup.repository;
 import com.goit.startup.entity.Startup;
 import com.goit.startup.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.util.Collection;
 
@@ -36,5 +38,5 @@ public interface StartupRepository extends DataRepository<Startup> {
      * @param keyWord a word that we are traing to find in startups name and description
      * @return a collection of startups that contain entered word in thair name or description
      */
-//    Collection<Startup> findAllByNameOrDescriptionIgnoreCaseContaining(String keyWord);
-}
+    @Query("select s from Startup s where s.name like %:keyWord% or s.description like %:keyWord%")
+    Collection<Startup> findAllByKeyWord(@Param("keyWord") String keyWord);}

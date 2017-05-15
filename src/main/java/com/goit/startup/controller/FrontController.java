@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -52,9 +53,15 @@ public class FrontController {
             value = { "", "/", "/index", "home" },
             method = RequestMethod.GET
     )
-    public ModelAndView getIndexPage() {
+    public ModelAndView getIndexPage(@RequestParam(value = "searchWord", defaultValue = "") String searchWord) {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("startups", startupService.getAll());
+
+        if (searchWord.equals("")) {
+            modelAndView.addObject("startups", startupService.getAll());
+        } else {
+            modelAndView.addObject("startups", startupService.findAllByKeyWord(searchWord));
+        }
+
         modelAndView.addObject("is_admin", userService.isAuthenticatedAdmin());
         modelAndView.setViewName("allStartups");
         return modelAndView;

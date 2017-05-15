@@ -83,16 +83,16 @@ public class StartupServiceImpl extends DataServiceImpl<Startup> implements Star
      * @return a collection of startups that contain entered word in their name or description,
      *          if entered word is NULL or whitespaces returns all startups from data base
      */
-//    @Override
-//    @Transactional (readOnly = true)
-//    public Collection<Startup> findAllByKeyWord(String keyWord) {
-//        Collection<Startup> startups;
-//        if (isBlank(keyWord)) {
-//            startups = super.getAll();
-//        } else {
-//            startups = repository.findAllByNameOrDescriptionIgnoreCaseContaining(keyWord);
-//        }
-//        return startups;
-//    }
+    @Override
+    @Transactional (readOnly = true)
+    public Collection<Startup> findAllByKeyWord(String keyWord) {
+        Collection<Startup> startups;
+        if (isBlank(keyWord)) {
+            startups = super.getAll();
+        } else {
+            startups = repository.findAllByKeyWord(keyWord);
+        }
+        return startups;
+    }
 
 }
