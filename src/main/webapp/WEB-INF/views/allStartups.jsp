@@ -20,6 +20,7 @@
                 <th>Minimal Investment</th>
                 <th>Current Investments</th>
                 <th>Details</th>
+                <th>Invest</th>
                 <c:if test="${is_admin}">
                     <th>Delete</th>
                 </c:if>
@@ -33,6 +34,9 @@
                     <td>
                         <a class="btn btn-xs btn-primary" role="button" style="margin: 5px"
                            href="<c:url value='/startups/${startup.id}'/>">Details</a>
+                    </td>                    <td>
+                        <a class="btn btn-xs btn-primary" role="button" style="margin: 5px"
+                           href="<c:url value='/startups/invest/${startup.id}'/>">Invest</a>
                     </td>
                     <c:if test="${is_admin}">
                         <%--<td>--%>

@@ -27,6 +27,9 @@ public class Investment extends Model {
     @ManyToOne
     private User author;
 
+    @ManyToOne
+    private Startup startup;
+
     /**
      * Default constructor
      */
@@ -100,5 +103,13 @@ public class Investment extends Model {
 
     public void setAuthor(User author) {
         this.author = author;
+    }
+
+    public Startup getStartup() {
+        return startup;
+    }
+
+    public void setStartup(Startup startup) {
+        this.startup = startup;
     }
 }

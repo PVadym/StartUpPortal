@@ -13,8 +13,11 @@
 <body>
 <%@include file="/WEB-INF/views/navbar.jsp" %>
 <div class="container">
+
     <div class="row">
+
         <div class="col-lg-3">
+            <h4><b>StartUp's Details</b></h4>
             <div class="jumbotron ">
                 <div class="well well-sm">Name: ${startUp.name}</div>
                 <div class="well well-sm">Minimal Investment: ${startUp.minInvestment}</div>
@@ -23,19 +26,23 @@
                 <div class="well well-sm">Current Investment: ${startUp.getCurrentInvestments()}</div>
             </div>
         </div>
-        <div class="table-responsive">
-            <table class="table table-striped">
-                <tr>
-                    <th>Amount</th>
-                    <th>Author</th>
-                </tr>
-                <c:forEach items="${startUp.investments}" var="investment">
-                    <tr align="center">
-                        <td>${investment.amount}</td>
-                        <td>${investment.author.username}</td>
+
+        <div class="col-lg-9">
+            <h4><b>StartUp's Investments</b></h4>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <tr>
+                        <th>Amount</th>
+                        <th>Author</th>
                     </tr>
-                </c:forEach>
-            </table>
+                    <c:forEach items="${startUp.investments}" var="investment">
+                        <tr align="center">
+                            <td>${investment.amount}</td>
+                            <td>${investment.author.username}</td>
+                        </tr>
+                    </c:forEach>
+                </table>
+            </div>
         </div>
     </div>
 

@@ -1,5 +1,6 @@
 package com.goit.startup.controller;
 
+import com.goit.startup.entity.Investment;
 import com.goit.startup.entity.Startup;
 import com.goit.startup.service.StartupService;
 import com.goit.startup.service.UserService;
@@ -56,11 +57,29 @@ public class StartUpController {
     @RequestMapping(value = "/{startupId}", method = RequestMethod.GET)
     public ModelAndView startUpDetails(@PathVariable(name = "startupId") long startupId){
         ModelAndView modelAndView = new ModelAndView();
-        System.out.println(startupId);
         Startup startup = startupService.get(startupId);
-        System.out.println(startup);
         modelAndView.addObject("startUp", startup);
         modelAndView.setViewName("startUpDetails");
         return modelAndView;
+    }
+
+    @RequestMapping(value = "/invest/{startupId}", method = RequestMethod.GET)
+    public ModelAndView investPage(@PathVariable(name = "startupId") long startupId){
+        ModelAndView modelAndView = new ModelAndView();
+        Startup startup = startupService.get(startupId);
+        modelAndView.addObject("startUp", startup);
+        modelAndView.addObject("investment", new Investment());
+        modelAndView.setViewName("makeInvestment");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/invest", method = RequestMethod.POST)
+    public String investPage(Investment investment){
+        long startupId = investment.getStartup().getId();
+        Startup startup = startupService.get(startupId);
+        modelAndView.addObject("startUp", startup);
+        modelAndView.addObject("investment", new Investment());
+        modelAndView.setViewName("makeInvestment");
+        return "redirect:/startups/" + startup.getId();
     }
 }

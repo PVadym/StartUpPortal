@@ -23,22 +23,28 @@
             </div>
         </div>
         <div class="col-lg-8">
-            <div class="btn-group btn-group-justified">
-                <a class="btn  btn-primary" role="button"
-                   href="<c:url value='/user/${pageContext.request.userPrincipal.name}/true'/>">StartUps</a>
-                <a class="btn  btn-info" role="button"
-                   href="<c:url value='/user/${pageContext.request.userPrincipal.name}/false'/>">Investments</a>
+            <div class="row">
+                <div class="btn-group btn-group-justified">
+                    <a class="btn  btn-primary" role="button"
+                       href="<c:url value='/user/${pageContext.request.userPrincipal.name}/true'/>">StartUps</a>
+                    <a class="btn  btn-info" role="button"
+                       href="<c:url value='/user/${pageContext.request.userPrincipal.name}/false'/>">Investments</a>
+                </div>
             </div>
-            <c:choose>
-                <c:when test="${isStartUps}">
-                    <%@include file="/WEB-INF/views/userStartUps.jsp" %>
-                    <br/>
-                </c:when>
-                <c:otherwise>
-                    <%@include file="/WEB-INF/views/userInvestments.jsp" %>
-                    <br/>
-                </c:otherwise>
-            </c:choose>
+        </div>
+        <div class="col-lg-8">
+            <div class="row">
+                <c:choose>
+                    <c:when test="${isStartUps}">
+                        <%@include file="/WEB-INF/views/userStartUps.jsp" %>
+                        <br/>
+                    </c:when>
+                    <c:otherwise>
+                        <%@include file="/WEB-INF/views/userInvestments.jsp" %>
+                        <br/>
+                    </c:otherwise>
+                </c:choose>
+            </div>
         </div>
     </div>
 </div>
