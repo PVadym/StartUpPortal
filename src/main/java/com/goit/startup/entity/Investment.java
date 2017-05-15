@@ -21,11 +21,11 @@ public class Investment extends Model {
     @Column(name = "amount", nullable = false)
     private int amount;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "investor_id")
     private User investor;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REFRESH)
     private Startup startup;
 
     /**

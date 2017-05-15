@@ -25,12 +25,12 @@
         <form class="form-horizontal" action="/investments/invest" method="post" role="form"
               style="display: block;" modelAttribute="investment">
 
-            <div class="form-group" >
+            <div class="form-group" hidden>
                 <input type="text" name="startup.id" class="form-control"
                        value="${investment.startup.id}">
             </div>
 
-            <div class="form-group" >
+            <div class="form-group" hidden>
                 <input type="text" name="investor.username" class="form-control"
                        value="${pageContext.request.userPrincipal.name}">
             </div>

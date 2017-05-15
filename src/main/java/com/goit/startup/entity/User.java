@@ -60,7 +60,7 @@ public class User extends Model implements UserDetails {
     /**
      * A list of investments that the user made
      */
-    @OneToMany(mappedBy = "author",cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "investor",cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private Set<Investment> investments;
 
     /**
