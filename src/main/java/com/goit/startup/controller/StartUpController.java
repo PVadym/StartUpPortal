@@ -52,4 +52,15 @@ public class StartUpController {
         startupService.add(startup);
         return "redirect:/";
     }
+
+    @RequestMapping(value = "/{startupId}", method = RequestMethod.GET)
+    public ModelAndView startUpDetails(@PathVariable(name = "startupId") long startupId){
+        ModelAndView modelAndView = new ModelAndView();
+        System.out.println(startupId);
+        Startup startup = startupService.get(startupId);
+        System.out.println(startup);
+        modelAndView.addObject("startUp", startup);
+        modelAndView.setViewName("startUpDetails");
+        return modelAndView;
+    }
 }

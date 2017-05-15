@@ -51,8 +51,8 @@ public class UserController {
 
 
 
-    @RequestMapping(value = "/user/{userName}")
-    public ModelAndView getUserPage(@PathVariable(name = "userName") String userName) {
+    @RequestMapping(value = "/user/{userName}/{isStartUp}")
+    public ModelAndView getUserPage(@PathVariable(name = "userName") String userName, @PathVariable(name = "isStartUp") boolean isStartUp) {
         ModelAndView modelAndView = new ModelAndView();
         User requestFromUser = userService.getByUsername(userName);
         User authenticatedUser = this.userService.getAuthenticatedUser();
@@ -60,6 +60,13 @@ public class UserController {
         if (requestFromUser.equals(authenticatedUser)) {
 
             modelAndView.addObject("user", requestFromUser);
+            modelAndView.addObject("isStartUps", isStartUp);
+            if(isStartUp){
+                modelAndView.addObject("startups", authenticatedUser.getStartups());
+            }
+            else {
+                modelAndView.addObject("investments", authenticatedUser.getInvestments());
+            }
             modelAndView.setViewName("userPage");
         } else {
             modelAndView.setViewName("redirect:/login");

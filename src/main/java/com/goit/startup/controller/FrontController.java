@@ -56,7 +56,7 @@ public class FrontController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("startups", startupService.getAll());
         modelAndView.addObject("is_admin", userService.isAuthenticatedAdmin());
-        modelAndView.setViewName("startups");
+        modelAndView.setViewName("allStartups");
         return modelAndView;
     }
 

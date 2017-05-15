@@ -87,18 +87,19 @@ public class Startup extends Model {
      */
     @Override
     public boolean equals(Object o) {
-        if (!super.equals(o))
-            return false;
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
 
         Startup startup = (Startup) o;
 
         if (minInvestment != startup.minInvestment) return false;
         if (needInvestment != startup.needInvestment) return false;
-        if (author != startup.author) return false;
-        if (!name.equals(startup.name)) return false;
-        if (description != null ? !description.equals(startup.description) : startup.description != null) return false;
-        return investments != null ? investments.equals(startup.investments) : startup.investments == null;
+        if (name != null ? !name.equals(startup.name) : startup.name != null) return false;
+        return description != null ? description.equals(startup.description) : startup.description == null;
+
     }
+
 
     /**
      * Method for getting a hashcode value of the instance
@@ -107,12 +108,10 @@ public class Startup extends Model {
      */
     @Override
     public int hashCode() {
-        int result = name.hashCode();
+        int result = name != null ? name.hashCode() : 0;
         result = 31 * result + (description != null ? description.hashCode() : 0);
-        result = 31 * result + (author != null ? author.hashCode() : 0);
         result = 31 * result + minInvestment;
         result = 31 * result + needInvestment;
-        result = 31 * result + (investments != null ? investments.hashCode() : 0);
         return result;
     }
 
@@ -121,7 +120,7 @@ public class Startup extends Model {
      *
      * @return the current amount of investment in this startup
      */
-    public int getCurrentInvestments(){
+    public int getCurrentInvestments() {
         int sum = 0;
         for (Investment investment : investments) {
             sum += investment.getAmount();

@@ -14,13 +14,33 @@
 <%@include file="/WEB-INF/views/navbar.jsp" %>
 <div class="container">
     <div class="row">
-        <div class="col-lg-5">
+        <div class="col-lg-4">
             <div class="jumbotron ">
-                <h4 class="col-lg-5">Name: ${user.username}</h4>
+                <div class="well well-sm">Name: ${user.username}</div>
+                <div class="well well-sm">Contacts: ${user.contacts}</div>
+                <a class="btn-sm  btn-primary pull-right" role="button"
+                   href="<c:url value='/startups/add/${user.id}'/>">Add StartUp</a>
             </div>
         </div>
+        <div class="col-lg-8">
+            <div class="btn-group btn-group-justified">
+                <a class="btn  btn-primary" role="button"
+                   href="<c:url value='/user/${pageContext.request.userPrincipal.name}/true'/>">StartUps</a>
+                <a class="btn  btn-info" role="button"
+                   href="<c:url value='/user/${pageContext.request.userPrincipal.name}/false'/>">Investments</a>
+            </div>
+            <c:choose>
+                <c:when test="${isStartUps}">
+                    <%@include file="/WEB-INF/views/userStartUps.jsp" %>
+                    <br/>
+                </c:when>
+                <c:otherwise>
+                    <%@include file="/WEB-INF/views/userInvestments.jsp" %>
+                    <br/>
+                </c:otherwise>
+            </c:choose>
+        </div>
     </div>
-    <a class="btn btn-primary" role="button" href="<c:url value='/startups/add/${user.id}'/>">Add StartUp</a>
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>

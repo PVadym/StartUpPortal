@@ -20,10 +20,10 @@
                     <form class="form-horizontal" action="/startups/add" method="post" role="form"
                           style="display: block;" modelAttribute="startUp">
 
-                        <div class="form-group">
+                        <div class="form-group" hidden>
                             <div class="col-sm-10">
-                                <input type="text" name="user.id" class="form-control"
-                                       value="${startUp.user.id}">
+                                <input type="text" name="author.id" class="form-control"
+                                       value="${startUp.author.id}">
                             </div>
                         </div>
                         <div class="form-group">

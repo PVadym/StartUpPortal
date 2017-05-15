@@ -31,8 +31,8 @@
                     <td>${startup.minInvestment}</td>
                     <td>${startup.getCurrentInvestments()}</td>
                     <td>
-                        <a class="btn btn-xs btn-primary active" role="button" style="margin: 5px"
-                           href="<c:url value='/product/${product.id}'/>">Details</a>
+                        <a class="btn btn-xs btn-primary" role="button" style="margin: 5px"
+                           href="<c:url value='/startups/${startup.id}'/>">Details</a>
                     </td>
                     <c:if test="${is_admin}">
                         <%--<td>--%>
@@ -40,7 +40,7 @@
                                <%--href="<c:url value='/admin/product/edit/${product.id}'/>">Edit</a>--%>
                         <%--</td>--%>
                         <td>
-                            <a class="btn btn-xs btn-danger active" role="button" style="margin: 5px"
+                            <a class="btn btn-xs btn-danger" role="button" style="margin: 5px"
                                href="<c:url value="/admin/product/delete/${product.id}"/>">Delete</a>
                         </td>
                     </c:if>

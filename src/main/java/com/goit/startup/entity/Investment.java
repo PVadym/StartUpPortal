@@ -3,6 +3,7 @@ package com.goit.startup.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -23,6 +24,9 @@ public class Investment extends Model {
     @Column(name = "amount", nullable = false)
     private int amount;
 
+    @ManyToOne
+    private User author;
+
     /**
      * Default constructor
      */
@@ -39,36 +43,37 @@ public class Investment extends Model {
     public String toString() {
         return "Investment{" + super.toString() +
                 "amount=" + amount +
-                "} " ;
+                "} ";
     }
 
     /**
      * Indicates whether some other object is "equal to" this one.
      *
-     * @param object The reference object with which to compare.
+     * @param o The reference object with which to compare.
      * @return true if this object is the same as the obj argument
      */
-
     @Override
-    public boolean equals(Object object) {
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
 
-        if (!super.equals(object)) return false;
-
-        Investment that = (Investment) object;
+        Investment that = (Investment) o;
 
         return amount == that.amount;
 
     }
+
 
     /**
      * Method for getting a hashcode value of the instance
      *
      * @return an integer, hash code value of the instance
      */
+
     @Override
     public int hashCode() {
-        int res = 31*this.amount;
-        return res;
+        return amount;
     }
 
     /**
@@ -86,9 +91,14 @@ public class Investment extends Model {
      * @param amount a amount of investment.
      */
     public void setAmount(int amount) {
-        this.amount = amount > 0 ? amount:0;
+        this.amount = amount > 0 ? amount : 0;
     }
 
+    public User getAuthor() {
+        return author;
+    }
 
-
+    public void setAuthor(User author) {
+        this.author = author;
+    }
 }
