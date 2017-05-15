@@ -12,10 +12,10 @@
 <div class="container">
     <div class="jumbotron col-md-4">
         <h4><b>StartUp's Details</b></h4>
-        <div class="well well-sm">Name: ${startUp.name}</div>
-        <div class="well well-sm">Minimal Investment: ${startUp.minInvestment}</div>
-        <div class="well well-sm">Target Investment: ${startUp.needInvestment}</div>
-        <div class="well well-sm">Current Investment: ${startUp.getCurrentInvestments()}</div>
+        <div class="well well-sm">Name: ${investment.startup.name}</div>
+        <div class="well well-sm">Minimal Investment: ${investment.startup.minInvestment}</div>
+        <div class="well well-sm">Target Investment: ${investment.startup.needInvestment}</div>
+        <div class="well well-sm">Current Investment: ${investment.startup.getCurrentInvestments()}</div>
     </div>
 
     <div class="col-xs-1"></div>
@@ -26,9 +26,15 @@
               style="display: block;" modelAttribute="investment">
 
             <div class="form-group" >
+                <input type="text" name="startup.id" class="form-control"
+                       value="${investment.startup.id}">
+            </div>
+
+            <div class="form-group" >
                 <input type="text" name="author.username" class="form-control"
                        value="${pageContext.request.userPrincipal.name}">
             </div>
+
             <div class="form-group">
                 <div class="row">
                     <input type="number" name="amount" id="amount" tabindex="1"

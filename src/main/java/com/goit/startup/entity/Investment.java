@@ -1,10 +1,7 @@
 package com.goit.startup.entity;
 
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * The entity class, describe investment entity, implements a set of standard methods for working with this entity
@@ -25,6 +22,7 @@ public class Investment extends Model {
     private int amount;
 
     @ManyToOne
+    @JoinColumn(name = "author_id")
     private User author;
 
     @ManyToOne

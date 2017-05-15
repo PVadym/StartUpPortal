@@ -20,7 +20,7 @@
             <h4><b>StartUp's Details</b></h4>
             <div class="jumbotron ">
                 <div class="well well-sm">Name: ${startUp.name}</div>
-                <div class="well well-sm">Minimal Investment: ${startUp.minInvestment}</div>
+                <div class="well well-sm">Min. Investment: ${startUp.minInvestment}</div>
                 <div class="well well-sm">Target Investment: ${startUp.needInvestment}</div>
                 <div class="well well-sm">Current Investment: ${startUp.getCurrentInvestments()}</div>
                 <div class="well well-sm">Current Investment: ${startUp.getCurrentInvestments()}</div>
