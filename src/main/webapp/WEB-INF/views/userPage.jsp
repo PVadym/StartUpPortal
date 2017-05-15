@@ -18,7 +18,10 @@
             <div class="jumbotron ">
                 <div class="well well-sm">Name: ${user.username}</div>
                 <div class="well well-sm">Contacts: ${user.contacts}</div>
-                <a class="btn-sm  btn-primary pull-right" role="button"
+                <a class="btn-sm " role="button"
+                   href="<c:url value='/user/edit/${user.id}'/>">Edit Personal Info</a>
+
+                <a class="btn  btn-success" role="button"
                    href="<c:url value='/startups/add/${user.id}'/>">Add StartUp</a>
             </div>
         </div>

@@ -23,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @ComponentScan(basePackages = "com.goit.startup.service")
+@RequestMapping(value = "/user")
 public class UserController {
 
     /**
@@ -48,10 +49,7 @@ public class UserController {
     }
 
 
-
-
-
-    @RequestMapping(value = "/user/{userName}/{isStartUp}")
+    @RequestMapping(value = "/{userName}/{isStartUp}")
     public ModelAndView getUserPage(@PathVariable(name = "userName") String userName, @PathVariable(name = "isStartUp") boolean isStartUp) {
         ModelAndView modelAndView = new ModelAndView();
         User requestFromUser = userService.getByUsername(userName);
@@ -81,7 +79,7 @@ public class UserController {
      * @return a page to add a new user
      */
     @RequestMapping(
-            value = "/user/register",
+            value = "/register",
             method = RequestMethod.GET
     )
     public ModelAndView getNewUserPage() {
@@ -102,7 +100,7 @@ public class UserController {
      * @return an address of users page
      */
     @RequestMapping(
-            value = "/user/register",
+            value = "/register",
             method = RequestMethod.POST
     )
     public String addNewUser(
@@ -137,63 +135,8 @@ public class UserController {
         return modelAndView;
     }
 
-    /**
-     * Method to update user
-     *
-     * @param id       user's id
-     * @param username user's name
-     * @param password user's password
-     * @param role     user's role
-     * @param isLocked information about locking user's account
-     * @return an address of users page
-     */
-    @RequestMapping(
-            value = "/admin/user/update/{id}",
-            method = RequestMethod.POST
-    )
-    public String updateUser(
-            @PathVariable(name = "id") long id,
-            @RequestParam(value = "username", defaultValue = "") String username,
-            @RequestParam(value = "password", defaultValue = "") String password,
-            @RequestParam(value = "role", defaultValue = "USER") UserRole role,
-            @RequestParam(value = "locked", defaultValue = "false") boolean isLocked
-    ) {
-        User user = userService.get(id);
-        user.setUsername(username);
-        user.setPassword(password);
-        user.setRole(role);
-        user.setLocked(isLocked);
-        userService.update(user);
-        return "redirect:/users";
-    }
 
-    /**
-     * Method to remove user by id
-     *
-     * @param id users's id
-     * @return an address of users page
-     */
-    @RequestMapping(
-            value = "/admin/user/delete/{id}",
-            method = RequestMethod.GET
-    )
-    public String deleteUser(@PathVariable(name = "id") long id) {
-        userService.remove(id);
-        return "redirect:/users";
-    }
 
-    /**
-     * Method to remove all users
-     *
-     * @return an address of users page
-     */
-    @RequestMapping(
-            value = "/admin/user/delete/all",
-            method = RequestMethod.GET
-    )
-    public String deleteAllUsers() {
-        userService.removeAll();
-        return "redirect:/users";
-    }
+
 
 }
