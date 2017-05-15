@@ -23,11 +23,24 @@
                 <div class="well well-sm">Min. Investment: ${startUp.minInvestment}</div>
                 <div class="well well-sm">Target Investment: ${startUp.needInvestment}</div>
                 <div class="well well-sm">Current Investment: ${startUp.getCurrentInvestments()}</div>
-                <div class="well well-sm">Current Investment: ${startUp.getCurrentInvestments()}</div>
+                <div class="well well-sm">Description: ${startUp.description}</div>
+                <c:choose>
+                    <c:when test="${not empty pageContext.request.userPrincipal.name}">
+                        <a class="btn btn-primary" role="button" style="margin: 5px"
+                           href="<c:url value='/investments/invest/${startUp.id}/${pageContext.request.userPrincipal.name}'/>">
+                            Invest
+                        </a>
+                    </c:when>
+                    <c:otherwise>
+                        <a class="btn btn-primary" role="button" style="margin: 5px"
+                           href="<c:url value='/login'/>">Invest</a>
+                    </c:otherwise>
+                </c:choose>
             </div>
         </div>
 
         <div class="col-lg-9">
+
             <h4><b>StartUp's Investments</b></h4>
             <div class="table-responsive">
                 <table class="table table-striped">
@@ -36,13 +49,14 @@
                         <th>Author</th>
                     </tr>
                     <c:forEach items="${startUp.investments}" var="investment">
-                        <tr align="center">
+                        <tr>
                             <td>${investment.amount}</td>
                             <td>${investment.author.username}</td>
                         </tr>
                     </c:forEach>
                 </table>
             </div>
+
         </div>
     </div>
 
