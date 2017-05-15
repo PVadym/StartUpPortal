@@ -21,6 +21,7 @@
                     <a class="btn btn-primary" role="button" href="<c:url value='/logout'/>">Logout</a>
                 </sec:authorize>
                 <sec:authorize access="!isAuthenticated()">
+                    <a class="btn btn-primary" role="button" href="<c:url value='/user/register'/>">Registration</a>
                     <a class="btn btn-primary" role="button" href="<c:url value='/login'/>">Login</a>
                 </sec:authorize>
             </div>

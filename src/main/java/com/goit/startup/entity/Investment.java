@@ -14,7 +14,7 @@ import javax.persistence.Table;
  */
 
 @Entity
-@Table(name = "investment")
+@Table(name = "investments")
 public class Investment extends Model {
 
     /**

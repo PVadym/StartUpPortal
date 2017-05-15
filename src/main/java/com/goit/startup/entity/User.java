@@ -84,7 +84,7 @@ public class User extends Model implements UserDetails {
      * @param role     user's role
      */
     public User(String username, String password, UserRole role) {
-        super();
+        this();
         setUsername(username);
         setRole(role);
         setPassword(password);

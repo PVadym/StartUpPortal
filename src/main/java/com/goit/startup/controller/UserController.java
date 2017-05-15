@@ -3,6 +3,7 @@ package com.goit.startup.controller;
 
 import com.goit.startup.entity.User;
 import com.goit.startup.enums.UserRole;
+import com.goit.startup.service.SecurityService;
 import com.goit.startup.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
@@ -25,9 +26,15 @@ import org.springframework.web.servlet.ModelAndView;
 public class UserController {
 
     /**
-     * An instance of implementation UserService interface
+     * An instance of implementation {@link UserService} interface
      */
     private final UserService userService;
+
+
+    /**
+     * An instance of implementation {@link SecurityService} interface
+     */
+    private SecurityService securityService;
 
     /**
      * Constructor.
@@ -35,9 +42,13 @@ public class UserController {
      * @param userService An instance of implementation UserService interface.
      */
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(UserService userService, SecurityService securityService) {
         this.userService = userService;
+        this.securityService = securityService;
     }
+
+
+
 
 
     @RequestMapping(value = "/user/{userName}")
@@ -96,6 +107,7 @@ public class UserController {
         User userToAdd = new User(username, password, role);
         userToAdd.setLocked(isLocked);
         userService.add(userToAdd);
+        securityService.autoLogin(username, password);
         return "redirect:/";
     }
 
