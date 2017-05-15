@@ -22,8 +22,8 @@
 
                         <div class="form-group" hidden>
                             <div class="col-sm-10">
-                                <input type="text" name="author.id" class="form-control"
-                                       value="${startUp.author.id}">
+                                <input type="text" name="investor.id" class="form-control"
+                                       value="${startUp.investor.id}">
                             </div>
                         </div>
                         <div class="form-group">

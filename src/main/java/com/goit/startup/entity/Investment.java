@@ -22,8 +22,8 @@ public class Investment extends Model {
     private int amount;
 
     @ManyToOne
-    @JoinColumn(name = "author_id")
-    private User author;
+    @JoinColumn(name = "investor_id")
+    private User investor;
 
     @ManyToOne
     private Startup startup;
@@ -95,12 +95,12 @@ public class Investment extends Model {
         this.amount = amount > 0 ? amount : 0;
     }
 
-    public User getAuthor() {
-        return author;
+    public User getInvestor() {
+        return investor;
     }
 
-    public void setAuthor(User author) {
-        this.author = author;
+    public void setInvestor(User investor) {
+        this.investor = investor;
     }
 
     public Startup getStartup() {

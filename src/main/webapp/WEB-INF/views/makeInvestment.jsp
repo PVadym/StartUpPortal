@@ -31,7 +31,7 @@
             </div>
 
             <div class="form-group" >
-                <input type="text" name="author.username" class="form-control"
+                <input type="text" name="investor.username" class="form-control"
                        value="${pageContext.request.userPrincipal.name}">
             </div>
 

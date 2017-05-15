@@ -51,7 +51,7 @@
                     <c:forEach items="${startUp.investments}" var="investment">
                         <tr>
                             <td>${investment.amount}</td>
-                            <td>${investment.author.username}</td>
+                            <td>${investment.investor.username}</td>
                         </tr>
                     </c:forEach>
                 </table>

@@ -45,7 +45,7 @@ public class InvestmentController {
 
         Investment investment = new Investment();
         User investor = userService.getByUsername(investorName);
-        investment.setAuthor(investor);
+        investment.setInvestor(investor);
         investment.setStartup(startup);
         modelAndView.addObject("investment", investment);
         modelAndView.setViewName("makeInvestment");
@@ -55,11 +55,11 @@ public class InvestmentController {
     @RequestMapping(value = "/invest", method = RequestMethod.POST)
     public String investPage(Investment investment){
         long startupId = investment.getStartup().getId();
-        String investorName = investment.getAuthor().getUsername();
+        String investorName = investment.getInvestor().getUsername();
         Startup startup = startupService.get(startupId);
         User investor = userService.getByUsername(investorName);
         investment.setStartup(startup);
-        investment.setAuthor(investor);
+        investment.setInvestor(investor);
         investmentService.update(investment);
         return "redirect:/startups/" + startup.getId();
     }

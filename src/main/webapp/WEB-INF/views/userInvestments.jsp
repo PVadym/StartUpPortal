@@ -10,7 +10,7 @@
         <c:forEach items="${investments}" var="investment">
             <tr>
                 <td><a href="<c:url value='/startups/${investment.startup.id}'/>">${investment.startup.name}</a></td>
-                <td>${investment.author.username}</td>
+                <td>${investment.investor.username}</td>
                 <td>${investment.amount}</td>
             </tr>
         </c:forEach>

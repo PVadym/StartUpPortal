@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS investments (
   id         INT UNSIGNED NOT NULL  AUTO_INCREMENT,
   amount     INT          NOT NULL  DEFAULT 0,
   startup_id INT UNSIGNED NOT NULL  DEFAULT 0,
-  investor_id    INT UNSIGNED NOT NULL,
+  author_id    INT UNSIGNED NOT NULL,
   PRIMARY KEY (id),
   FOREIGN KEY (investor_id) REFERENCES users (id),
   FOREIGN KEY (startup_id) REFERENCES startups (id)

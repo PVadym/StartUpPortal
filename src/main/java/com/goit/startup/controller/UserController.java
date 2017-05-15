@@ -82,7 +82,7 @@ public class UserController {
             value = "/register",
             method = RequestMethod.GET
     )
-    public ModelAndView getNewUserPage() {
+    public ModelAndView getRegistrationPage() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("roles", UserRole.values());
         modelAndView.addObject("is_admin", this.userService.isAuthenticatedAdmin());
@@ -103,7 +103,7 @@ public class UserController {
             value = "/register",
             method = RequestMethod.POST
     )
-    public String addNewUser(
+    public String registerUser(
             @RequestParam(value = "username", defaultValue = "") String username,
             @RequestParam(value = "password", defaultValue = "") String password,
             @RequestParam(value = "role", defaultValue = "USER") UserRole role,
@@ -116,25 +116,14 @@ public class UserController {
         return "redirect:/";
     }
 
-    /**
-     * Method creates a page to update a new user
-     *
-     * @param id user's id
-     * @return a page to update a new user
-     */
-    @RequestMapping(
-            value = "/admin/user/edit/{id}",
-            method = RequestMethod.GET
-    )
-    public ModelAndView getPageForUpdatingUser(@PathVariable(name = "id") long id) {
+
+    @RequestMapping(value = "/edit/{userId}")
+    public ModelAndView editUserInfoPage(){
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("user", this.userService.get(id));
-        modelAndView.addObject("roles", UserRole.values());
-        modelAndView.addObject("is_admin", true);
-        modelAndView.setViewName("edit_user");
+
+        modelAndView.setViewName("editUser");
         return modelAndView;
     }
-
 
 
 
