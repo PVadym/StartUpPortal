@@ -34,7 +34,7 @@ public class User extends Model implements UserDetails {
     @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "contacts", nullable = false)
+    @Column(name = "contacts")
     private String contacts;
 
     /**

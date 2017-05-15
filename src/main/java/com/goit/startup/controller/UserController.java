@@ -63,14 +63,14 @@ public class UserController {
      * @return a page to add a new user
      */
     @RequestMapping(
-            value = "/user/new",
+            value = "/user/register",
             method = RequestMethod.GET
     )
     public ModelAndView getNewUserPage() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("roles", UserRole.values());
         modelAndView.addObject("is_admin", this.userService.isAuthenticatedAdmin());
-        modelAndView.setViewName("add_user");
+        modelAndView.setViewName("registration");
         return modelAndView;
     }
 
@@ -84,7 +84,7 @@ public class UserController {
      * @return an address of users page
      */
     @RequestMapping(
-            value = "/user/add",
+            value = "/user/register",
             method = RequestMethod.POST
     )
     public String addNewUser(
