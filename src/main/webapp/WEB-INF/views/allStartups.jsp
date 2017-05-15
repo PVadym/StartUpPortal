@@ -34,14 +34,26 @@
                     <td>
                         <a class="btn btn-xs btn-primary" role="button" style="margin: 5px"
                            href="<c:url value='/startups/${startup.id}'/>">Details</a>
-                    </td>                    <td>
-                        <a class="btn btn-xs btn-primary" role="button" style="margin: 5px"
-                           href="<c:url value='/startups/invest/${startup.id}'/>">Invest</a>
                     </td>
+                    <td>
+                        <c:choose>
+                            <c:when test="${not empty pageContext.request.userPrincipal.name}">
+                                <a class="btn btn-xs btn-primary" role="button" style="margin: 5px"
+                                   href="<c:url value='/investments/invest/${startup.id}/${pageContext.request.userPrincipal.name}'/>">
+                                    Invest
+                                </a>
+                            </c:when>
+                            <c:otherwise>
+                                <a class="btn btn-xs btn-primary" role="button" style="margin: 5px"
+                                   href="<c:url value='/login'/>">Invest</a>
+                            </c:otherwise>
+                        </c:choose>
+                    </td>
+
                     <c:if test="${is_admin}">
                         <%--<td>--%>
-                            <%--<a class="btn btn-xs btn-primary active" role="button" style="margin: 5px"--%>
-                               <%--href="<c:url value='/admin/product/edit/${product.id}'/>">Edit</a>--%>
+                        <%--<a class="btn btn-xs btn-primary active" role="button" style="margin: 5px"--%>
+                        <%--href="<c:url value='/admin/product/edit/${product.id}'/>">Edit</a>--%>
                         <%--</td>--%>
                         <td>
                             <a class="btn btn-xs btn-danger" role="button" style="margin: 5px"

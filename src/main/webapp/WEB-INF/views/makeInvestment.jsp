@@ -4,81 +4,55 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Add a Start-Up</title>
+    <title>Make Investment</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/navbar.jsp"/>
 <div class="container">
-    <h4><b>Add a Start-Up</b></h4>
-    <div class="panel-body">
+    <div class="jumbotron col-md-4">
+        <h4><b>StartUp's Details</b></h4>
+        <div class="well well-sm">Name: ${startUp.name}</div>
+        <div class="well well-sm">Minimal Investment: ${startUp.minInvestment}</div>
+        <div class="well well-sm">Target Investment: ${startUp.needInvestment}</div>
+        <div class="well well-sm">Current Investment: ${startUp.getCurrentInvestments()}</div>
+    </div>
 
-        <div class="jumbotron">
-            <div class="row">
+    <div class="col-xs-1"></div>
 
-                <div class="col-lg-12">
-                    <form class="form-horizontal" action="/startups/add" method="post" role="form"
-                          style="display: block;" modelAttribute="startUp">
+    <div class="jumbotron col-md-3">
+        <h4><b>Make Investment</b></h4>
+        <form class="form-horizontal" action="/investments/invest" method="post" role="form"
+              style="display: block;" modelAttribute="investment">
 
-                        <div class="form-group" hidden>
-                            <div class="col-sm-10">
-                                <input type="text" name="author.id" class="form-control"
-                                       value="${startUp.author.id}">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-2" for="name">Name:</label>
-                            <div class="col-sm-10">
-                                <input type="text" name="name" id="name" tabindex="1" class="form-control"
-                                       placeholder="Name">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-2" for="minInvestment">Minimal Investment:</label>
-                            <div class="col-sm-10">
-                                <input type="number" name="minInvestment" id="minInvestment" tabindex="2"
-                                       class="form-control"
-                                       placeholder="Minimal Investment">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-2" for="needInvestment">Target Investment:</label>
-                            <div class="col-sm-10">
-                                <input type="number" name="needInvestment" id="needInvestment" tabindex="3"
-                                       class="form-control"
-                                       placeholder="Target Investment">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="control-label col-sm-2" for="description">Description:</label>
-                            <div class="col-sm-10">
-                                <input type="text" name="description" id="description" tabindex="4"
-                                       class="form-control"
-                                       placeholder="Description">
-                            </div>
-                        </div>
-                        <div class="form-group ">
-                            <div class="row">
-                                <div class="col-sm-6 col-sm-offset-3">
-                                    <input type="submit" tabindex="5"
-                                           class="form-control btn-success" value="Submit">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group ">
-                            <div class="row">
-                                <div class="col-sm-6 col-sm-offset-3">
-                                    <input type="reset" tabindex="6"
-                                           class="form-control btn-danger" value="Reset">
-                                </div>
-                            </div>
-                        </div>
-                    </form>
+            <div class="form-group" >
+                <input type="text" name="author.username" class="form-control"
+                       value="${pageContext.request.userPrincipal.name}">
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <input type="number" name="amount" id="amount" tabindex="1"
+                           class="form-control"
+                           placeholder="Investment Amount">
                 </div>
             </div>
-        </div>
+            <div class="form-group">
+                <div class="row">
+                    <input type="submit" tabindex="2"
+                           class="form-control btn-success" value="Submit">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+
+                    <input type="reset" tabindex="3"
+                           class="form-control btn-danger" value="Reset">
+                </div>
+            </div>
     </div>
+    </form>
 </div>
+</div>
+
 </body>
 </html>

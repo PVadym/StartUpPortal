@@ -63,23 +63,5 @@ public class StartUpController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/invest/{startupId}", method = RequestMethod.GET)
-    public ModelAndView investPage(@PathVariable(name = "startupId") long startupId){
-        ModelAndView modelAndView = new ModelAndView();
-        Startup startup = startupService.get(startupId);
-        modelAndView.addObject("startUp", startup);
-        modelAndView.addObject("investment", new Investment());
-        modelAndView.setViewName("makeInvestment");
-        return modelAndView;
-    }
 
-    @RequestMapping(value = "/invest", method = RequestMethod.POST)
-    public String investPage(Investment investment){
-        long startupId = investment.getStartup().getId();
-        Startup startup = startupService.get(startupId);
-        modelAndView.addObject("startUp", startup);
-        modelAndView.addObject("investment", new Investment());
-        modelAndView.setViewName("makeInvestment");
-        return "redirect:/startups/" + startup.getId();
-    }
 }

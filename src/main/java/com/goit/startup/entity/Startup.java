@@ -236,4 +236,9 @@ public class Startup extends Model {
         this.author = user;
     }
 
+
+    public void makeInvestment(Investment investment){
+        this.investments.add(investment);
+    }
+
 }
