@@ -39,4 +39,5 @@ public interface StartupRepository extends DataRepository<Startup> {
      * @return a collection of startups that contain entered word in thair name or description
      */
     @Query("select s from Startup s where s.name like %:keyWord% or s.description like %:keyWord%")
-    Collection<Startup> findAllByKeyWord(@Param("keyWord") String keyWord);}
+    Collection<Startup> findAllByKeyWord(@Param("keyWord") String keyWord);
+}

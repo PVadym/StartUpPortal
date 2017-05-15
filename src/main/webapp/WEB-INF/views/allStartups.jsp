@@ -10,7 +10,22 @@
 <body>
 <jsp:include page="/WEB-INF/views/navbar.jsp"/>
 <div class="container">
+
     <h4><b>Startups</b></h4>
+
+        <form class="form-group" action="<c:url value='/'/>" method='get'>
+            <table>
+                <tr>
+                    <td width="100%">
+                        <input class="form-control" type="text" name="searchWord"
+                               placeholder="What are you looking for?">
+                    </td>
+                    <td>
+                        <input class="btn btn-primary" type="submit" value="Search">
+                    </td>
+                </tr>
+            </table>
+        </form>
 
     <div class="table-responsive">
         <table class="table table-striped">
