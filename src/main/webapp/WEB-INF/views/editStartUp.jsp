@@ -23,14 +23,14 @@
                         <div class="form-group" hidden>
                             <div class="col-sm-10">
                                 <input type="text" name="author.id" class="form-control"
-                                       value="${startUp.author.id}">
+                                       value="${startup.author.id}">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-2" for="name">Name:</label>
                             <div class="col-sm-10">
                                 <input type="text" name="name" id="name" tabindex="1" class="form-control"
-                                       placeholder="Name" value="${startup.}">
+                                       placeholder="Name" value="${startup.name}">
                             </div>
                         </div>
                         <div class="form-group">
@@ -38,7 +38,7 @@
                             <div class="col-sm-10">
                                 <input type="number" name="minInvestment" id="minInvestment" tabindex="2"
                                        class="form-control"
-                                       placeholder="Minimal Investment">
+                                       placeholder="Minimal Investment" value="${startup.minInvestment}">
                             </div>
                         </div>
                         <div class="form-group">
@@ -46,7 +46,7 @@
                             <div class="col-sm-10">
                                 <input type="number" name="needInvestment" id="needInvestment" tabindex="3"
                                        class="form-control"
-                                       placeholder="Target Investment">
+                                       placeholder="Target Investment" value="${startup.needInvestment}">
                             </div>
                         </div>
 
@@ -55,7 +55,7 @@
                             <div class="col-sm-10">
                                 <input type="text" name="description" id="description" tabindex="4"
                                        class="form-control"
-                                       placeholder="Description">
+                                       placeholder="Description" value="${startup.description}">
                             </div>
                         </div>
                         <div class="form-group ">
