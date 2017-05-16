@@ -16,14 +16,19 @@
 <%@include file="/WEB-INF/views/navbar.jsp" %>
 <div class="container">
 
+    <h4><b>${startup.name}</b></h4>
+
     <div class="row">
 
         <div class="col-md-3">
-            <h4><b>StartUp's Details</b></h4>
             <div class="jumbo">
                 <h4>
-                    <small>name:</small>
-                    <p>${startup.name}</p>
+                    <small>Author:</small>
+                    <p>${startup.author.username}</p>
+                </h4>
+                <h4>
+                    <small>contacts:</small>
+                    <p>${startup.author.contacts}</p>
                 </h4>
                 <h4>
                     <small>min. investments:</small>
@@ -38,40 +43,54 @@
                     <p>${startup.getCurrentInvestments()}</p>
                 </h4>
 
-                <c:choose>
-                    <c:when test="${not empty pageContext.request.userPrincipal.name}">
-                        <a class="btn btn-primary" role="button" style="margin: 5px"
-                           href="<c:url value='/investments/invest/${startup.id}/${pageContext.request.userPrincipal.name}'/>">
-                            Invest
-                        </a>
-                    </c:when>
-                    <c:otherwise>
-                        <a class="btn btn-primary" role="button" style="margin: 5px"
-                           href="<c:url value='/login'/>">Invest</a>
-                    </c:otherwise>
-                </c:choose>
+                <c:if test="${!(pageContext.request.userPrincipal.name eq startup.author.username)}">
+                    <c:choose>
+                        <c:when test="${not empty pageContext.request.userPrincipal.name}">
+                            <a class="btn btn-primary" role="button" style="margin: 5px"
+                               href="<c:url value='/investments/invest/${startup.id}/${pageContext.request.userPrincipal.name}'/>">
+                                Invest
+                            </a>
+                        </c:when>
+                        <c:otherwise>
+                            <a class="btn btn-primary" role="button" style="margin: 5px"
+                               href="<c:url value='/login'/>">Invest</a>
+                        </c:otherwise>
+                    </c:choose>
+                </c:if>
+
+                <c:if test="${pageContext.request.userPrincipal.name eq startup.author.username}">
+                    <a class="btn btn-primary" role="button" style="margin: 5px"
+                       href="<c:url value='/startups/edit/${startup.id}'/>">Update</a>
+                </c:if>
+
+                <c:if test="${pageContext.request.userPrincipal.name eq startup.author.username or is_admin}">
+                    <a class="btn btn-danger active" role="button" style="margin: 5px"
+                       href="<c:url value='#'/>">Delete</a>
+                </c:if>
+
             </div>
         </div>
 
         <div class="col-md-9">
 
-            <h4><b>Description: </b></h4>
             <div class="jumbo">
                 ${startup.description}
             </div>
 
-            <c:if test="${pageContext.request.userPrincipal.name eq startup.author.username}">
+            <c:if test="${pageContext.request.userPrincipal.name eq startup.author.username or is_admin}">
                 <h4><b>Current Investments: </b></h4>
                 <div class="table-responsive">
                     <table class="table table-striped">
                         <tr>
                             <th>Amount</th>
-                            <th>Author</th>
+                            <th>Investor</th>
+                            <th>Contacts</th>
                         </tr>
                         <c:forEach items="${startup.investments}" var="investment">
                             <tr>
                                 <td>${investment.amount}</td>
                                 <td>${investment.investor.username}</td>
+                                <td>${investment.investor.contacts}</td>
                             </tr>
                         </c:forEach>
                     </table>
