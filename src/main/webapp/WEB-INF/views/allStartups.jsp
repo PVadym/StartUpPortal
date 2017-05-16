@@ -10,10 +10,11 @@
         .jumbo {
             /*background-image: url("");*/
             background-repeat: no-repeat;
-            background-color: #f9f9f9;
+            background-color: #eaeaea;
             color: #428bca;
             padding: 10px 10px 10px 20px;
             margin: 10px 5px 30px 5px;
+            border-radius: 4px;
             font-family: Montserrat, sans-serif;}
 
     </style>
