@@ -59,6 +59,7 @@ public class StartUpController {
         ModelAndView modelAndView = new ModelAndView();
         Startup startup = startupService.get(startupId);
         modelAndView.addObject("startup", startup);
+        modelAndView.addObject("isAdmin", this.userService.isAuthenticatedAdmin());
         modelAndView.setViewName("startUpDetails");
         return modelAndView;
     }

@@ -16,14 +16,20 @@
 <%@include file="/WEB-INF/views/navbar.jsp" %>
 <div class="container">
 
+    <h4 align="center"><b>${startup.name}</b></h4>
+
     <div class="row">
 
         <div class="col-md-3">
-            <h4><b>StartUp's Details</b></h4>
+            <%--<h4><b>StartUp detail</b></h4>--%>
             <div class="jumbo">
                 <h4>
-                    <small>name:</small>
-                    <p>${startup.name}</p>
+                    <small>Author:</small>
+                    <p>${startup.author.username}</p>
+                </h4>
+                <h4>
+                    <small>contacts:</small>
+                    <p>${startup.author.contacts}</p>
                 </h4>
                 <h4>
                     <small>min. investments:</small>
@@ -34,7 +40,7 @@
                     <p>${startup.needInvestment}</p>
                 </h4>
                 <h4>
-                    <small>curr. invetments:</small>
+                    <small>curr.invetments:</small>
                     <p>${startup.getCurrentInvestments()}</p>
                 </h4>
 
@@ -55,11 +61,18 @@
 
         <div class="col-md-9">
 
-            <h4><b>Description: </b></h4>
             <div class="jumbo">
-                ${startUp.description}
+                ${startup.description}
             </div>
 
+<%--доделать!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!--%>
+            <div>
+                <c:choose>
+                <c:when test="${isAdmin}">
+                    qergqwergqewrgqewgqewrgdddddddddddddddddd
+                </c:when>
+                </c:choose>
+            </div>
             <%--<div class="table-responsive">--%>
             <%--<table class="table table-striped">--%>
             <%--<tr>--%>
