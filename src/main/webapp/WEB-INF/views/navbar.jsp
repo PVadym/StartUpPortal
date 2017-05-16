@@ -6,7 +6,7 @@
     <div class="panel-heading">
         <div class="row">
             <h3 class="col-lg-3">
-                <a href="<c:url value='/'/>">STARTUP FOUNDER</a>
+                <a href="<c:url value='/'/>">${pageContext.request.userPrincipal.name}</a>
             </h3>
             <div class="btn-group pull-right">
                 <sec:authorize access="isAuthenticated()">
@@ -16,7 +16,7 @@
                 <a class="btn btn-primary" role="button" href="<c:url value='/'/>">StartUps</a>
                 <c:choose>
                     <c:when test="${is_admin}">
-                        <a class="btn btn-primary" role="button" href="<c:url value='/users'/>">Users</a>
+                        <a class="btn btn-primary" role="button" href="<c:url value='/user'/>">Users</a>
                     </c:when>
                 </c:choose>
                 <sec:authorize access="isAuthenticated()">

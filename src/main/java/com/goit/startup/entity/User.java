@@ -329,4 +329,11 @@ public class User extends Model implements UserDetails {
         this.investments = investments;
     }
 
+    public boolean getIsLocked(){
+        return isLocked;
+    }
+
+    public boolean setIsLocked(){
+        return isLocked;
+    }
 }

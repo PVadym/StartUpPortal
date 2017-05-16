@@ -15,9 +15,15 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-4">
-            <div class="jumbotron ">
-                <div class="well well-sm">Name: ${user.username}</div>
-                <div class="well well-sm">Contacts: ${user.contacts}</div>
+            <div class="jumbotron">
+                <h4>
+                    <small>name:</small>
+                    <div class="well well-md">${user.username}</div>
+                </h4>
+                <h4>
+                    <small>contacts:</small>
+                    <div class="well well-md">${user.contacts}</div>
+                </h4>
                 <a class="btn-sm " role="button"
                    href="<c:url value='/user/edit/${user.id}'/>">Edit Personal Info</a>
 

@@ -33,14 +33,17 @@
 
 
                 <div class="form-group">
-                    <input type="password" class="form-control" name="password" required placeholder="Password" value="${user.password}">
+                    <label for="password">Password:</label>
+                    <input type="password" class="form-control" name="password" id="password" tabindex="3"
+                           required placeholder="Password" value="${user.password}">
                 </div>
 
                 <c:if test="${is_admin}">
                     <div class="form-group">
                         <c:forEach items="${roles}" var="role">
                             <label>
-                                <input type="radio" name="role" value="<c:out value="${role}"/>" required/>
+                                <input type="radio" name="role" value="<c:out value="${role}"/>" required
+                                       <c:if test="${role eq user.role}">checked</c:if>/>
                                 <c:out value="${role}"/>
                             </label>
                             &nbsp;&nbsp;
@@ -48,11 +51,13 @@
                     </div>
                     <div class="form-group">
                         <label>
-                            <input type="radio" name="locked" value="true" tabindex="1" required/>Locked
+                            <input type="radio" name="locked" value="true" tabindex="4"
+                                   <c:if test="${user.isLocked}">checked</c:if>/>Locked
                         </label>
                         &nbsp;&nbsp;
                         <label>
-                            <input type="radio" name="locked" value="false" tabindex="2" checked required/>Not locked
+                            <input type="radio" name="locked" value="false" tabindex="5"
+                                   <c:if test="${!user.isLocked}">checked</c:if>/>Not locked
                         </label>
                     </div>
                 </c:if>

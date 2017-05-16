@@ -6,78 +6,54 @@
 <head>
     <title>Startups</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <style>
+        .jumbo {
+            /*background-image: url("");*/
+            background-repeat: no-repeat;
+            background-color: #f9f9f9;
+            color: #428bca;
+            padding: 10px 10px 10px 20px;
+            margin: 10px 5px 30px 5px;
+            font-family: Montserrat, sans-serif;}
+
+    </style>
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/navbar.jsp"/>
 <div class="container">
 
-    <h4><b>Startups</b></h4>
+    <div class="row">
+        <div class="col-md-2"><h4><b>Startups</b></h4></div>
 
-        <form class="form-group" action="<c:url value='/'/>" method='get'>
-            <table>
-                <tr>
-                    <td width="100%">
-                        <input class="form-control" type="text" name="searchWord"
-                               placeholder="What are you looking for?">
-                    </td>
-                    <td>
-                        <input class="btn btn-primary" type="submit" value="Search">
-                    </td>
-                </tr>
-            </table>
+        <div class="col-md-10">
+        <form class="form-inline pull-right" action="<c:url value='/'/>" method='get'>
+            <div class="form-group">
+                <input type="text" name="searchWord" class="form-control" placeholder="What are you looking for?"/>
+            </div>
+            <button type="submit" class="btn btn-primary">Search</button>
         </form>
+        </div>
+    </div>
 
-    <div class="table-responsive">
-        <table class="table table-striped">
-            <tr>
-                <th align="center">Name</th>
-                <th>Target Investment</th>
-                <th>Minimal Investment</th>
-                <th>Current Investments</th>
-                <th>Details</th>
-                <th>Invest</th>
-                <c:if test="${is_admin}">
-                    <th>Delete</th>
-                </c:if>
-            </tr>
-            <c:forEach items="${startups}" var="startup">
-                <tr align="center">
-                    <td width="50%" align="left">${startup.name}</td>
-                    <td>${startup.needInvestment}</td>
-                    <td>${startup.minInvestment}</td>
-                    <td>${startup.getCurrentInvestments()}</td>
-                    <td>
-                        <a class="btn btn-xs btn-primary" role="button" style="margin: 5px"
-                           href="<c:url value='/startups/${startup.id}'/>">Details</a>
-                    </td>
-                    <td>
-                        <c:choose>
-                            <c:when test="${not empty pageContext.request.userPrincipal.name}">
-                                <a class="btn btn-xs btn-primary" role="button" style="margin: 5px"
-                                   href="<c:url value='/investments/invest/${startup.id}/${pageContext.request.userPrincipal.name}'/>">
-                                    Invest
-                                </a>
-                            </c:when>
-                            <c:otherwise>
-                                <a class="btn btn-xs btn-primary" role="button" style="margin: 5px"
-                                   href="<c:url value='/login'/>">Invest</a>
-                            </c:otherwise>
-                        </c:choose>
-                    </td>
+    <div class="row">
+        <c:forEach items="${startups}" var="startup">
+            <div class="col-md-3">
+                <a href="<c:url value='/startups/${startup.id}'/>" class="">
+                    <div class="jumbo">
+                        <h4>
+                            <small>name:</small>
+                            <p>${startup.name}</p></h4>
+                        <h4>
+                            <small>target investments:</small>
+                            <p>${startup.needInvestment}</p></h4>
+                        <h4>
+                            <small>curr. invetments:</small>
+                            <p>${startup.getCurrentInvestments()}</p></h4>
+                    </div>
+                </a>
+            </div>
+        </c:forEach>
 
-                    <c:if test="${is_admin}">
-                        <%--<td>--%>
-                        <%--<a class="btn btn-xs btn-primary active" role="button" style="margin: 5px"--%>
-                        <%--href="<c:url value='/admin/product/edit/${product.id}'/>">Edit</a>--%>
-                        <%--</td>--%>
-                        <td>
-                            <a class="btn btn-xs btn-danger" role="button" style="margin: 5px"
-                               href="<c:url value="/admin/product/delete/${product.id}"/>">Delete</a>
-                        </td>
-                    </c:if>
-                </tr>
-            </c:forEach>
-        </table>
     </div>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>

@@ -48,6 +48,14 @@ public class UserController {
         this.securityService = securityService;
     }
 
+    @RequestMapping(method = RequestMethod.GET)
+    public ModelAndView getAllUsersPage() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("is_admin", this.userService.isAuthenticatedAdmin());
+        modelAndView.addObject("users", this.userService.getAll());
+        modelAndView.setViewName("allUsers");
+        return modelAndView;
+    }
 
     @RequestMapping(value = "/{userName}/{isStartUp}")
     public ModelAndView getUserPage(@PathVariable(name = "userName") String userName,
@@ -66,6 +74,7 @@ public class UserController {
             else {
                 modelAndView.addObject("investments", authenticatedUser.getInvestments());
             }
+            modelAndView.addObject("is_admin", this.userService.isAuthenticatedAdmin());
             modelAndView.setViewName("userPage");
         } else {
             modelAndView.setViewName("redirect:/login");
@@ -79,10 +88,7 @@ public class UserController {
      *
      * @return a page to add a new user
      */
-    @RequestMapping(
-            value = "/register",
-            method = RequestMethod.GET
-    )
+    @RequestMapping(value = "/register", method = RequestMethod.GET)
     public ModelAndView getRegistrationPage() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("roles", UserRole.values());
@@ -100,10 +106,7 @@ public class UserController {
      * @param isLocked information about locking user's account
      * @return an address of users page
      */
-    @RequestMapping(
-            value = "/register",
-            method = RequestMethod.POST
-    )
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String registerUser(
             @RequestParam(value = "username", defaultValue = "") String username,
             @RequestParam(value = "password", defaultValue = "") String password,
@@ -122,21 +125,30 @@ public class UserController {
     public ModelAndView editUserInfoPage(@PathVariable(name = "userId") long userId){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("user", userService.get(userId));
+        modelAndView.addObject("roles", UserRole.values());
+        modelAndView.addObject("is_admin", this.userService.isAuthenticatedAdmin());
         modelAndView.setViewName("editUser");
         return modelAndView;
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
-    public String editUserInfo(User user){
+    public String editUserInfo(User user, @RequestParam(value = "locked", defaultValue = "false") boolean isLocked){
         User oldUser = userService.get(user.getId());
         oldUser.setUsername(user.getUsername());
         oldUser.setContacts(user.getContacts());
         oldUser.setPassword(user.getPassword());
+        System.out.println(user.getRole());
+        oldUser.setRole(user.getRole());
+        oldUser.setLocked(isLocked);
         userService.update(oldUser);
         securityService.autoLogin(oldUser.getUsername(), oldUser.getPassword());
         return "redirect:/user/" + oldUser.getUsername() + "/true";
     }
 
-
+    @RequestMapping(value = "/delete/{userId}", method = RequestMethod.POST)
+    public String deleteUser(@PathVariable(name = "userId") long userId){
+        userService.remove(userId);
+        return "redirect:/user";
+    }
 
 }
