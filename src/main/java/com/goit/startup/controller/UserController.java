@@ -50,7 +50,8 @@ public class UserController {
 
 
     @RequestMapping(value = "/{userName}/{isStartUp}")
-    public ModelAndView getUserPage(@PathVariable(name = "userName") String userName, @PathVariable(name = "isStartUp") boolean isStartUp) {
+    public ModelAndView getUserPage(@PathVariable(name = "userName") String userName,
+                                    @PathVariable(name = "isStartUp") boolean isStartUp) {
         ModelAndView modelAndView = new ModelAndView();
         User requestFromUser = userService.getByUsername(userName);
         User authenticatedUser = this.userService.getAuthenticatedUser();
@@ -117,14 +118,24 @@ public class UserController {
     }
 
 
-    @RequestMapping(value = "/edit/{userId}")
-    public ModelAndView editUserInfoPage(){
+    @RequestMapping(value = "/edit/{userId}", method = RequestMethod.GET)
+    public ModelAndView editUserInfoPage(@PathVariable(name = "userId") long userId){
         ModelAndView modelAndView = new ModelAndView();
-
+        modelAndView.addObject("user", userService.get(userId));
         modelAndView.setViewName("editUser");
         return modelAndView;
     }
 
+    @RequestMapping(value = "/edit", method = RequestMethod.POST)
+    public String editUserInfo(User user){
+        User oldUser = userService.get(user.getId());
+        oldUser.setUsername(user.getUsername());
+        oldUser.setContacts(user.getContacts());
+        oldUser.setPassword(user.getPassword());
+        userService.update(oldUser);
+        securityService.autoLogin(oldUser.getUsername(), oldUser.getPassword());
+        return "redirect:/user/" + oldUser.getUsername() + "/true";
+    }
 
 
 

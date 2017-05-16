@@ -1,16 +1,73 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Pavel
-  Date: 4/6/2017
-  Time: 2:40 PM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Title</title>
+    <title>Edit</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 <body>
+<jsp:include page="/WEB-INF/views/navbar.jsp"/>
+<div class="container">
+    <div class="col-lg-4 col-md-offset-4">
+        <h4><b>Edit User's Information</b></h4>
+        <div class="jumbotron">
+            <form action="<c:url value="/user/edit"/>" method="post">
 
+                <div class="form-group" hidden>
+                    <input type="text" class="form-control" name="id" value="${user.id}">
+                </div>
+
+                <div class="form-group">
+                    <label for="username">Name:</label>
+                    <input type="text" class="form-control" name="username" id="username" tabindex="1"
+                           required autofocus placeholder="Username" value="${user.username}">
+                </div>
+
+
+                <div class="form-group">
+                    <label for="contacts">Contacts:</label>
+                    <textarea class="form-control" rows="5" id="contacts" name="contacts" tabindex="2">${user.contacts}</textarea>
+                </div>
+
+
+                <div class="form-group">
+                    <input type="password" class="form-control" name="password" required placeholder="Password" value="${user.password}">
+                </div>
+
+                <c:if test="${is_admin}">
+                    <div class="form-group">
+                        <c:forEach items="${roles}" var="role">
+                            <label>
+                                <input type="radio" name="role" value="<c:out value="${role}"/>" required/>
+                                <c:out value="${role}"/>
+                            </label>
+                            &nbsp;&nbsp;
+                        </c:forEach>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <input type="radio" name="locked" value="true" tabindex="1" required/>Locked
+                        </label>
+                        &nbsp;&nbsp;
+                        <label>
+                            <input type="radio" name="locked" value="false" tabindex="2" checked required/>Not locked
+                        </label>
+                    </div>
+                </c:if>
+
+                <div class="form-group ">
+                    <div class="row">
+                        <div class="col-sm-6 col-sm-offset-3">
+                            <input type="submit" tabindex="3"
+                                   class="form-control btn btn-success" value="Save">
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 </body>
 </html>
