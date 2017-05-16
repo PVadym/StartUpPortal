@@ -32,13 +32,16 @@
                     <div class="jumbo">
                         <h4>
                             <small>name:</small>
-                            <p>${startup.name}</p></h4>
+                            <p>${startup.name}</p>
+                        </h4>
                         <h4>
                             <small>target investments:</small>
-                            <p>${startup.needInvestment}</p></h4>
+                            <p>${startup.needInvestment}</p>
+                        </h4>
                         <h4>
                             <small>curr. invetments:</small>
-                            <p>${startup.getCurrentInvestments()}</p></h4>
+                            <p>${startup.getCurrentInvestments()}</p>
+                        </h4>
                     </div>
                 </a>
             </div>
