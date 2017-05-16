@@ -41,6 +41,7 @@ public class StartUpController {
         Startup startup = new Startup();
         startup.setAuthor(userService.get(userId));
         modelAndView.addObject("startup", startup);
+        modelAndView.addObject("is_admin", this.userService.isAuthenticatedAdmin());
         modelAndView.setViewName("addStartUp");
         return modelAndView;
     }
@@ -59,10 +60,26 @@ public class StartUpController {
         ModelAndView modelAndView = new ModelAndView();
         Startup startup = startupService.get(startupId);
         modelAndView.addObject("startup", startup);
-        modelAndView.addObject("isAdmin", this.userService.isAuthenticatedAdmin());
+        modelAndView.addObject("is_admin", this.userService.isAuthenticatedAdmin());
         modelAndView.setViewName("startUpDetails");
         return modelAndView;
     }
 
+    @RequestMapping(value = "edit/{startupId}", method = RequestMethod.GET)
+    public ModelAndView editStartupPage(@PathVariable(name = "startupId") long startupId){
+        ModelAndView modelAndView = new ModelAndView();
+        Startup startup = startupService.get(startupId);
+        modelAndView.addObject("startup", startup);
+        modelAndView.addObject("is_admin", this.userService.isAuthenticatedAdmin());
+        modelAndView.setViewName("editStartUp");
+        return modelAndView;
+    }
 
+    @RequestMapping(value = "/edit", method = RequestMethod.POST)
+    public String editStartup(Startup startup){
+        long userId = startup.getAuthor().getId();
+        startup.setAuthor(userService.get(userId));
+        startupService.add(startup);
+        return "redirect:/";
+    }
 }

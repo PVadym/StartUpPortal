@@ -65,8 +65,16 @@
                 <div class="form-group ">
                     <div class="row">
                         <div class="col-sm-6 col-sm-offset-3">
-                            <input type="submit" tabindex="3"
-                                   class="form-control btn btn-success" value="Save">
+                            <input type="submit" tabindex="4"
+                                   class="form-control btn btn-success" value="Save"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group ">
+                    <div class="row">
+                        <div class="col-sm-6 col-sm-offset-3">
+                            <a class="btn-block btn btn-primary" href="/" type="button"
+                               tabindex="5">Cancel</a>
                         </div>
                     </div>
                 </div>
