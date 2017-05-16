@@ -57,23 +57,26 @@
 
             <h4><b>Description: </b></h4>
             <div class="jumbo">
-                ${startUp.description}
+                ${startup.description}
             </div>
 
-            <%--<div class="table-responsive">--%>
-            <%--<table class="table table-striped">--%>
-            <%--<tr>--%>
-            <%--<th>Amount</th>--%>
-            <%--<th>Author</th>--%>
-            <%--</tr>--%>
-            <%--<c:forEach items="${startUp.investments}" var="investment">--%>
-            <%--<tr>--%>
-            <%--<td>${investment.amount}</td>--%>
-            <%--<td>${investment.investor.username}</td>--%>
-            <%--</tr>--%>
-            <%--</c:forEach>--%>
-            <%--</table>--%>
-            <%--</div>--%>
+            <c:if test="${pageContext.request.userPrincipal.name eq startup.author.username}">
+                <h4><b>Current Investments: </b></h4>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <tr>
+                            <th>Amount</th>
+                            <th>Author</th>
+                        </tr>
+                        <c:forEach items="${startup.investments}" var="investment">
+                            <tr>
+                                <td>${investment.amount}</td>
+                                <td>${investment.investor.username}</td>
+                            </tr>
+                        </c:forEach>
+                    </table>
+                </div>
+            </c:if>
 
         </div>
     </div>

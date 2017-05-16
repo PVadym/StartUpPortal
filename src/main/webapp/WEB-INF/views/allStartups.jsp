@@ -31,7 +31,7 @@
                 <a href="<c:url value='/startups/${startup.id}'/>" class="">
                     <div class="jumbo">
                         <h4>
-                            <small>name:</small>
+                            <%--<small>name:</small>--%>
                             <p>${startup.name}</p>
                         </h4>
                         <h4>

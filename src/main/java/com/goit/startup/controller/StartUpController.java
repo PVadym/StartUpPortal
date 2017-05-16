@@ -63,5 +63,13 @@ public class StartUpController {
         return modelAndView;
     }
 
+    @RequestMapping(value = "edit/{startupId}", method = RequestMethod.GET)
+    public ModelAndView startUpEditPage(@PathVariable(name = "startupId") long startupId){
+        ModelAndView modelAndView = new ModelAndView();
+        Startup startup = startupService.get(startupId);
+        modelAndView.addObject("startup", startup);
+        modelAndView.setViewName("editStartUp");
+        return modelAndView;
+    }
 
 }

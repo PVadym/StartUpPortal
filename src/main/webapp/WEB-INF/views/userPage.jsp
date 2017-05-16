@@ -26,20 +26,21 @@
                     <small>contacts:</small>
                     <p>${user.contacts}</p>
                 </h4>
-                <a class="btn-sm " role="button"
-                   href="<c:url value='/user/edit/${user.id}'/>">Edit Personal Info</a>
-
+                <br>
                 <a class="btn  btn-success" role="button"
                    href="<c:url value='/startups/add/${user.id}'/>">Add StartUp</a>
+                <br>
+                <a class="btn-sm" role="button"
+                   href="<c:url value='/user/edit/${user.id}'/>">Edit Personal Info</a>
             </div>
         </div>
         <div class="col-md-9">
             <div class="row">
                 <div class="btn-group btn-group-justified">
                     <a class="btn  btn-primary" role="button"
-                       href="<c:url value='/user/${pageContext.request.userPrincipal.name}/true'/>">StartUps</a>
+                       href="<c:url value='/user/${pageContext.request.userPrincipal.name}/true'/>">My StartUps</a>
                     <a class="btn  btn-primary" role="button"
-                       href="<c:url value='/user/${pageContext.request.userPrincipal.name}/false'/>">Investments</a>
+                       href="<c:url value='/user/${pageContext.request.userPrincipal.name}/false'/>">My Investments</a>
                 </div>
             </div>
         </div>
