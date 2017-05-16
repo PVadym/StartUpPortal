@@ -1,0 +1,11 @@
+.jumbo {
+    /*background-image: url("");*/
+    background-repeat: no-repeat;
+    background-color: #eaeaea;
+    color: #428bca;
+    padding: 20px 20px 20px 20px;
+    margin: 0px 5px 30px 5px;
+    border-radius: 4px;
+    align-content: center;
+    text-align: center;
+    font-family: Montserrat, sans-serif;}

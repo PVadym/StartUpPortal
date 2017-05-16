@@ -9,6 +9,8 @@
     <title>StartUp Details</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<c:url value='/resources/css/customStyles.css'/>">
+
 </head>
 <body>
 <%@include file="/WEB-INF/views/navbar.jsp" %>
@@ -16,18 +18,30 @@
 
     <div class="row">
 
-        <div class="col-lg-3">
+        <div class="col-md-3">
             <h4><b>StartUp's Details</b></h4>
-            <div class="jumbotron ">
-                <div class="well well-sm">Name: ${startUp.name}</div>
-                <div class="well well-sm">Min. Investment: ${startUp.minInvestment}</div>
-                <div class="well well-sm">Target Investment: ${startUp.needInvestment}</div>
-                <div class="well well-sm">Current Investment: ${startUp.getCurrentInvestments()}</div>
-                <div class="well well-sm">Description: ${startUp.description}</div>
+            <div class="jumbo">
+                <h4>
+                    <small>name:</small>
+                    <p>${startup.name}</p>
+                </h4>
+                <h4>
+                    <small>min. investments:</small>
+                    <p>${startup.minInvestment}</p>
+                </h4>
+                <h4>
+                    <small>target investments:</small>
+                    <p>${startup.needInvestment}</p>
+                </h4>
+                <h4>
+                    <small>curr. invetments:</small>
+                    <p>${startup.getCurrentInvestments()}</p>
+                </h4>
+
                 <c:choose>
                     <c:when test="${not empty pageContext.request.userPrincipal.name}">
                         <a class="btn btn-primary" role="button" style="margin: 5px"
-                           href="<c:url value='/investments/invest/${startUp.id}/${pageContext.request.userPrincipal.name}'/>">
+                           href="<c:url value='/investments/invest/${startup.id}/${pageContext.request.userPrincipal.name}'/>">
                             Invest
                         </a>
                     </c:when>
@@ -39,23 +53,27 @@
             </div>
         </div>
 
-        <div class="col-lg-9">
+        <div class="col-md-9">
 
-            <h4><b>StartUp's Investments</b></h4>
-            <div class="table-responsive">
-                <table class="table table-striped">
-                    <tr>
-                        <th>Amount</th>
-                        <th>Author</th>
-                    </tr>
-                    <c:forEach items="${startUp.investments}" var="investment">
-                        <tr>
-                            <td>${investment.amount}</td>
-                            <td>${investment.investor.username}</td>
-                        </tr>
-                    </c:forEach>
-                </table>
+            <h4><b>Description: </b></h4>
+            <div class="jumbo">
+                ${startUp.description}
             </div>
+
+            <%--<div class="table-responsive">--%>
+            <%--<table class="table table-striped">--%>
+            <%--<tr>--%>
+            <%--<th>Amount</th>--%>
+            <%--<th>Author</th>--%>
+            <%--</tr>--%>
+            <%--<c:forEach items="${startUp.investments}" var="investment">--%>
+            <%--<tr>--%>
+            <%--<td>${investment.amount}</td>--%>
+            <%--<td>${investment.investor.username}</td>--%>
+            <%--</tr>--%>
+            <%--</c:forEach>--%>
+            <%--</table>--%>
+            <%--</div>--%>
 
         </div>
     </div>

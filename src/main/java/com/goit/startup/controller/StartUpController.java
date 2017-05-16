@@ -40,7 +40,7 @@ public class StartUpController {
         ModelAndView modelAndView = new ModelAndView();
         Startup startup = new Startup();
         startup.setAuthor(userService.get(userId));
-        modelAndView.addObject("startUp", startup);
+        modelAndView.addObject("startup", startup);
         modelAndView.setViewName("addStartUp");
         return modelAndView;
     }
@@ -58,7 +58,7 @@ public class StartUpController {
     public ModelAndView startUpDetails(@PathVariable(name = "startupId") long startupId){
         ModelAndView modelAndView = new ModelAndView();
         Startup startup = startupService.get(startupId);
-        modelAndView.addObject("startUp", startup);
+        modelAndView.addObject("startup", startup);
         modelAndView.setViewName("startUpDetails");
         return modelAndView;
     }

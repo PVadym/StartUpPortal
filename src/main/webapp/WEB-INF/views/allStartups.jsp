@@ -6,18 +6,7 @@
 <head>
     <title>Startups</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <style>
-        .jumbo {
-            /*background-image: url("");*/
-            background-repeat: no-repeat;
-            background-color: #eaeaea;
-            color: #428bca;
-            padding: 10px 10px 10px 20px;
-            margin: 10px 5px 30px 5px;
-            border-radius: 4px;
-            font-family: Montserrat, sans-serif;}
-
-    </style>
+    <link rel="stylesheet" href="<c:url value='/resources/css/customStyles.css'/>">
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/navbar.jsp"/>
