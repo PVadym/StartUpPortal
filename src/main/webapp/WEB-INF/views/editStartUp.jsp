@@ -17,13 +17,19 @@
             <div class="row">
 
                 <div class="col-lg-12">
-                    <form class="form-horizontal" action="/startups/add" method="post" role="form"
+                    <form class="form-horizontal" action="/startups/edit" method="post" role="form"
                           style="display: block;" modelAttribute="startUp">
 
                         <div class="form-group" hidden>
                             <div class="col-sm-10">
-                                <input type="text" name="author.id" class="form-control"
+                                <input type="number" name="author.id" class="form-control"
                                        value="${startup.author.id}">
+                            </div>
+                        </div>
+                        <div class="form-group" hidden>
+                            <div class="col-sm-10">
+                                <input type="number" name="id" class="form-control"
+                                       value="${startup.id}">
                             </div>
                         </div>
                         <div class="form-group">

@@ -60,7 +60,7 @@
 
                 <c:if test="${pageContext.request.userPrincipal.name eq startup.author.username}">
                     <a class="btn btn-primary" role="button" style="margin: 5px"
-                       href="<c:url value='/startups/edit/${startup.id}'/>">Update</a>
+                       href="<c:url value='/startups/edit/${startup.id}'/>">Edit</a>
                 </c:if>
 
                 <c:if test="${pageContext.request.userPrincipal.name eq startup.author.username or is_admin}">

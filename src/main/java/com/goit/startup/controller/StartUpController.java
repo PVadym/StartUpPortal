@@ -83,7 +83,7 @@ public class StartUpController {
     public String editStartup(Startup startup){
         long userId = startup.getAuthor().getId();
         startup.setAuthor(userService.get(userId));
-        startupService.add(startup);
+        startupService.update(startup);
         return "redirect:/";
     }
 }
