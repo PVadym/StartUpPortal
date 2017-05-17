@@ -12,6 +12,7 @@ CREATE TABLE IF NOT EXISTS images (
   PRIMARY KEY (id)
 )
   ENGINE = InnoDB;
+INSERT INTO images (id) VALUE (1);
 
 -- user
 CREATE TABLE IF NOT EXISTS users (

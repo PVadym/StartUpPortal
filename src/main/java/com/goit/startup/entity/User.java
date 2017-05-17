@@ -77,6 +77,7 @@ public class User extends Model implements UserDetails {
         password = "";
         contacts = "";
         role = UserRole.USER;
+        imageId = 1L;
         startups = new HashSet<>();
         investments = new HashSet<>();
     }

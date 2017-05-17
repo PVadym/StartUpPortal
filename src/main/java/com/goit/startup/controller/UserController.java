@@ -109,11 +109,11 @@ public class UserController {
      */
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String registerUser(User user, BindingResult bindingResult) {
-        System.out.println(user.getUsername());
         userValidator.validate(user, bindingResult);
         if (bindingResult.hasErrors()) {
             return "registration";
         }
+        user.setImageId(1L);
         userService.add(user);
         securityService.autoLogin(user.getUsername(), user.getPassword());
         return "redirect:/user/" + user.getUsername() + "/true";
