@@ -7,9 +7,6 @@
             <th>Minimal Investment</th>
             <th>Current Investments</th>
             <th>Details</th>
-            <c:if test="${is_admin}">
-                <th>Delete</th>
-            </c:if>
         </tr>
         <c:forEach items="${startups}" var="startup">
             <tr>
@@ -18,7 +15,7 @@
                 <td>${startup.minInvestment}</td>
                 <td>${startup.getCurrentInvestments()}</td>
                 <td>
-                    <a class="btn btn-xs btn-primary active" role="button" style="margin: 5px"
+                    <a class="btn btn-xs btn-primary" role="button" style="margin: 5px"
                        href="<c:url value='/startups/${startup.id}'/>">Details</a>
                 </td>
             </tr>

@@ -67,39 +67,4 @@ public class FrontController {
         return modelAndView;
     }
 
-//
-//    /**
-//     * Method defines models and view for users page
-//     *
-//     * @return model and view of users page
-//     */
-//    @RequestMapping(
-//            value = "/users",
-//            method = RequestMethod.GET
-//    )
-//    public ModelAndView getUsersPage() {
-//        ModelAndView modelAndView = new ModelAndView();
-//        modelAndView.addObject("users", userService.getAll());
-//        modelAndView.addObject("is_admin", userService.isAuthenticatedAdmin());
-//        modelAndView.setViewName("users");
-//        return modelAndView;
-//    }
-//
-//    /**
-//     * Method defines models and view for product page
-//     *
-//     * @param id a unique identifier for product
-//     * @return model and view for product info page
-//     */
-//    @RequestMapping(
-//            value = "/product/{id}",
-//            method = RequestMethod.GET
-//    )
-//    public ModelAndView getProductPage(@PathVariable(name = "id") long id) {
-//        ModelAndView modelAndView = new ModelAndView();
-//        modelAndView.addObject("product", productService.get(id));
-//        modelAndView.addObject("is_admin", userService.isAuthenticatedAdmin());
-//        modelAndView.setViewName("product");
-//        return modelAndView;
-//    }
 }

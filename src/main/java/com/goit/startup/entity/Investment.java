@@ -21,11 +21,11 @@ public class Investment extends Model {
     @Column(name = "amount", nullable = false)
     private int amount;
 
-    @ManyToOne(cascade = CascadeType.REFRESH)
+    @ManyToOne
     @JoinColumn(name = "investor_id")
     private User investor;
 
-    @ManyToOne(cascade = CascadeType.REFRESH)
+    @ManyToOne
     private Startup startup;
 
     /**
@@ -61,7 +61,9 @@ public class Investment extends Model {
 
         Investment that = (Investment) o;
 
-        return amount == that.amount;
+        if (amount != that.amount) return false;
+        if (investor != null ? !investor.equals(that.investor) : that.investor != null) return false;
+        return startup != null ? startup.equals(that.startup) : that.startup == null;
 
     }
 
@@ -71,11 +73,15 @@ public class Investment extends Model {
      *
      * @return an integer, hash code value of the instance
      */
-
     @Override
     public int hashCode() {
-        return amount;
+        int result = amount;
+        result = 31 * result + (investor != null ? investor.hashCode() : 0);
+        result = 31 * result + (startup != null ? startup.hashCode() : 0);
+        return result;
     }
+
+
 
     /**
      * A getter for the field amount.

@@ -53,7 +53,7 @@ public class Startup extends Model {
     /**
      * An author of this startup
      */
-    @ManyToOne(cascade = CascadeType.REFRESH)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "author_id")
     private User author;
 
@@ -96,24 +96,28 @@ public class Startup extends Model {
         if (minInvestment != startup.minInvestment) return false;
         if (needInvestment != startup.needInvestment) return false;
         if (name != null ? !name.equals(startup.name) : startup.name != null) return false;
-        return description != null ? description.equals(startup.description) : startup.description == null;
+        if (description != null ? !description.equals(startup.description) : startup.description != null) return false;
+        return author != null ? author.equals(startup.author) : startup.author == null;
 
     }
 
 
-    /**
+/**
      * Method for getting a hashcode value of the instance
      *
      * @return an integer, hash code value of the instance
      */
-    @Override
-    public int hashCode() {
-        int result = name != null ? name.hashCode() : 0;
-        result = 31 * result + (description != null ? description.hashCode() : 0);
-        result = 31 * result + minInvestment;
-        result = 31 * result + needInvestment;
-        return result;
-    }
+@Override
+public int hashCode() {
+    int result = name != null ? name.hashCode() : 0;
+    result = 31 * result + (description != null ? description.hashCode() : 0);
+    result = 31 * result + minInvestment;
+    result = 31 * result + needInvestment;
+    result = 31 * result + (author != null ? author.hashCode() : 0);
+    return result;
+}
+
+
 
     /**
      * The method returns the current amount of investment in this startup

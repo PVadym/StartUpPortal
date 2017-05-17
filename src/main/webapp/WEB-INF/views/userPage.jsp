@@ -19,13 +19,12 @@
             <div class="jumbo">
 
                 <h4>
-                    <small>name:</small>
                     <p>${user.username}</p>
                 </h4>
-                <h4>
+                <h5>
                     <small>contacts:</small>
                     <p>${user.contacts}</p>
-                </h4>
+                </h5>
                 <br>
                 <a class="btn  btn-success" role="button"
                    href="<c:url value='/startups/add/${user.id}'/>">Add StartUp</a>

@@ -1,6 +1,7 @@
 package com.goit.startup.service;
 import com.goit.startup.entity.Model;
 import com.goit.startup.repository.DataRepository;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
@@ -12,6 +13,7 @@ import java.util.Collection;
  * @author Slava Makhinich
  * @version 1.0
  */
+@Service
 public abstract class DataServiceImpl<T extends Model> implements DataService<T> {
 
     /**
@@ -81,6 +83,7 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
      * @return a collection of updated models
      */
     @Override
+    @Transactional
     public Collection<T> updateAll(Collection<T> collection) {
         return this.addAll(collection);
     }

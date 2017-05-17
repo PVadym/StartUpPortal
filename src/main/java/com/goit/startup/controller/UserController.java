@@ -63,7 +63,6 @@ public class UserController {
         ModelAndView modelAndView = new ModelAndView();
         User requestFromUser = userService.getByUsername(userName);
         User authenticatedUser = this.userService.getAuthenticatedUser();
-
         if (requestFromUser.equals(authenticatedUser)) {
 
             modelAndView.addObject("user", requestFromUser);
@@ -137,7 +136,6 @@ public class UserController {
         oldUser.setUsername(user.getUsername());
         oldUser.setContacts(user.getContacts());
         oldUser.setPassword(user.getPassword());
-        System.out.println(user.getRole());
         oldUser.setRole(user.getRole());
         oldUser.setLocked(isLocked);
         userService.update(oldUser);

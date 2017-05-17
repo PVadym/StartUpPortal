@@ -6,6 +6,8 @@
 <head>
     <title>Add a Start-Up</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<c:url value='/resources/css/customStyles.css'/>">
+
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/navbar.jsp"/>
@@ -13,7 +15,7 @@
     <h4><b>Add a Start-Up</b></h4>
     <div class="panel-body">
 
-        <div class="jumbotron">
+        <div class="jumbo">
             <div class="row">
 
                 <div class="col-lg-12">
@@ -26,6 +28,7 @@
                                        value="${startup.author.id}">
                             </div>
                         </div>
+                        <br>
                         <div class="form-group">
                             <label class="control-label col-sm-2" for="name">Name:</label>
                             <div class="col-sm-10">
@@ -53,9 +56,9 @@
                         <div class="form-group">
                             <label class="control-label col-sm-2" for="description">Description:</label>
                             <div class="col-sm-10">
-                                <input type="text" name="description" id="description" tabindex="4"
+                                <textarea rows="5" name="description" id="description" tabindex="4"
                                        class="form-control"
-                                       placeholder="Description">
+                                       placeholder="Enter the Startup's description"></textarea>
                             </div>
                         </div>
                         <div class="form-group ">

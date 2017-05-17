@@ -26,10 +26,10 @@
                     <small>Author:</small>
                     <p>${startup.author.username}</p>
                 </h4>
-                <h4>
+                <h5>
                     <small>contacts:</small>
                     <p>${startup.author.contacts}</p>
-                </h4>
+                </h5>
                 <h4>
                     <small>min. investments:</small>
                     <p>${startup.minInvestment}</p>
@@ -64,8 +64,8 @@
                 </c:if>
 
                 <c:if test="${pageContext.request.userPrincipal.name eq startup.author.username or is_admin}">
-                    <a class="btn btn-danger active" role="button" style="margin: 5px"
-                       href="<c:url value='#'/>">Delete</a>
+                    <a class="btn btn-danger" role="button" style="margin: 5px"
+                       href="<c:url value='/startups/delete/${startup.id}'/>">Delete</a>
                 </c:if>
 
             </div>

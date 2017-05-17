@@ -60,7 +60,7 @@ public class User extends Model implements UserDetails {
     /**
      * A list of investments that the user made
      */
-    @OneToMany(mappedBy = "investor",cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "investor", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private Set<Investment> investments;
 
     /**
@@ -115,18 +115,20 @@ public class User extends Model implements UserDetails {
      */
     @Override
     public boolean equals(Object o) {
-        if (!super.equals(o))
-            return false;
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
 
         User user = (User) o;
 
+        if (isLocked != user.isLocked) return false;
         if (username != null ? !username.equals(user.username) : user.username != null) return false;
         if (password != null ? !password.equals(user.password) : user.password != null) return false;
         if (contacts != null ? !contacts.equals(user.contacts) : user.contacts != null) return false;
-        if (role != user.role) return false;
-        if (startups != null ? !startups.equals(user.startups) : user.startups != null) return false;
-        return investments != null ? investments.equals(user.investments) : user.investments == null;
+        return role == user.role;
+
     }
+
 
     /**
      * Method for getting a hashcode value of the instance
@@ -139,8 +141,7 @@ public class User extends Model implements UserDetails {
         result = 31 * result + (password != null ? password.hashCode() : 0);
         result = 31 * result + (contacts != null ? contacts.hashCode() : 0);
         result = 31 * result + (role != null ? role.hashCode() : 0);
-        result = 31 * result + (startups != null ? startups.hashCode() : 0);
-        result = 31 * result + (investments != null ? investments.hashCode() : 0);
+        result = 31 * result + (isLocked ? 1 : 0);
         return result;
     }
 
@@ -329,11 +330,11 @@ public class User extends Model implements UserDetails {
         this.investments = investments;
     }
 
-    public boolean getIsLocked(){
+    public boolean getIsLocked() {
         return isLocked;
     }
 
-    public boolean setIsLocked(){
+    public boolean setIsLocked() {
         return isLocked;
     }
 }

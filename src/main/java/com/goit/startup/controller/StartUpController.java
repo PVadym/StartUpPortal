@@ -69,7 +69,7 @@ public class StartUpController {
     @RequestMapping(value = "edit/{startupId}", method = RequestMethod.GET)
     public ModelAndView editStartupPage(@PathVariable(name = "startupId") long startupId) throws IllegalAccessException {
         Startup startup = startupService.get(startupId);
-        if (!startup.getAuthor().equals(userService.getAuthenticatedUser())) {
+        if (!startup.getAuthor().equals(userService.getAuthenticatedUser()) || userService.isAuthenticatedAdmin()) {
             throw new IllegalAccessException("Only startup's author can edit the startup");
         }
         ModelAndView modelAndView = new ModelAndView();
@@ -84,6 +84,19 @@ public class StartUpController {
         long userId = startup.getAuthor().getId();
         startup.setAuthor(userService.get(userId));
         startupService.update(startup);
+        return "redirect:/";
+    }
+
+    @RequestMapping(value = "delete/{startupId}", method = RequestMethod.GET)
+    public String deleteStartup(@PathVariable(name = "startupId") long startupId) throws IllegalAccessException {
+        Startup startup = startupService.get(startupId);
+        if (!startup.getAuthor().equals(userService.getAuthenticatedUser()) || userService.isAuthenticatedAdmin()) {
+            throw new IllegalAccessException("Only startup's author can edit the startup");
+        }
+        //        startupService.remove(startup);
+        User user = userService.get(startup.getAuthor().getId());
+        user.getStartups().remove(startup);
+        userService.update(user);
         return "redirect:/";
     }
 }
