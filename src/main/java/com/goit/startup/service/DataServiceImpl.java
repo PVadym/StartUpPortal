@@ -1,4 +1,5 @@
 package com.goit.startup.service;
+
 import com.goit.startup.entity.Model;
 import com.goit.startup.repository.DataRepository;
 import org.springframework.stereotype.Service;

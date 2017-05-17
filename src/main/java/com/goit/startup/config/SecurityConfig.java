@@ -13,7 +13,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.web.authentication.AbstractAuthenticationTargetUrlRequestHandler;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 
 /**
@@ -30,29 +29,25 @@ import org.springframework.security.web.authentication.SimpleUrlAuthenticationSu
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     /**
+     * Request default success.
+     */
+    @Value("${request.default-success}")
+    String requestDefaultSuccess;
+    /**
      * Request prefix for administrators.
      */
     @Value("${request.admin}")
     private String requestAdmin;
-
     /**
      * Request for authorization.
      */
     @Value("${request.login}")
     private String requestLogin;
-
     /**
      * Request.access-denied-page.
      */
     @Value("${request.access-denied-page}")
     private String requestAccessDeniedPage;
-
-    /**
-     * Request default success.
-     */
-    @Value("${request.default-success}")
-    String requestDefaultSuccess;
-
     /**
      * It is always use default success request.
      */
@@ -123,8 +118,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(final AuthenticationManagerBuilder builder) throws Exception {
         builder.userDetailsService(this.userDetailsService);
     }
-
-
 
     /**
      * Method define authentication bean

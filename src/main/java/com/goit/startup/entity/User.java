@@ -40,6 +40,9 @@ public class User extends Model implements UserDetails {
     @Column(name = "contacts")
     private String contacts;
 
+    @Column(name = "image_id")
+    private long imageId;
+
     /**
      * User's role
      */
@@ -347,5 +350,13 @@ public class User extends Model implements UserDetails {
 
     public boolean setIsLocked() {
         return isLocked;
+    }
+
+    public long getImageId() {
+        return imageId;
+    }
+
+    public void setImageId(long imageId) {
+        this.imageId = imageId;
     }
 }
