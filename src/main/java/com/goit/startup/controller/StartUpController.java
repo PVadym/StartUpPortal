@@ -2,6 +2,7 @@ package com.goit.startup.controller;
 
 import com.goit.startup.entity.Investment;
 import com.goit.startup.entity.Startup;
+import com.goit.startup.entity.User;
 import com.goit.startup.service.StartupService;
 import com.goit.startup.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,9 +67,12 @@ public class StartUpController {
     }
 
     @RequestMapping(value = "edit/{startupId}", method = RequestMethod.GET)
-    public ModelAndView editStartupPage(@PathVariable(name = "startupId") long startupId){
-        ModelAndView modelAndView = new ModelAndView();
+    public ModelAndView editStartupPage(@PathVariable(name = "startupId") long startupId) throws IllegalAccessException {
         Startup startup = startupService.get(startupId);
+        if (!startup.getAuthor().equals(userService.getAuthenticatedUser())) {
+            throw new IllegalAccessException("Only startup's author can edit the startup");
+        }
+        ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("startup", startup);
         modelAndView.addObject("is_admin", this.userService.isAuthenticatedAdmin());
         modelAndView.setViewName("editStartUp");
