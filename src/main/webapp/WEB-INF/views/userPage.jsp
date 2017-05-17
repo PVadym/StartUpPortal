@@ -17,7 +17,9 @@
     <div class="row">
         <div class="col-md-3">
             <div class="jumbo">
-                <img src="/images/${user.imageId}"/>
+                <div class="picture">
+                    <img src="/images/${user.imageId}"/>
+                </div>
                 <form method="POST" enctype="multipart/form-data" action="/images/upload/${user.id}/${user.imageId}">
                     <input type="file" name="file">
                     <input type="submit" value="Upload">
