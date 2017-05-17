@@ -5,9 +5,11 @@ import com.goit.startup.entity.User;
 import com.goit.startup.enums.UserRole;
 import com.goit.startup.service.SecurityService;
 import com.goit.startup.service.UserService;
+import com.goit.startup.validator.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,7 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 /**
  * The class provides a set of methods for operations with User entity
  *
- * @author Slava Makhinich
+ * @author Slava Makhinich, Pavel Perevoznyk
  */
 
 @Controller
@@ -31,11 +33,12 @@ public class UserController {
      */
     private final UserService userService;
 
-
     /**
      * An instance of implementation {@link SecurityService} interface
      */
     private SecurityService securityService;
+
+    private UserValidator userValidator;
 
     /**
      * Constructor.
@@ -43,9 +46,10 @@ public class UserController {
      * @param userService An instance of implementation UserService interface.
      */
     @Autowired
-    public UserController(UserService userService, SecurityService securityService) {
+    public UserController(UserService userService, SecurityService securityService, UserValidator userValidator) {
         this.userService = userService;
         this.securityService = securityService;
+        this.userValidator = userValidator;
     }
 
     @RequestMapping(method = RequestMethod.GET)
@@ -67,10 +71,9 @@ public class UserController {
 
             modelAndView.addObject("user", requestFromUser);
             modelAndView.addObject("isStartUps", isStartUp);
-            if(isStartUp){
+            if (isStartUp) {
                 modelAndView.addObject("startups", authenticatedUser.getStartups());
-            }
-            else {
+            } else {
                 modelAndView.addObject("investments", authenticatedUser.getInvestments());
             }
             modelAndView.addObject("is_admin", this.userService.isAuthenticatedAdmin());
@@ -90,6 +93,7 @@ public class UserController {
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public ModelAndView getRegistrationPage() {
         ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("user", new User());
         modelAndView.addObject("roles", UserRole.values());
         modelAndView.addObject("is_admin", this.userService.isAuthenticatedAdmin());
         modelAndView.setViewName("registration");
@@ -99,29 +103,24 @@ public class UserController {
     /**
      * Method to add a new user
      *
-     * @param username user's name
-     * @param password user's password
-     * @param role     user's role
-     * @param isLocked information about locking user's account
+     * @param user          is a {@link User} entity from request
+     * @param bindingResult is a {@link BindingResult}
      * @return an address of users page
      */
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public String registerUser(
-            @RequestParam(value = "username", defaultValue = "") String username,
-            @RequestParam(value = "password", defaultValue = "") String password,
-            @RequestParam(value = "role", defaultValue = "USER") UserRole role,
-            @RequestParam(value = "locked", defaultValue = "false") boolean isLocked
-    ) {
-        User userToAdd = new User(username, password, role);
-        userToAdd.setLocked(isLocked);
-        userService.add(userToAdd);
-        securityService.autoLogin(username, password);
-        return "redirect:/";
+    public String registerUser(User user, BindingResult bindingResult) {
+        System.out.println(user.getUsername());
+        userValidator.validate(user, bindingResult);
+        if (bindingResult.hasErrors()) {
+            return "registration";
+        }
+        userService.add(user);
+        securityService.autoLogin(user.getUsername(), user.getPassword());
+        return "redirect:/user/" + user.getUsername() + "/true";
     }
 
-
     @RequestMapping(value = "/edit/{userId}", method = RequestMethod.GET)
-    public ModelAndView editUserInfoPage(@PathVariable(name = "userId") long userId){
+    public ModelAndView editUserInfoPage(@PathVariable(name = "userId") long userId) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("user", userService.get(userId));
         modelAndView.addObject("roles", UserRole.values());
@@ -131,7 +130,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
-    public String editUserInfo(User user, @RequestParam(value = "locked", defaultValue = "false") boolean isLocked){
+    public String editUserInfo(User user, @RequestParam(value = "locked", defaultValue = "false") boolean isLocked) {
         User oldUser = userService.get(user.getId());
         oldUser.setUsername(user.getUsername());
         oldUser.setContacts(user.getContacts());
@@ -143,9 +142,13 @@ public class UserController {
         return "redirect:/user/" + oldUser.getUsername() + "/true";
     }
 
-    @RequestMapping(value = "/delete/{userId}", method = RequestMethod.POST)
-    public String deleteUser(@PathVariable(name = "userId") long userId){
-        userService.remove(userId);
+    @RequestMapping(value = "/delete/{userId}", method = RequestMethod.GET)
+    public String deleteUser(@PathVariable(name = "userId") long userId) throws IllegalAccessException {
+        if (userService.isAuthenticatedAdmin()) {
+            userService.remove(userId);
+        } else {
+            throw new IllegalAccessException("Only administrator's can delete users");
+        }
         return "redirect:/user";
     }
 

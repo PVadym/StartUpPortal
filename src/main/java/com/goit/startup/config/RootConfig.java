@@ -27,7 +27,7 @@ import javax.sql.DataSource;
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories(basePackages = "com.goit.startup.repository")
-@ComponentScan(basePackages = "com.goit.startup.entity")
+@ComponentScan(basePackages = {"com.goit.startup.entity", "com.goit.startup.validator"})
 @PropertySource(value = "classpath:database.properties")
 public class RootConfig {
 
@@ -167,6 +167,14 @@ public class RootConfig {
     private String entityPackages;
 
     /**
+     * The method returns {@link PropertySourcesPlaceholderConfigurer}
+     */
+    @Bean
+    public static PropertySourcesPlaceholderConfigurer propertyConfigInDev() {
+        return new PropertySourcesPlaceholderConfigurer();
+    }
+
+    /**
      * The method returns datasource
      */
     @Bean
@@ -230,14 +238,6 @@ public class RootConfig {
     @Bean
     public BeanPostProcessor persistenceTranslation() {
         return new PersistenceExceptionTranslationPostProcessor();
-    }
-
-    /**
-     * The method returns {@link PropertySourcesPlaceholderConfigurer}
-     */
-    @Bean
-    public static PropertySourcesPlaceholderConfigurer propertyConfigInDev() {
-        return new PropertySourcesPlaceholderConfigurer();
     }
 
     /**

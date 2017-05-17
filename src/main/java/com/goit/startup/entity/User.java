@@ -34,6 +34,9 @@ public class User extends Model implements UserDetails {
     @Column(name = "password", nullable = false)
     private String password;
 
+    @Transient
+    private String confirmPassword;
+
     @Column(name = "contacts")
     private String contacts;
 
@@ -237,6 +240,14 @@ public class User extends Model implements UserDetails {
      */
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
     }
 
     /**

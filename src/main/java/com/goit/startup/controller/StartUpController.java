@@ -1,6 +1,5 @@
 package com.goit.startup.controller;
 
-import com.goit.startup.entity.Investment;
 import com.goit.startup.entity.Startup;
 import com.goit.startup.entity.User;
 import com.goit.startup.service.StartupService;
@@ -10,9 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import sun.misc.Contended;
 
 /**
  * The class is responsible of processing {@link com.goit.startup.entity.Startup} entity related requests
@@ -35,9 +32,8 @@ public class StartUpController {
         this.userService = userService;
     }
 
-
     @RequestMapping(value = "/add/{userId}", method = RequestMethod.GET)
-    public ModelAndView addStartupPage(@PathVariable(name = "userId") long userId){
+    public ModelAndView addStartupPage(@PathVariable(name = "userId") long userId) {
         ModelAndView modelAndView = new ModelAndView();
         Startup startup = new Startup();
         startup.setAuthor(userService.get(userId));
@@ -47,9 +43,8 @@ public class StartUpController {
         return modelAndView;
     }
 
-
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String addStartup(Startup startup){
+    public String addStartup(Startup startup) {
         long userId = startup.getAuthor().getId();
         startup.setAuthor(userService.get(userId));
         startupService.add(startup);
@@ -57,7 +52,7 @@ public class StartUpController {
     }
 
     @RequestMapping(value = "/{startupId}", method = RequestMethod.GET)
-    public ModelAndView startUpDetails(@PathVariable(name = "startupId") long startupId){
+    public ModelAndView startUpDetails(@PathVariable(name = "startupId") long startupId) {
         ModelAndView modelAndView = new ModelAndView();
         Startup startup = startupService.get(startupId);
         modelAndView.addObject("startup", startup);
@@ -80,7 +75,7 @@ public class StartUpController {
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
-    public String editStartup(Startup startup){
+    public String editStartup(Startup startup) {
         long userId = startup.getAuthor().getId();
         startup.setAuthor(userService.get(userId));
         startupService.update(startup);
