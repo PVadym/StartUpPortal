@@ -3,6 +3,16 @@ CREATE DATABASE IF NOT EXISTS startupdb
   DEFAULT CHARACTER SET utf8;
 USE startupdb;
 
+
+
+-- images
+CREATE TABLE IF NOT EXISTS images (
+  id   INT UNSIGNED NOT NULL  AUTO_INCREMENT,
+  data BLOB,
+  PRIMARY KEY (id)
+)
+  ENGINE = InnoDB;
+
 -- user
 CREATE TABLE IF NOT EXISTS users (
   id       INT UNSIGNED           NOT NULL  AUTO_INCREMENT,
@@ -42,13 +52,6 @@ CREATE TABLE IF NOT EXISTS investments (
 )
   ENGINE = InnoDB;
 
--- images
-CREATE TABLE IF NOT EXISTS images (
-  id   INT UNSIGNED NOT NULL  AUTO_INCREMENT,
-  data BLOB,
-  PRIMARY KEY (id)
-)
-  ENGINE = InnoDB;
 
 
 

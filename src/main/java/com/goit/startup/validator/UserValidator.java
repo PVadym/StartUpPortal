@@ -21,7 +21,7 @@ import org.springframework.validation.Validator;
  */
 
 @Component
-@PropertySource(value = "classpath:validation_en_US.properties")
+@PropertySource(value = "classpath:validation.properties")
 public class UserValidator implements Validator {
 
     private UserService userService;
