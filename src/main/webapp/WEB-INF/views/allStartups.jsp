@@ -30,8 +30,10 @@
             <div class="col-md-3">
                 <a href="<c:url value='/startups/${startup.id}'/>" class="">
                     <div class="jumbo">
+                        <div class="picture" style="width: 90%; margin: auto;">
+                            <img style="width: 100%;" src="/images/${startup.imageId}"/>
+                        </div>
                         <h4>
-                            <%--<small>name:</small>--%>
                             <p>${startup.name}</p>
                         </h4>
                         <h4>

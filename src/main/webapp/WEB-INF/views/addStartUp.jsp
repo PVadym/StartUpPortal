@@ -33,7 +33,7 @@
                             <label class="control-label col-sm-2" for="name">Name:</label>
                             <div class="col-sm-10">
                                 <input type="text" name="name" id="name" tabindex="1" class="form-control"
-                                       placeholder="Name">
+                                       placeholder="Name" required>
                             </div>
                         </div>
                         <div class="form-group">
@@ -41,7 +41,7 @@
                             <div class="col-sm-10">
                                 <input type="number" name="minInvestment" id="minInvestment" tabindex="2"
                                        class="form-control"
-                                       placeholder="Minimal Investment">
+                                       placeholder="Minimal Investment" required>
                             </div>
                         </div>
                         <div class="form-group">
@@ -49,7 +49,7 @@
                             <div class="col-sm-10">
                                 <input type="number" name="needInvestment" id="needInvestment" tabindex="3"
                                        class="form-control"
-                                       placeholder="Target Investment">
+                                       placeholder="Target Investment" required>
                             </div>
                         </div>
 

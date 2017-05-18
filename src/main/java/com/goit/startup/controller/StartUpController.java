@@ -47,6 +47,7 @@ public class StartUpController {
     public String addStartup(Startup startup) {
         long userId = startup.getAuthor().getId();
         startup.setAuthor(userService.get(userId));
+        startup.setImageId(1L);
         startupService.add(startup);
         return "redirect:/";
     }

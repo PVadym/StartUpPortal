@@ -34,7 +34,9 @@ CREATE TABLE IF NOT EXISTS startups (
   description     VARCHAR(1800) NOT NULL  DEFAULT '',
   min_investment  INT           NOT NULL  DEFAULT 0,
   need_investment INT           NOT NULL  DEFAULT 0,
-  author_id         INT UNSIGNED  NOT NULL,
+  author_id       INT UNSIGNED  NOT NULL,
+  image_id        INT UNSIGNED            DEFAULT 1,
+  FOREIGN KEY (image_id) REFERENCES images (id),
   PRIMARY KEY (id),
   FOREIGN KEY (author_id) REFERENCES users (id)
 )

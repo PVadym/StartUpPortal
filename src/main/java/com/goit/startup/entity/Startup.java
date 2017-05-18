@@ -1,10 +1,7 @@
 package com.goit.startup.entity;
 
-import javax.jws.soap.SOAPBinding;
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -42,6 +39,9 @@ public class Startup extends Model {
     @Column(name = "need_investment")
     private int needInvestment;
 
+    @Column(name = "image_id")
+    private long imageId;
+
     /**
      * A list of investments that users already  made in this startup
      */
@@ -53,7 +53,7 @@ public class Startup extends Model {
     /**
      * An author of this startup
      */
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "author_id")
     private User author;
 
@@ -65,6 +65,7 @@ public class Startup extends Model {
         description = "";
         minInvestment = 0;
         needInvestment = 0;
+        this.imageId = 1L;
         investments = new HashSet<>();
     }
 
@@ -95,6 +96,7 @@ public class Startup extends Model {
 
         if (minInvestment != startup.minInvestment) return false;
         if (needInvestment != startup.needInvestment) return false;
+        if (imageId != startup.imageId) return false;
         if (name != null ? !name.equals(startup.name) : startup.name != null) return false;
         if (description != null ? !description.equals(startup.description) : startup.description != null) return false;
         return author != null ? author.equals(startup.author) : startup.author == null;
@@ -102,21 +104,21 @@ public class Startup extends Model {
     }
 
 
-/**
+    /**
      * Method for getting a hashcode value of the instance
      *
      * @return an integer, hash code value of the instance
      */
-@Override
-public int hashCode() {
-    int result = name != null ? name.hashCode() : 0;
-    result = 31 * result + (description != null ? description.hashCode() : 0);
-    result = 31 * result + minInvestment;
-    result = 31 * result + needInvestment;
-    result = 31 * result + (author != null ? author.hashCode() : 0);
-    return result;
-}
-
+    @Override
+    public int hashCode() {
+        int result = name != null ? name.hashCode() : 0;
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + minInvestment;
+        result = 31 * result + needInvestment;
+        result = 31 * result + (int) (imageId ^ (imageId >>> 32));
+        result = 31 * result + (author != null ? author.hashCode() : 0);
+        return result;
+    }
 
 
     /**
@@ -241,8 +243,15 @@ public int hashCode() {
     }
 
 
-    public void makeInvestment(Investment investment){
+    public void makeInvestment(Investment investment) {
         this.investments.add(investment);
     }
 
+    public long getImageId() {
+        return imageId;
+    }
+
+    public void setImageId(long imageId) {
+        this.imageId = imageId;
+    }
 }

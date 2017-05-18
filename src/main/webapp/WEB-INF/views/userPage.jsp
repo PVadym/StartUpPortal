@@ -20,11 +20,11 @@
                 <div class="picture" style="width: 90%; margin: auto;">
                     <img style="width: 100%;" src="/images/${user.imageId}"/>
                 </div>
-                <form method="POST" enctype="multipart/form-data" action="/images/upload/${user.id}/${user.imageId}"
+                <form method="POST" enctype="multipart/form-data"
+                      action="/images/uploadUserImage/${user.id}/${user.imageId}"
                       id="image">
-                    <%--<input type="file" name="file">--%>
                     <label class="btn-xs btn btn-file">
-                        choose new photo <input type="file" name="file" style="display: none;">
+                        choose new photo <input type="file" name="file" style="display: none;" required>
                     </label>
                     <label class="btn-xs btn btn-file">
                         submit <input class="btn-xs" type="submit" style="display: none;">
