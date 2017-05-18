@@ -17,25 +17,27 @@
 <div class="container">
 
 
-    <h4><b>${startup.name}</b></h4>
+    <h4 style="text-align: center"><b>${startup.name}</b></h4>
 
     <div class="row">
 
         <div class="col-md-3">
             <div class="jumbo">
-                <div class="picture" style="width: 90%; margin: auto;">
-                    <img style="width: 100%;" src="/images/${startup.imageId}"/>
+                <div class="imgcontainer">
+                    <img class="img" src="/images/${startup.imageId}"/>
                 </div>
-                <form method="POST" enctype="multipart/form-data"
-                      action="/images/uploadStartupImage/${startup.id}/${startup.imageId}"
-                      id="image">
-                    <label class="btn-xs btn btn-file">
-                        choose new photo <input type="file" name="file" style="display: none;" required>
-                    </label>
-                    <label class="btn-xs btn btn-file">
-                        submit <input class="btn-xs" type="submit" style="display: none;">
-                    </label>
-                </form>
+                <c:if test="${pageContext.request.userPrincipal.name eq startup.author.username}">
+                    <form method="POST" enctype="multipart/form-data"
+                          action="/images/uploadStartupImage/${startup.id}/${startup.imageId}"
+                          id="image">
+                        <label class="btn-xs btn btn-file">
+                            choose new photo <input type="file" name="file" style="display: none;" required>
+                        </label>
+                        <label class="btn-xs btn btn-file">
+                            submit <input class="btn-xs" type="submit" style="display: none;">
+                        </label>
+                    </form>
+                </c:if>
                 <h4>
                     <small>author:</small>
                     <p>${startup.author.username}</p>

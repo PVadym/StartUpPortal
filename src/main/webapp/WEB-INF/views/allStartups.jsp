@@ -16,22 +16,22 @@
         <div class="col-md-2"><h4><b>Startups</b></h4></div>
 
         <div class="col-md-10">
-        <form class="form-inline pull-right" action="<c:url value='/'/>" method='get'>
-            <div class="form-group">
-                <input type="text" name="searchWord" class="form-control" placeholder="What are you looking for?"/>
-            </div>
-            <button type="submit" class="btn btn-primary">Search</button>
-        </form>
+            <form class="form-inline pull-right" action="<c:url value='/'/>" method='get'>
+                <div class="form-group">
+                    <input type="text" name="searchWord" class="form-control" placeholder="What are you looking for?"/>
+                </div>
+                <button type="submit" class="btn btn-primary">Search</button>
+            </form>
         </div>
     </div>
 
     <div class="row">
         <c:forEach items="${startups}" var="startup">
             <div class="col-md-3">
-                <a href="<c:url value='/startups/${startup.id}'/>" class="">
-                    <div class="jumbo">
-                        <div class="picture" style="width: 90%; margin: auto;">
-                            <img style="width: 100%;" src="/images/${startup.imageId}"/>
+                <a style="text-decoration: none;" href="<c:url value='/startups/${startup.id}'/>" class="">
+                    <div class="jumbo1">
+                        <div class="imgcontainer" style="height: 180px;">
+                            <img class="img" src="/images/${startup.imageId}"/>
                         </div>
                         <h4>
                             <p>${startup.name}</p>

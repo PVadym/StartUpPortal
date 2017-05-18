@@ -33,7 +33,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-2" for="name">Name:</label>
+                            <label class="control-label col-sm-2" for="name">Name:<br>(100 chars max)</label>
                             <div class="col-sm-10">
                                 <input type="text" name="name" id="name" tabindex="1" class="form-control"
                                        placeholder="Name" value="${startup.name}">
@@ -57,7 +57,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="control-label col-sm-2" for="description">Description:</label>
+                            <label class="control-label col-sm-2" for="description">Description:<br>(1800 chars max)</label>
                             <div class="col-sm-10">
                                 <textarea type="text" name="description" id="description" tabindex="4"
                                           class="form-control" rows="5"

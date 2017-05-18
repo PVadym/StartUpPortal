@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS users (
 -- startup
 CREATE TABLE IF NOT EXISTS startups (
   id              INT UNSIGNED  NOT NULL  AUTO_INCREMENT,
-  name            VARCHAR(300)  NOT NULL  DEFAULT '',
+  name            VARCHAR(100)  NOT NULL  DEFAULT '',
   description     VARCHAR(1800) NOT NULL  DEFAULT '',
   min_investment  INT           NOT NULL  DEFAULT 0,
   need_investment INT           NOT NULL  DEFAULT 0,
@@ -53,6 +53,7 @@ CREATE TABLE IF NOT EXISTS investments (
   FOREIGN KEY (startup_id) REFERENCES startups (id)
 )
   ENGINE = InnoDB;
+
 
 
 

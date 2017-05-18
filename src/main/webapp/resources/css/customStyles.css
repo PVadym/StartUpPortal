@@ -1,5 +1,4 @@
 .jumbo {
-    /*background-image: url("");*/
     background-repeat: no-repeat;
     background-color: #eaeaea;
     color: #428bca;
@@ -8,16 +7,40 @@
     border-radius: 4px;
     align-content: center;
     text-align: center;
-    font-family: Montserrat, sans-serif;}
-.picture{
-    background-repeat: no-repeat;
-    /*background-image: url("/images/2");*/
+    font-family: Montserrat, sans-serif;
+    }
 
-    /*background-color: #eaeaea;*/
+.jumbo1 {
+    background-repeat: no-repeat;
+    background-color: #eaeaea;
+    color: #428bca;
+    padding: 10px 10px 10px 10px;
+    margin: 0px 5px 30px 5px;
+    border-radius: 4px;
+    align-content: center;
+    text-align: center;
+    font-family: Montserrat, sans-serif;
+    height: 420px;
+}
+
+.jumbo1:hover {
+
+    background-color: gainsboro;
+}
+.imgcontainer {
+    background-repeat: no-repeat;
     color: #428bca;
     padding: 0px 0px 0px 0px;
     margin: 0px 0px 0px 0px;
     border-radius: 4px;
     align-content: center;
     text-align: center;
-    font-family: Montserrat, sans-serif;}
+    font-family: Montserrat, sans-serif;
+    width: 100%;
+    margin: auto;
+}
+
+.img{
+    max-height: 180px;
+    max-width: 100%
+}
