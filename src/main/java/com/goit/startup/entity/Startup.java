@@ -4,6 +4,8 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
+
 /**
  * The entity class, describe startup entity, implements a set of standard methods for working with this entity.
  * Extends {@link Model}
@@ -149,7 +151,7 @@ public class Startup extends Model {
      * @param name a name if startup.
      */
     public void setName(String name) {
-        this.name = name;
+        this.name = isNotBlank(name) ? name:"";
     }
 
     /**
@@ -167,7 +169,7 @@ public class Startup extends Model {
      * @param description a stastup's description.
      */
     public void setDescription(String description) {
-        this.description = description;
+        this.description = isNotBlank(description) ? description:"";
     }
 
     /**
@@ -185,7 +187,7 @@ public class Startup extends Model {
      * @param minInvestment a new value for field minInvestment.
      */
     public void setMinInvestment(int minInvestment) {
-        this.minInvestment = minInvestment;
+        this.minInvestment = minInvestment > 0 ? minInvestment:0;
     }
 
     /**
@@ -203,7 +205,7 @@ public class Startup extends Model {
      * @param needInvestment a new value for field needInvestment.
      */
     public void setNeedInvestment(int needInvestment) {
-        this.needInvestment = needInvestment;
+        this.needInvestment = needInvestment > 0 ? needInvestment:0;
     }
 
     /**
@@ -221,7 +223,7 @@ public class Startup extends Model {
      * @param investments a list of investments.
      */
     public void setInvestments(Set<Investment> investments) {
-        this.investments = investments;
+        this.investments = investments!=null ? investments : new HashSet<>();
     }
 
     /**

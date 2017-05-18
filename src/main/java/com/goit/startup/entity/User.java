@@ -11,6 +11,8 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
+
 /**
  * The entity class, describe user entity, implements a set of standard methods for working with this entity.
  * Extends {@link Model}
@@ -223,7 +225,7 @@ public class User extends Model implements UserDetails {
      * @param username a user's name
      */
     public void setUsername(String username) {
-        this.username = username;
+        this.username = isNotBlank(username) ? username:"";
     }
 
     /**
@@ -269,7 +271,7 @@ public class User extends Model implements UserDetails {
      * @param contacts user's contacts.
      */
     public void setContacts(String contacts) {
-        this.contacts = contacts;
+        this.contacts = isNotBlank(contacts) ? contacts : "";
     }
 
     /**
@@ -288,7 +290,7 @@ public class User extends Model implements UserDetails {
      * @param role a user's role.
      */
     public void setRole(UserRole role) {
-        this.role = role;
+        this.role = (role != null) ? role : UserRole.USER;
     }
 
     /**
@@ -324,7 +326,7 @@ public class User extends Model implements UserDetails {
      * @param startups a list of startups.
      */
     public void setStartups(Set<Startup> startups) {
-        this.startups = startups;
+        this.startups = (startups!=null)? startups: new HashSet<>();
     }
 
     /**
@@ -342,7 +344,7 @@ public class User extends Model implements UserDetails {
      * @param investments a list of investments.
      */
     public void setInvestments(Set<Investment> investments) {
-        this.investments = investments;
+        this.investments = (investments!=null)? investments: new HashSet<>();
     }
 
     public boolean getIsLocked() {
