@@ -6,7 +6,7 @@
 <html lang="en">
 <html>
 <head>
-    <title>Projects</title>
+    <title>${user.username} HomePage</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="<c:url value='/resources/css/customStyles.css'/>">
