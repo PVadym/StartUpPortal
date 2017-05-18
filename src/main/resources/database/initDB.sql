@@ -13,7 +13,6 @@ CREATE TABLE IF NOT EXISTS images (
 )
   ENGINE = InnoDB;
 INSERT INTO images (id) VALUE (1);
-
 -- user
 CREATE TABLE IF NOT EXISTS users (
   id       INT UNSIGNED           NOT NULL  AUTO_INCREMENT,

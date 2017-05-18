@@ -20,10 +20,17 @@
                 <div class="picture" style="width: 90%; margin: auto;">
                     <img style="width: 100%;" src="/images/${user.imageId}"/>
                 </div>
-                <form method="POST" enctype="multipart/form-data" action="/images/upload/${user.id}/${user.imageId}">
-                    <input type="file" name="file">
-                    <input type="submit" value="Upload">
+                <form method="POST" enctype="multipart/form-data" action="/images/upload/${user.id}/${user.imageId}"
+                      id="image">
+                    <%--<input type="file" name="file">--%>
+                    <label class="btn-xs btn btn-file">
+                        choose new photo <input type="file" name="file" style="display: none;">
+                    </label>
+                    <label class="btn-xs btn btn-file">
+                        submit <input class="btn-xs" type="submit" style="display: none;">
+                    </label>
                 </form>
+
                 <h4>
                     <p>${user.username}</p>
                 </h4>
@@ -68,5 +75,10 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+    function toggleImage() {
+        $("#image").hide();
+    }
+</script>
 </body>
 </html>

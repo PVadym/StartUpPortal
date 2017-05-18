@@ -53,6 +53,7 @@ public class ImageController {
     @RequestMapping(value = "/upload/{userId}/{imageId}", method = RequestMethod.POST)
     public String uploadImage(@RequestParam("file") MultipartFile file, @PathVariable("userId") long userId, @PathVariable("imageId") long imageId)
             throws ServletException, IOException {
+        User user = userService.get(userId);
         if (imageId != defaultImageId) {
             Image image = imageService.get(imageId);
             image.setData(file.getBytes());
@@ -60,11 +61,10 @@ public class ImageController {
         } else {
             Image newImage = new Image();
             newImage.setData(file.getBytes());
-            User user = userService.get(userId);
             newImage = imageService.add(newImage);
             user.setImageId(newImage.getId());
             userService.update(user);
         }
-        return "redirect:/";
+        return "redirect:/user/" + user.getUsername() + "/true";
     }
 }

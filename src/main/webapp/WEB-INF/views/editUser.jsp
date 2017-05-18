@@ -19,8 +19,9 @@
                     <input type="text" class="form-control" name="id" value="${user.id}">
                 </div>
 
-                <label class="control-label" for="input-1">Select File</label>
-                <input id="input-1" type="file" class="file">
+                <div class="form-group" hidden>
+                    <input type="text" class="form-control" name="imageId" value="${user.imageId}">
+                </div>
 
                 <div class="form-group">
                     <label for="username">Name:</label>
