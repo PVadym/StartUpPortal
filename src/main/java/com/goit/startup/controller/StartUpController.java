@@ -46,9 +46,12 @@ public class StartUpController {
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String addStartup(Startup startup) {
         long userId = startup.getAuthor().getId();
-        startup.setAuthor(userService.get(userId));
+        User user = userService.get(userId);
+        startup.setAuthor(user);
         startup.setImageId(1L);
-        startupService.add(startup);
+        user.getStartups().add(startup);
+        userService.update(user);
+//        startupService.add(startup);
         return "redirect:/";
     }
 

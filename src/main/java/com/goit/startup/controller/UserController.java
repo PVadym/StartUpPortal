@@ -72,9 +72,9 @@ public class UserController {
             modelAndView.addObject("user", requestFromUser);
             modelAndView.addObject("isStartUps", isStartUp);
             if (isStartUp) {
-                modelAndView.addObject("startups", authenticatedUser.getStartups());
+                modelAndView.addObject("startups", requestFromUser.getStartups());
             } else {
-                modelAndView.addObject("investments", authenticatedUser.getInvestments());
+                modelAndView.addObject("investments", requestFromUser.getInvestments());
             }
             modelAndView.addObject("is_admin", this.userService.isAuthenticatedAdmin());
             modelAndView.setViewName("userPage");
