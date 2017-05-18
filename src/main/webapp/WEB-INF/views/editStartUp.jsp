@@ -4,13 +4,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Add a Start-Up</title>
+    <title>Edit Start-Up</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/navbar.jsp"/>
 <div class="container">
-    <h4><b>Add a Start-Up</b></h4>
+    <h4><b>Edit Start-Up</b></h4>
     <div class="panel-body">
 
         <div class="jumbotron">
@@ -59,9 +59,9 @@
                         <div class="form-group">
                             <label class="control-label col-sm-2" for="description">Description:</label>
                             <div class="col-sm-10">
-                                <input type="text" name="description" id="description" tabindex="4"
-                                       class="form-control"
-                                       placeholder="Description" value="${startup.description}">
+                                <textarea type="text" name="description" id="description" tabindex="4"
+                                          class="form-control" rows="5"
+                                          placeholder="Description">${startup.description}</textarea>
                             </div>
                         </div>
                         <div class="form-group ">
