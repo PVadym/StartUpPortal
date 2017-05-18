@@ -2,12 +2,15 @@
     background-repeat: no-repeat;
     background-color: #eaeaea;
     color: #428bca;
-    padding: 20px 20px 20px 20px;
+    padding: 10px 10px 10px 10px;
     margin: 0px 5px 30px 5px;
     border-radius: 4px;
     align-content: center;
     text-align: center;
     font-family: Montserrat, sans-serif;
+    -webkit-box-shadow: 10px 10px 21px -5px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 10px 21px -5px rgba(0,0,0,0.75);
+    box-shadow: 10px 10px 21px -5px rgba(0,0,0,0.75);
     }
 
 .jumbo1 {
@@ -21,10 +24,12 @@
     text-align: center;
     font-family: Montserrat, sans-serif;
     height: 420px;
+    -webkit-box-shadow: 10px 10px 21px -5px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 10px 21px -5px rgba(0,0,0,0.75);
+    box-shadow: 10px 10px 21px -5px rgba(0,0,0,0.75);
 }
 
 .jumbo1:hover {
-
     background-color: gainsboro;
 }
 .imgcontainer {
