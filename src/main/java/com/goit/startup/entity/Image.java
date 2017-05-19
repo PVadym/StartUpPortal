@@ -1,5 +1,7 @@
 package com.goit.startup.entity;
 
+import org.hibernate.annotations.Type;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -17,6 +19,7 @@ import java.util.Arrays;
 public class Image extends Model {
 
     @Column(name = "data")
+    @Type(type = "BLOB")
     private byte[] data;
 
 
