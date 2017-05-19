@@ -22,7 +22,8 @@
                 </div>
                 <button type="submit" class="btn btn-primary">Search</button>
                 <c:if test="${not empty searchWord}">
-                    <a href="<c:url value='/'/>" class="btn btn-primary" role="button">Reset search: "${searchWord}"</a>
+                    <a href="<c:url value='/'/>" class="btn btn-primary" role="button">Reset search by:
+                        "${searchWord}"</a>
                 </c:if>
             </form>
         </div>
