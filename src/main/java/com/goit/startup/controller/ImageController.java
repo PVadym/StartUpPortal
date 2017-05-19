@@ -62,8 +62,8 @@ public class ImageController {
         if (!file.getContentType().equals("image/jpg") && !file.getContentType().equals("image/gif") && !file.getContentType().equals("image/png")) {
             throw new IllegalStateException("The file you selected is of incorrect type. An image should be .jpg, .gif or .png");
         }
-        if (file.getSize() > 1024 * 1024) {
-            throw new IllegalStateException("The file you selected is too big. A file must be less than 1 MB.");
+        if (file.getSize() > 1024 * 100) {
+            throw new IllegalStateException("The file you selected is too big. A file must be less than 100 kB.");
         }
         if (imageId != defaultImageId) {
             Image image = imageService.get(imageId);
