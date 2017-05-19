@@ -75,14 +75,15 @@ public class StartUpController {
 
     @RequestMapping(value = "edit/{startupId}", method = RequestMethod.GET)
     public ModelAndView editStartupPage(@PathVariable(name = "startupId") long startupId) throws IllegalAccessException {
+        ModelAndView modelAndView = new ModelAndView();
         Startup startup = startupService.get(startupId);
-        if (!startup.getAuthor().equals(userService.getAuthenticatedUser()) || userService.isAuthenticatedAdmin()) {
+        if (startup.getAuthor().equals(userService.getAuthenticatedUser()) || userService.isAuthenticatedAdmin()) {
+            modelAndView.addObject("startup", startup);
+            modelAndView.addObject("is_admin", this.userService.isAuthenticatedAdmin());
+            modelAndView.setViewName("editStartUp");
+        } else {
             throw new IllegalAccessException("Only startup's author can edit the startup");
         }
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("startup", startup);
-        modelAndView.addObject("is_admin", this.userService.isAuthenticatedAdmin());
-        modelAndView.setViewName("editStartUp");
         return modelAndView;
     }
 
