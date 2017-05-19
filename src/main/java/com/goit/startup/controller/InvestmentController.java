@@ -6,8 +6,10 @@ import com.goit.startup.entity.User;
 import com.goit.startup.service.InvestmentService;
 import com.goit.startup.service.StartupService;
 import com.goit.startup.service.UserService;
+import com.goit.startup.validator.InvestmentValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -30,11 +32,15 @@ public class InvestmentController {
 
     private InvestmentService investmentService;
 
+    private InvestmentValidator investmentValidator;
+
     @Autowired
-    public InvestmentController(StartupService startupService, UserService userService, InvestmentService investmentService) {
+    public InvestmentController(StartupService startupService, UserService userService,
+                                InvestmentService investmentService, InvestmentValidator investmentValidator) {
         this.startupService = startupService;
         this.userService = userService;
         this.investmentService = investmentService;
+        this.investmentValidator = investmentValidator;
     }
 
     @RequestMapping(value = "/invest/{startupId}/{investorName}", method = RequestMethod.GET)
@@ -53,13 +59,17 @@ public class InvestmentController {
     }
 
     @RequestMapping(value = "/invest", method = RequestMethod.POST)
-    public String investPage(Investment investment){
+    public String investPage(Investment investment, BindingResult bindingResult){
         long startupId = investment.getStartup().getId();
         String investorName = investment.getInvestor().getUsername();
         Startup startup = startupService.get(startupId);
         User investor = userService.getByUsername(investorName);
         investment.setStartup(startup);
         investment.setInvestor(investor);
+        investmentValidator.validate(investment, bindingResult);
+        if (bindingResult.hasErrors()) {
+            return "makeInvestment";
+        }
         investmentService.update(investment);
         return "redirect:/startups/" + startup.getId();
     }

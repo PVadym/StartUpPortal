@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -22,8 +23,9 @@
 
     <div class="jumbotron col-md-3">
         <h4><b>Make Investment</b></h4>
-        <form class="form-horizontal" action="/investments/invest" method="post" role="form"
-              style="display: block;" modelAttribute="investment">
+
+        <form:form class="form-horizontal" action="/investments/invest" method="post" role="form"
+                   style="display: block;" modelAttribute="investment">
 
             <div class="form-group" hidden>
                 <input type="text" name="startup.id" class="form-control"
@@ -40,6 +42,9 @@
                     <input type="number" name="amount" id="amount" tabindex="1"
                            class="form-control"
                            placeholder="Investment Amount">
+                    <div class="text-danger" role="alert">
+                        <form:errors path="amount"></form:errors>
+                    </div>
                 </div>
             </div>
             <div class="form-group">
@@ -55,8 +60,9 @@
                            class="form-control btn-danger" value="Reset">
                 </div>
             </div>
+        </form:form>
     </div>
-    </form>
+
 </div>
 </div>
 

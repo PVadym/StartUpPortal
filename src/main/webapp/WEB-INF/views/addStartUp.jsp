@@ -44,7 +44,7 @@
                         <div class="form-group">
                             <label class="control-label col-sm-2" for="needInvestment">Target Investment:</label>
                             <div class="col-sm-10">
-                                <input type="number" name="needInvestment" id="needInvestment" tabindex="3"
+                                <input type="number" name="needInvestment" id="needInvestment" tabindex="2"
                                        class="form-control"
                                        placeholder="Target Investment" required>
                                 <div class="text-danger" role="alert">
@@ -55,7 +55,7 @@
                         <div class="form-group">
                             <label class="control-label col-sm-2" for="minInvestment">Minimal Investment:</label>
                             <div class="col-sm-10">
-                                <input type="number" name="minInvestment" id="minInvestment" tabindex="2"
+                                <input type="number" name="minInvestment" id="minInvestment" tabindex="3"
                                        class="form-control"
                                        placeholder="Minimal Investment" required>
                                 <div class="text-danger" role="alert">
