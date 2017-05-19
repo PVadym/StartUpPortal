@@ -101,12 +101,19 @@
                             <th>Amount</th>
                             <th>Investor</th>
                             <th>Contacts</th>
+                            <c:if test="${is_admin}">
+                                <th>Delete</th>
+                            </c:if>
                         </tr>
                         <c:forEach items="${startup.investments}" var="investment">
                             <tr>
                                 <td>${investment.amount}</td>
                                 <td>${investment.investor.username}</td>
                                 <td>${investment.investor.contacts}</td>
+                                <td>
+                                    <a class="btn btn-xs btn-danger" role="button" style="margin: 5px"
+                                       href="<c:url value="/investments/delete/${investment.id}"/>">Delete</a>
+                                </td>
                             </tr>
                         </c:forEach>
                     </table>

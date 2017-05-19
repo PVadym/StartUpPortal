@@ -73,4 +73,16 @@ public class InvestmentController {
         investmentService.update(investment);
         return "redirect:/startups/" + startup.getId();
     }
+
+    @RequestMapping(value = "/delete/{investmentId}", method = RequestMethod.GET)
+    public String delete (@PathVariable(name = "investmentId") long investmentId){
+        if (investmentService.get(investmentId).getInvestor().equals(userService.getAuthenticatedUser())
+                || userService.isAuthenticatedAdmin()) {
+            investmentService.remove(investmentId);
+//            Startup startup = investmentService.get(investmentId).getStartup();
+//            startup.getInvestments().remove(investmentService.get(investmentId));
+//            startupService.update(startup);
+        }
+    return "redirect:/user/" + userService.getAuthenticatedUser().getUsername() +  "/false";
+    }
 }
