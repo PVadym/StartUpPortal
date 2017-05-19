@@ -21,6 +21,9 @@
                     <input type="text" name="searchWord" class="form-control" placeholder="What are you looking for?"/>
                 </div>
                 <button type="submit" class="btn btn-primary">Search</button>
+                <c:if test="${not empty searchWord}">
+                    <a href="<c:url value='/'/>" class="btn btn-primary" role="button">Reset search: "${searchWord}"</a>
+                </c:if>
             </form>
         </div>
     </div>

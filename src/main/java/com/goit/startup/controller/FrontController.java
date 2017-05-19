@@ -5,7 +5,6 @@ import com.goit.startup.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -60,6 +59,7 @@ public class FrontController {
             modelAndView.addObject("startups", startupService.getAll());
         } else {
             modelAndView.addObject("startups", startupService.findAllByKeyWord(searchWord));
+            modelAndView.addObject("searchWord", searchWord);
         }
 
         modelAndView.addObject("is_admin", userService.isAuthenticatedAdmin());
