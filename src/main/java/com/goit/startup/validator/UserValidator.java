@@ -82,7 +82,7 @@ public class UserValidator implements Validator {
         }
 
         if (!user.getConfirmPassword().equals(user.getPassword())) {
-            errors.rejectValue("confirmPassword", "Different.password");
+            errors.rejectValue("confirmPassword", "Different.user.password");
         }
     }
 
