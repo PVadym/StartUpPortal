@@ -130,13 +130,18 @@ public class UserController {
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
-    public String editUserInfo(User user, @RequestParam(value = "locked", defaultValue = "false") boolean isLocked) {
+    public String editUserInfo(User user, BindingResult bindingResult, @RequestParam(value = "locked", defaultValue = "false") boolean isLocked) {
         User oldUser = userService.get(user.getId());
         oldUser.setUsername(user.getUsername());
         oldUser.setContacts(user.getContacts());
         oldUser.setPassword(user.getPassword());
+        oldUser.setConfirmPassword(user.getConfirmPassword());
         oldUser.setRole(user.getRole());
         oldUser.setLocked(isLocked);
+        userValidator.validate(oldUser, bindingResult);
+        if (bindingResult.hasErrors()) {
+            return "editUser";
+        }
         userService.update(oldUser);
         securityService.autoLogin(oldUser.getUsername(), oldUser.getPassword());
         return "redirect:/user/" + oldUser.getUsername() + "/true";
