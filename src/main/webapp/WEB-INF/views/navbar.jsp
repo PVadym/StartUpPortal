@@ -5,10 +5,17 @@
 <div class="container">
     <div class="panel-heading">
         <div class="row">
-            <h3 class="col-md-3">
-                <small>logged in:</small>
-                <a href="<c:url value='/'/>">${pageContext.request.userPrincipal.name}</a>
-            </h3>
+            <h2 class="col-md-8">
+                <a href="<c:url value='/'/>">StartUp Founder</a>
+                <c:if test="${null != pageContext.request.userPrincipal.name}">
+                    <small>
+                        <span style='padding-left:100px;'></span>
+                        Hello
+                        <a href="<c:url value='/'/>">${pageContext.request.userPrincipal.name}</a>
+                        !
+                    </small>
+                </c:if>
+            </h2>
             <div class="btn-group pull-right">
                 <sec:authorize access="isAuthenticated()">
                     <a class="btn btn-primary" role="button"
