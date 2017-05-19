@@ -18,11 +18,11 @@
             <form:form action="/user/edit" method="post" modelAttribute="user">
 
                 <div class="form-group" hidden>
-                    <input type="text" class="form-control" name="id" value="${user.id}"/>
+                    <input type="number" class="form-control" name="id" value="${user.id}"/>
                 </div>
 
                 <div class="form-group" hidden>
-                    <input type="text" class="form-control" name="imageId" value="${user.imageId}"/>
+                    <input type="number" class="form-control" name="imageId" value="${user.imageId}"/>
                 </div>
 
                 <div class="form-group">

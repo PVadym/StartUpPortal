@@ -55,7 +55,7 @@ public class Startup extends Model {
     /**
      * An author of this startup
      */
-    @ManyToOne(cascade = CascadeType.REFRESH)
+    @ManyToOne
     @JoinColumn(name = "author_id")
     private User author;
 

@@ -88,14 +88,17 @@ public class StartUpController {
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
-    public String editStartup(Startup startup, BindingResult bindingResult) {
-        startupValidator.validate(startup, bindingResult);
+    public String editStartup(Startup editedStartup, BindingResult bindingResult) {
+        startupValidator.validate(editedStartup, bindingResult);
         if (bindingResult.hasErrors()) {
             return "editStartUp";
         }
-        long userId = startup.getAuthor().getId();
-        startup.setAuthor(userService.get(userId));
-        startupService.update(startup);
+        Startup oldStartup = startupService.get(editedStartup.getId());
+        long userId = editedStartup.getAuthor().getId();
+        User author = userService.get(userId);
+        editedStartup.setAuthor(author);
+        editedStartup.setInvestments(oldStartup.getInvestments());
+        startupService.update(editedStartup);
         return "redirect:/";
     }
 

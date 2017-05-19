@@ -22,17 +22,17 @@
                                style="display: block;" modelAttribute="startup">
 
                         <div class="form-group" hidden>
-                            <div class="col-sm-10">
                                 <input type="number" name="author.id" class="form-control"
                                        value="${startup.author.id}">
-                            </div>
                         </div>
                         <div class="form-group" hidden>
-                            <div class="col-sm-10">
                                 <input type="number" name="id" class="form-control"
                                        value="${startup.id}">
-                            </div>
                         </div>
+                        <div class="form-group" hidden>
+                            <input type="number" class="form-control" name="imageId" value="${startup.imageId}"/>
+                        </div>
+
                         <div class="form-group">
                             <label class="control-label col-sm-2" for="name">Name:<br>(100 chars max)</label>
                             <div class="col-sm-10">
