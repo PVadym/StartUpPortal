@@ -4,8 +4,10 @@ import com.goit.startup.entity.Startup;
 import com.goit.startup.entity.User;
 import com.goit.startup.service.StartupService;
 import com.goit.startup.service.UserService;
+import com.goit.startup.validator.StartupValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,11 +27,13 @@ public class StartUpController {
     private StartupService startupService;
 
     private UserService userService;
+    private StartupValidator startupValidator;
 
     @Autowired
-    public StartUpController(StartupService startupService, UserService userService) {
+    public StartUpController(StartupService startupService, UserService userService, StartupValidator startupValidator) {
         this.startupService = startupService;
         this.userService = userService;
+        this.startupValidator = startupValidator;
     }
 
     @RequestMapping(value = "/add/{userId}", method = RequestMethod.GET)
@@ -44,7 +48,11 @@ public class StartUpController {
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String addStartup(Startup startup) {
+    public String addStartup(Startup startup, BindingResult bindingResult) {
+        startupValidator.validate(startup, bindingResult);
+        if (bindingResult.hasErrors()) {
+            return "addStartUp";
+        }
         long userId = startup.getAuthor().getId();
         User user = userService.get(userId);
         startup.setAuthor(user);
@@ -79,7 +87,11 @@ public class StartUpController {
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
-    public String editStartup(Startup startup) {
+    public String editStartup(Startup startup, BindingResult bindingResult) {
+        startupValidator.validate(startup, bindingResult);
+        if (bindingResult.hasErrors()) {
+            return "editStartUp";
+        }
         long userId = startup.getAuthor().getId();
         startup.setAuthor(userService.get(userId));
         startupService.update(startup);

@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -17,8 +18,8 @@
             <div class="row">
 
                 <div class="col-lg-12">
-                    <form class="form-horizontal" action="/startups/edit" method="post" role="form"
-                          style="display: block;" modelAttribute="startUp">
+                    <form:form class="form-horizontal" action="/startups/edit" method="post" role="form"
+                               style="display: block;" modelAttribute="startup">
 
                         <div class="form-group" hidden>
                             <div class="col-sm-10">
@@ -37,14 +38,9 @@
                             <div class="col-sm-10">
                                 <input type="text" name="name" id="name" tabindex="1" class="form-control"
                                        placeholder="Name" value="${startup.name}">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-2" for="minInvestment">Minimal Investment:</label>
-                            <div class="col-sm-10">
-                                <input type="number" name="minInvestment" id="minInvestment" tabindex="2"
-                                       class="form-control"
-                                       placeholder="Minimal Investment" value="${startup.minInvestment}">
+                                <div class="text-danger" role="alert">
+                                    <form:errors path="name"></form:errors>
+                                </div>
                             </div>
                         </div>
                         <div class="form-group">
@@ -53,8 +49,23 @@
                                 <input type="number" name="needInvestment" id="needInvestment" tabindex="3"
                                        class="form-control"
                                        placeholder="Target Investment" value="${startup.needInvestment}">
+                                <div class="text-danger" role="alert">
+                                    <form:errors path="needInvestment"></form:errors>
+                                </div>
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="minInvestment">Minimal Investment:</label>
+                            <div class="col-sm-10">
+                                <input type="number" name="minInvestment" id="minInvestment" tabindex="2"
+                                       class="form-control"
+                                       placeholder="Minimal Investment" value="${startup.minInvestment}">
+                                <div class="text-danger" role="alert">
+                                    <form:errors path="minInvestment"></form:errors>
+                                </div>
+                            </div>
+                        </div>
+
 
                         <div class="form-group">
                             <label class="control-label col-sm-2" for="description">Description:<br>(1800 chars max)</label>
@@ -80,7 +91,7 @@
                                 </div>
                             </div>
                         </div>
-                    </form>
+                    </form:form>
                 </div>
             </div>
         </div>

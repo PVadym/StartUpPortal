@@ -26,17 +26,17 @@ public class UserValidator implements Validator {
 
     private UserService userService;
 
-    @Value("${Size.username.min}")
+    @Value("${Size.user.username.min}")
     private int minUsernameLength;
 
-    @Value("${Size.username.max}")
+    @Value("${Size.user.username.max}")
     private int maxUsernameLength;
 
 
-    @Value("${Size.password.min}")
+    @Value("${Size.user.password.min}")
     private int minPasswordLength;
 
-    @Value("${Size.password.max}")
+    @Value("${Size.user.password.max}")
     private int maxPasswordLength;
 
     @Autowired
@@ -56,16 +56,16 @@ public class UserValidator implements Validator {
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "username", "Required");
 
         if (user.getUsername().contains(" ")) {
-            errors.rejectValue("username", "Blanks.username");
+            errors.rejectValue("username", "Blanks.user.username");
         }
 
         if (user.getUsername().length() < minUsernameLength || user.getUsername().length() > maxUsernameLength) {
-            errors.rejectValue("username", "Size.username");
+            errors.rejectValue("username", "Size.user.username");
         }
 
         try {
             if (userService.loadUserByUsername(user.getUsername()) != null) {
-                errors.rejectValue("username", "Duplicate.username");
+                errors.rejectValue("username", "Duplicate.user.username");
             }
         } catch (UsernameNotFoundException e) {
             System.out.println(e.getMessage());
@@ -74,11 +74,11 @@ public class UserValidator implements Validator {
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "Required");
 
         if (user.getPassword().contains(" ")) {
-            errors.rejectValue("password", "Blanks.password");
+            errors.rejectValue("password", "Blanks.user.password");
         }
 
         if (user.getPassword().length() < minPasswordLength || user.getPassword().length() > maxPasswordLength) {
-            errors.rejectValue("password", "Size.password");
+            errors.rejectValue("password", "Size.user.password");
         }
 
         if (!user.getConfirmPassword().equals(user.getPassword())) {

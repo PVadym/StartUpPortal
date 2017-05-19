@@ -1,11 +1,11 @@
 package com.goit.startup.validator;
 
+import com.goit.startup.entity.Startup;
 import com.goit.startup.entity.User;
-import com.goit.startup.service.UserService;
+import com.goit.startup.service.StartupService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
@@ -24,67 +24,51 @@ import org.springframework.validation.Validator;
 @PropertySource(value = "classpath:validation.properties")
 public class StartupValidator implements Validator {
 
-    private UserService userService;
+    private StartupService startupService;
 
-    @Value("${Size.username.min}")
-    private int minUsernameLength;
+    @Value("${Size.startup.name.min}")
+    private int minNameLength;
 
-    @Value("${Size.username.max}")
-    private int maxUsernameLength;
-
-
-    @Value("${Size.password.min}")
-    private int minPasswordLength;
-
-    @Value("${Size.password.max}")
-    private int maxPasswordLength;
+    @Value("${Size.startup.name.max}")
+    private int maxNameLength;
 
     @Autowired
-    public StartupValidator(UserService userService) {
-        this.userService = userService;
+    public StartupValidator(StartupService startupService) {
+        this.startupService = startupService;
     }
 
     @Override
     public boolean supports(Class<?> aClass) {
-        return User.class.equals(aClass);
+        return Startup.class.equals(aClass);
     }
 
     @Override
     public void validate(Object o, Errors errors) {
-        User user = (User) o;
+        Startup startup = (Startup) o;
 
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "username", "Required");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "Required");
 
-        if (user.getUsername().contains(" ")) {
-            errors.rejectValue("username", "Blanks.username");
-        }
-
-        if (user.getUsername().length() < minUsernameLength || user.getUsername().length() > maxUsernameLength) {
-            errors.rejectValue("username", "Size.username");
+        if (startup.getName().length() < minNameLength || startup.getName().length() > maxNameLength) {
+            errors.rejectValue("name", "Size.startup.name");
         }
 
         try {
-            if (userService.loadUserByUsername(user.getUsername()) != null) {
-                errors.rejectValue("username", "Duplicate.username");
+            if (startupService.getByName(startup.getName()) != null) {
+                errors.rejectValue("name", "Duplicate.startup.name");
             }
-        } catch (UsernameNotFoundException e) {
+        } catch (NullPointerException e) {
             System.out.println(e.getMessage());
         }
 
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "Required");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "needInvestment", "Required");
 
-        if (user.getPassword().contains(" ")) {
-            errors.rejectValue("password", "Blanks.password");
+        if (startup.getNeedInvestment() <= 0) {
+            errors.rejectValue("needInvestment", "Amount.startup.needInvestment");
         }
 
-        if (user.getPassword().length() < minPasswordLength || user.getPassword().length() > maxPasswordLength) {
-            errors.rejectValue("password", "Size.password");
-        }
-
-        if (!user.getConfirmPassword().equals(user.getPassword())) {
-            errors.rejectValue("confirmPassword", "Different.password");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "minInvestment", "Required");
+        if (startup.getMinInvestment() <= 0 || startup.getMinInvestment() > startup.getNeedInvestment()) {
+            errors.rejectValue("minInvestment", "Amount.startup.minInvestment");
         }
     }
-
-
 }
