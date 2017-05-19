@@ -48,6 +48,12 @@
                             <small>curr. invetments:</small>
                             <p>${startup.getCurrentInvestments()}</p>
                         </h4>
+                        <br>
+                        <c:if test="${startup.author.username eq pageContext.request.userPrincipal.name}">
+                            <div class="text-danger" role="alert">
+                                <h6>my startup</h6>
+                            </div>
+                        </c:if>
                     </div>
                 </a>
             </div>
