@@ -58,6 +58,7 @@ public class ImageController {
     public String uploadUserImage(@RequestParam("file") MultipartFile file, @PathVariable("userId") long userId, @PathVariable("imageId") long imageId)
             throws ServletException, IOException {
         User user = userService.get(userId);
+        System.out.println(file.getContentType());
         if (!file.getContentType().equals("image/jpg") && !file.getContentType().equals("image/gif") && !file.getContentType().equals("image/png")) {
             throw new IllegalStateException("The file you selected is of incorrect type. An image should be .jpg, .gif or .png");
         }
