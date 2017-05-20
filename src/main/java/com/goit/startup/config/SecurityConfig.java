@@ -94,7 +94,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginPage(this.requestLogin)
                 .usernameParameter(this.parameterUsername)
                 .passwordParameter(this.parameterPassword)
-                .defaultSuccessUrl(this.requestDefaultSuccess, false)
+                .defaultSuccessUrl(this.requestDefaultSuccess, alwaysUseDefaultSuccess)
                 .and()
                 .exceptionHandling()
                 .accessDeniedPage(this.requestAccessDeniedPage)

@@ -143,8 +143,11 @@ public class UserController {
             return "editUser";
         }
         userService.update(oldUser);
-        securityService.autoLogin(oldUser.getUsername(), oldUser.getPassword());
-        return "redirect:/user/" + oldUser.getUsername() + "/true";
+        if (userService.getAuthenticatedUser().getId() == oldUser.getId()) {
+            securityService.autoLogin(oldUser.getUsername(), oldUser.getPassword());
+            return "redirect:/user/" + oldUser.getUsername() + "/true";
+        }
+        return "redirect:/user";
     }
 
     @RequestMapping(value = "/delete/{userId}", method = RequestMethod.GET) // TODO: should be POST

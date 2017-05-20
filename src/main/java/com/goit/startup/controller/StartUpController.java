@@ -106,16 +106,12 @@ public class StartUpController {
     public String deleteStartup(@PathVariable(name = "startupId") long startupId) throws IllegalAccessException {
         Startup startup = startupService.get(startupId);
         if (startup.getAuthor().equals(userService.getAuthenticatedUser()) || userService.isAuthenticatedAdmin()) {
-
-            startupService.remove(startup);
-
-//            User user = userService.get(startup.getAuthor().getId());
-//            user.getStartups().remove(startup);
-//            userService.update(user);
+            User user = userService.get(startup.getAuthor().getId());
+            user.getStartups().remove(startup);
+            userService.update(user);
         } else {
             throw new IllegalAccessException("Only startup's author can edit the startup");
         }
-        //        startupService.remove(startup);
         return "redirect:/";
     }
 }
