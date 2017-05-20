@@ -47,6 +47,5 @@ public class InvestmentValidator implements Validator {
         if (investment.getAmount() < investment.getStartup().getMinInvestment()) {
             errors.rejectValue("amount", "Amount.investment.minInvestment");
         }
-
     }
 }
