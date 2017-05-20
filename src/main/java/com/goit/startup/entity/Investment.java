@@ -26,6 +26,7 @@ public class Investment extends Model {
     private User investor;
 
     @ManyToOne
+    @JoinColumn(name = "startup_id")
     private Startup startup;
 
     /**

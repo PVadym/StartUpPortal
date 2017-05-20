@@ -59,20 +59,24 @@
                     <p>${startup.getCurrentInvestments()}</p>
                 </h4>
 
-                <c:if test="${!(pageContext.request.userPrincipal.name eq startup.author.username)}">
-                    <c:choose>
-                        <c:when test="${not empty pageContext.request.userPrincipal.name}">
-                            <a class="btn btn-primary" role="button" style="margin: 5px"
-                               href="<c:url value='/investments/invest/${startup.id}/${pageContext.request.userPrincipal.name}'/>">
-                                Invest
-                            </a>
-                        </c:when>
-                        <c:otherwise>
-                            <a class="btn btn-primary" role="button" style="margin: 5px"
-                               href="<c:url value='/login'/>">Invest</a>
-                        </c:otherwise>
-                    </c:choose>
-                </c:if>
+                <%--<c:if test="${!(pageContext.request.userPrincipal.name eq startup.author.username)}">--%>
+                    <%--<c:choose>--%>
+                        <%--<c:when test="${not empty pageContext.request.userPrincipal.name}">--%>
+                            <%--<a class="btn btn-primary" role="button" style="margin: 5px"--%>
+                               <%--href="<c:url value='/investments/invest/${startup.id}/${pageContext.request.userPrincipal.name}'/>">--%>
+                                <%--Invest--%>
+                            <%--</a>--%>
+                        <%--</c:when>--%>
+                        <%--<c:otherwise>--%>
+                            <%--<a class="btn btn-primary" role="button" style="margin: 5px"--%>
+                               <%--href="<c:url value='/login'/>">Invest</a>--%>
+                        <%--</c:otherwise>--%>
+                    <%--</c:choose>--%>
+                <%--</c:if>--%>
+                <a class="btn btn-primary" role="button" style="margin: 5px"
+                   href="<c:url value='/investments/invest/${startup.id}'/>">
+                    Invest
+                </a>
 
                 <c:if test="${pageContext.request.userPrincipal.name eq startup.author.username}">
                     <a class="btn btn-primary" role="button" style="margin: 5px"
@@ -95,8 +99,9 @@
             </div>
 
             <c:if test="${pageContext.request.userPrincipal.name eq startup.author.username or is_admin}">
-                <h4><b>Current Investments: </b></h4>
-                <div class="table-responsive">
+
+                <div class="jumbo" style="text-align: left">
+                    <h4><b>Current Investments: </b></h4>
                     <table class="table table-striped">
                         <tr>
                             <th>Amount</th>

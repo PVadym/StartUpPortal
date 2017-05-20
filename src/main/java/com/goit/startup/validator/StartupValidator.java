@@ -53,7 +53,8 @@ public class StartupValidator implements Validator {
         }
 
         try {
-            if (startupService.getByName(startup.getName()) != null) {
+            Startup startupWithSameName = startupService.getByName(startup.getName());
+            if (startupWithSameName != null && startupWithSameName.getId() != startup.getId()) {
                 errors.rejectValue("name", "Duplicate.startup.name");
             }
         } catch (NullPointerException e) {

@@ -1,6 +1,7 @@
 package com.goit.startup.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -49,6 +50,7 @@ public class Startup extends Model {
      */
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @JoinColumn(name = "startup_id")
+//            @Transient
     private Set<Investment> investments;
 
 
@@ -79,6 +81,7 @@ public class Startup extends Model {
                 ", minInvestment=" + minInvestment +
                 ", needInvestment=" + needInvestment +
                 ", investments=" + investments +
+                ", authorId=" + author.getId() +
                 '}';
     }
 

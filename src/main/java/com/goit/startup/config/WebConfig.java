@@ -23,7 +23,7 @@ import org.springframework.web.servlet.view.JstlView;
  */
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = { "com.goit.startup.controller", "com.goit.startup.config" })
+@ComponentScan(basePackages = { "com.goit.startup.controller", "com.goit.startup.validator", "com.goit.startup.config" })
 @PropertySource("classpath:content.properties")
 public class WebConfig extends WebMvcConfigurerAdapter {
 

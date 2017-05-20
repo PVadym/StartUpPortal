@@ -4,57 +4,47 @@ CREATE DATABASE IF NOT EXISTS startupdb
 USE startupdb;
 
 
+CREATE TABLE images
+(
+  id INT(10) unsigned PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  data BLOB
+);
 
--- images
-CREATE TABLE IF NOT EXISTS images (
-  id   INT UNSIGNED NOT NULL  AUTO_INCREMENT,
-  data BLOB,
-  PRIMARY KEY (id)
-)
-  ENGINE = InnoDB;
-INSERT INTO images (id) VALUE (1);
--- user
-CREATE TABLE IF NOT EXISTS users (
-  id       INT UNSIGNED           NOT NULL  AUTO_INCREMENT,
-  username VARCHAR(50)           NOT NULL  DEFAULT '',
-  password VARCHAR(50)           NOT NULL  DEFAULT '',
-  contacts VARCHAR(300)           NOT NULL  DEFAULT '',
-  role     ENUM ('ADMIN', 'USER') NOT NULL  DEFAULT 'USER',
-  locked   BOOLEAN                NOT NULL  DEFAULT FALSE,
-  image_id INT UNSIGNED                     DEFAULT 1,
-  FOREIGN KEY (image_id) REFERENCES images (id),
-  PRIMARY KEY (id)
-)
-  ENGINE = InnoDB;
+CREATE TABLE users
+(
+  id INT(10) unsigned PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  username VARCHAR(50) DEFAULT '' NOT NULL,
+  password VARCHAR(50) DEFAULT '' NOT NULL,
+  contacts VARCHAR(300) DEFAULT '' NOT NULL,
+  role ENUM('ADMIN', 'USER') DEFAULT 'USER' NOT NULL,
+  locked TINYINT(1) DEFAULT '0' NOT NULL,
+  image_id INT(10) unsigned DEFAULT '1',
+  CONSTRAINT users_ibfk_1 FOREIGN KEY (image_id) REFERENCES images (id)
+);
+CREATE INDEX image_id ON users (image_id);
 
--- startup
-CREATE TABLE IF NOT EXISTS startups (
-  id              INT UNSIGNED  NOT NULL  AUTO_INCREMENT,
-  name            VARCHAR(100)  NOT NULL  DEFAULT '',
-  description     VARCHAR(1800) NOT NULL  DEFAULT '',
-  min_investment  INT           NOT NULL  DEFAULT 0,
-  need_investment INT           NOT NULL  DEFAULT 0,
-  author_id       INT UNSIGNED  NOT NULL,
-  image_id        INT UNSIGNED            DEFAULT 1,
-  FOREIGN KEY (image_id) REFERENCES images (id),
-  PRIMARY KEY (id),
-  FOREIGN KEY (author_id) REFERENCES users (id)
-)
-  ENGINE = InnoDB;
+CREATE TABLE startups
+(
+  id INT(10) unsigned PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  name VARCHAR(100) DEFAULT '' NOT NULL,
+  description VARCHAR(1800) DEFAULT '' NOT NULL,
+  min_investment INT(11) DEFAULT '0' NOT NULL,
+  need_investment INT(11) DEFAULT '0' NOT NULL,
+  author_id INT(10) unsigned NOT NULL,
+  image_id INT(10) unsigned DEFAULT '1',
+  CONSTRAINT startups_ibfk_2 FOREIGN KEY (author_id) REFERENCES users (id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+CREATE INDEX image_id ON startups (image_id);
+CREATE INDEX startups_ibfk_2 ON startups (author_id);
 
--- investment
-CREATE TABLE IF NOT EXISTS investments (
-  id          INT UNSIGNED NOT NULL  AUTO_INCREMENT,
-  amount      INT          NOT NULL  DEFAULT 0,
-  startup_id  INT UNSIGNED NOT NULL  DEFAULT 0,
-  investor_id INT UNSIGNED NOT NULL,
-  PRIMARY KEY (id),
-  FOREIGN KEY (investor_id) REFERENCES users (id),
-  FOREIGN KEY (startup_id) REFERENCES startups (id)
-)
-  ENGINE = InnoDB;
-
-
-
-
-
+CREATE TABLE investments
+(
+  id INT(10) unsigned PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  amount INT(11) DEFAULT '0' NOT NULL,
+  startup_id INT(10) unsigned DEFAULT '0',
+  investor_id INT(10) unsigned NOT NULL,
+  CONSTRAINT investments_ibfk_2 FOREIGN KEY (startup_id) REFERENCES startups (id) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT investments_ibfk_1 FOREIGN KEY (investor_id) REFERENCES users (id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+CREATE INDEX investments_ibfk_1 ON investments (investor_id);
+CREATE INDEX investments_ibfk_2 ON investments (startup_id);
