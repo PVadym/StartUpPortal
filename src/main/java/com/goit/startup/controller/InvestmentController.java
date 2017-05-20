@@ -78,7 +78,11 @@ public class InvestmentController {
     public String delete (@PathVariable(name = "investmentId") long investmentId){
         if (investmentService.get(investmentId).getInvestor().equals(userService.getAuthenticatedUser())
                 || userService.isAuthenticatedAdmin()) {
-            investmentService.remove(investmentId);
+            User investor = userService.get(investmentService.get(investmentId).getInvestor().getId());
+            investor.getInvestments().remove(investmentService.get(investmentId));
+
+//            investmentService.remove(investmentId);
+
 //            Startup startup = investmentService.get(investmentId).getStartup();
 //            startup.getInvestments().remove(investmentService.get(investmentId));
 //            startupService.update(startup);

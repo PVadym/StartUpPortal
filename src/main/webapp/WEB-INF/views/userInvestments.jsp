@@ -13,6 +13,7 @@
                 <td>${investment.amount}</td>
                 <td>
                     <a class="btn btn-xs btn-danger" role="button" style="margin: 5px"
+                       onclick="if(confirm('Delete this investment?')) this.submit"
                        href="<c:url value="/investments/delete/${investment.id}"/>">Delete</a>
                 </td>
             </tr>

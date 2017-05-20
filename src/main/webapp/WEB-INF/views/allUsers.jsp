@@ -35,6 +35,7 @@
                                 </td>
                                 <td>
                                     <a class="btn btn-xs btn-danger" role="button" style="margin: 5px"
+                                       onclick="if(confirm('Delete user ${user.username}?')) this.submit"
                                        href="<c:url value="/user/delete/${user.id}"/>">Delete</a>
                                 </td>
                             </c:if>

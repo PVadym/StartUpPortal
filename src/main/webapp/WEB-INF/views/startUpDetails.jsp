@@ -81,6 +81,7 @@
 
                 <c:if test="${pageContext.request.userPrincipal.name eq startup.author.username or is_admin}">
                     <a class="btn btn-danger" role="button" style="margin: 5px"
+                       onclick="if(confirm('Delete this startup?')) this.submit"
                        href="<c:url value='/startups/delete/${startup.id}'/>">Delete</a>
                 </c:if>
 
@@ -112,6 +113,7 @@
                                 <td>${investment.investor.contacts}</td>
                                 <td>
                                     <a class="btn btn-xs btn-danger" role="button" style="margin: 5px"
+                                       onclick="if(confirm('Delete this investment?')) this.submit"
                                        href="<c:url value="/investments/delete/${investment.id}"/>">Delete</a>
                                 </td>
                             </tr>
