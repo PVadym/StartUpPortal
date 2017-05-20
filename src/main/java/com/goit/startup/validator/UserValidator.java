@@ -64,7 +64,7 @@ public class UserValidator implements Validator {
         }
 
         try {
-            if (userService.getByUsername(user.getUsername()) != null
+            if (userService.loadUserByUsername(user.getUsername()) != null
                     && user.getId() != userService.getByUsername(user.getUsername()).getId()) {
                 errors.rejectValue("username", "Duplicate.user.username");
             }
