@@ -1,7 +1,8 @@
-<h4><b>User's Investments</b></h4>
+<div class="jumbo" style="text-align: left; margin-top: 20px">
 
-<div class="table-responsive">
-    <table class="table table-striped" style="text-align: center">
+<h4><b>Investments</b></h4>
+
+    <table class="table table-striped">
         <tr>
             <th>StartUp</th>
             <th>Amount</th>

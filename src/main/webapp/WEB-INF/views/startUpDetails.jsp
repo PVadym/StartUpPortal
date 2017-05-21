@@ -59,20 +59,6 @@
                     <p>${startup.getCurrentInvestments()}</p>
                 </h4>
 
-                <%--<c:if test="${!(pageContext.request.userPrincipal.name eq startup.author.username)}">--%>
-                <%--<c:choose>--%>
-                <%--<c:when test="${not empty pageContext.request.userPrincipal.name}">--%>
-                <%--<a class="btn btn-primary" role="button" style="margin: 5px"--%>
-                <%--href="<c:url value='/investments/invest/${startup.id}/${pageContext.request.userPrincipal.name}'/>">--%>
-                <%--Invest--%>
-                <%--</a>--%>
-                <%--</c:when>--%>
-                <%--<c:otherwise>--%>
-                <%--<a class="btn btn-primary" role="button" style="margin: 5px"--%>
-                <%--href="<c:url value='/login'/>">Invest</a>--%>
-                <%--</c:otherwise>--%>
-                <%--</c:choose>--%>
-                <%--</c:if>--%>
                 <c:if test="${!(pageContext.request.userPrincipal.name eq startup.author.username)}">
                     <a class="btn btn-primary" role="button" style="margin: 5px"
                        href="<c:url value='/investments/invest/${startup.id}'/>">
