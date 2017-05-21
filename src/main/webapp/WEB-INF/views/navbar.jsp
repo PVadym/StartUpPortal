@@ -6,7 +6,8 @@
     <div class="panel-heading">
         <div class="row">
             <h2 class="col-md-8">
-                <a href="<c:url value='/'/>">StartUp Founder</a>
+                <a style="text-shadow: 0.1em 0.1em 0.2em gray; text-decoration: none"
+                   href="<c:url value='/'/>">StartUp Founder</a>
                 <c:if test="${null != pageContext.request.userPrincipal.name}">
                     <small>
                         <span style='padding-left:100px;'></span>
