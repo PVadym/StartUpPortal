@@ -81,7 +81,8 @@
 
         <div class="col-md-9">
 
-            <div class="jumbo">
+            <div class="jumbo" style="text-align: left">
+                <h4>Description</h4>
                 ${startup.description}
             </div>
 
