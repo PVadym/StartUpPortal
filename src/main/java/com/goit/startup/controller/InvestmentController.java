@@ -43,11 +43,12 @@ public class InvestmentController {
         this.investmentValidator = investmentValidator;
     }
 
-    @RequestMapping(value = "/invest/{startupId}/{investorName}", method = RequestMethod.GET)
-    public ModelAndView investPage(@PathVariable(name = "startupId") long startupId,
-                                   @PathVariable(name = "investorName") String investorName){
+    @RequestMapping(value = "/invest/{startupId}", method = RequestMethod.GET)
+    public ModelAndView investPage(@PathVariable(name = "startupId") long startupId){
         ModelAndView modelAndView = new ModelAndView();
         Startup startup = startupService.get(startupId);
+
+        String investorName = userService.getAuthenticatedUser().getUsername();
 
         Investment investment = new Investment();
         User investor = userService.getByUsername(investorName);
@@ -61,9 +62,8 @@ public class InvestmentController {
     @RequestMapping(value = "/invest", method = RequestMethod.POST)
     public String investPage(Investment investment, BindingResult bindingResult){
         long startupId = investment.getStartup().getId();
-        String investorName = investment.getInvestor().getUsername();
         Startup startup = startupService.get(startupId);
-        User investor = userService.getByUsername(investorName);
+        User investor = userService.getAuthenticatedUser();
         investment.setStartup(startup);
         investment.setInvestor(investor);
         investmentValidator.validate(investment, bindingResult);
@@ -72,5 +72,16 @@ public class InvestmentController {
         }
         investmentService.update(investment);
         return "redirect:/startups/" + startup.getId();
+    }
+
+    @RequestMapping(value = "/delete/{investmentId}", method = RequestMethod.GET)
+    public String delete (@PathVariable(name = "investmentId") long investmentId){
+        Startup startup = investmentService.get(investmentId).getStartup();
+        if (investmentService.get(investmentId).getInvestor().equals(userService.getAuthenticatedUser())
+                || userService.isAuthenticatedAdmin()) {
+            startup.getInvestments().remove(investmentService.get(investmentId));
+            startupService.update(startup);
+        }
+    return "redirect:/user/" + userService.getAuthenticatedUser().getUsername() + "/false";
     }
 }

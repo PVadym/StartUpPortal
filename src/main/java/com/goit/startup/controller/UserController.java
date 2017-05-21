@@ -142,6 +142,7 @@ public class UserController {
         if (bindingResult.hasErrors()) {
             return "editUser";
         }
+        userService.update(oldUser);
         if (userService.getAuthenticatedUser().getId() == oldUser.getId()) {
             securityService.autoLogin(oldUser.getUsername(), oldUser.getPassword());
             return "redirect:/user/" + oldUser.getUsername() + "/true";
@@ -149,7 +150,7 @@ public class UserController {
         return "redirect:/user";
     }
 
-    @RequestMapping(value = "/delete/{userId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/delete/{userId}", method = RequestMethod.GET) // TODO: should be POST
     public String deleteUser(@PathVariable(name = "userId") long userId) throws IllegalAccessException {
         if (userService.isAuthenticatedAdmin()) {
             userService.remove(userId);

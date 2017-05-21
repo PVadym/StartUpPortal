@@ -1,5 +1,7 @@
-<h4><b>User's Startups</b></h4>
-<div class="table-responsive">
+<div class="jumbo" style="text-align: left; margin-top: 20px">
+
+<h4><b>Startups</b></h4>
+<%--<div class="table-responsive">--%>
     <table class="table table-striped">
         <tr>
             <th>Name</th>

@@ -112,7 +112,6 @@ public class StartUpController {
         } else {
             throw new IllegalAccessException("Only startup's author can edit the startup");
         }
-        //        startupService.remove(startup);
         return "redirect:/";
     }
 }

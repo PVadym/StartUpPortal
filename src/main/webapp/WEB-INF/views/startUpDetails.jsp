@@ -60,20 +60,11 @@
                 </h4>
 
                 <c:if test="${!(pageContext.request.userPrincipal.name eq startup.author.username)}">
-                    <c:choose>
-                        <c:when test="${not empty pageContext.request.userPrincipal.name}">
-                            <a class="btn btn-primary" role="button" style="margin: 5px"
-                               href="<c:url value='/investments/invest/${startup.id}/${pageContext.request.userPrincipal.name}'/>">
-                                Invest
-                            </a>
-                        </c:when>
-                        <c:otherwise>
-                            <a class="btn btn-primary" role="button" style="margin: 5px"
-                               href="<c:url value='/login'/>">Invest</a>
-                        </c:otherwise>
-                    </c:choose>
+                    <a class="btn btn-primary" role="button" style="margin: 5px"
+                       href="<c:url value='/investments/invest/${startup.id}'/>">
+                        Invest
+                    </a>
                 </c:if>
-
                 <c:if test="${pageContext.request.userPrincipal.name eq startup.author.username}">
                     <a class="btn btn-primary" role="button" style="margin: 5px"
                        href="<c:url value='/startups/edit/${startup.id}'/>">Edit</a>
@@ -81,6 +72,7 @@
 
                 <c:if test="${pageContext.request.userPrincipal.name eq startup.author.username or is_admin}">
                     <a class="btn btn-danger" role="button" style="margin: 5px"
+                       onclick="if(confirm('Delete this startup?')) this.submit; else return false;"
                        href="<c:url value='/startups/delete/${startup.id}'/>">Delete</a>
                 </c:if>
 
@@ -89,24 +81,34 @@
 
         <div class="col-md-9">
 
-            <div class="jumbo">
+            <div class="jumbo" style="text-align: left">
+                <h4>Description</h4>
                 ${startup.description}
             </div>
 
             <c:if test="${pageContext.request.userPrincipal.name eq startup.author.username or is_admin}">
-                <h4><b>Current Investments: </b></h4>
-                <div class="table-responsive">
+
+                <div class="jumbo" style="text-align: left">
+                    <h4><b>Current Investments: </b></h4>
                     <table class="table table-striped">
                         <tr>
                             <th>Amount</th>
                             <th>Investor</th>
                             <th>Contacts</th>
+                            <c:if test="${is_admin}">
+                                <th>Delete</th>
+                            </c:if>
                         </tr>
                         <c:forEach items="${startup.investments}" var="investment">
                             <tr>
                                 <td>${investment.amount}</td>
                                 <td>${investment.investor.username}</td>
                                 <td>${investment.investor.contacts}</td>
+                                <td>
+                                    <a class="btn btn-xs btn-danger" role="button" style="margin: 5px"
+                                       onclick="if(confirm('Delete this investment?')) this.submit"
+                                       href="<c:url value="/investments/delete/${investment.id}"/>">Delete</a>
+                                </td>
                             </tr>
                         </c:forEach>
                     </table>

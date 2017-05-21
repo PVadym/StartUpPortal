@@ -35,7 +35,7 @@
                             <label class="control-label col-sm-2" for="name">Name:</label>
                             <div class="col-sm-10">
                                 <input type="text" name="name" id="name" tabindex="1" class="form-control"
-                                       placeholder="Name" required>
+                                       placeholder="Name" required autofocus>
                                 <div class="text-danger" role="alert">
                                     <form:errors path="name"></form:errors>
                                 </div>

@@ -1,6 +1,7 @@
 package com.goit.startup.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -47,10 +48,8 @@ public class Startup extends Model {
     /**
      * A list of investments that users already  made in this startup
      */
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    @JoinColumn(name = "startup_id")
+    @OneToMany(mappedBy = "startup", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private Set<Investment> investments;
-
 
     /**
      * An author of this startup
@@ -79,6 +78,7 @@ public class Startup extends Model {
                 ", minInvestment=" + minInvestment +
                 ", needInvestment=" + needInvestment +
                 ", investments=" + investments +
+                ", authorId=" + author.getId() +
                 '}';
     }
 
