@@ -5,7 +5,7 @@
 <div class="container">
     <div class="panel-heading">
         <div class="row">
-            <h2 class="col-md-8">
+            <h2 style="font-weight: bold" class="col-md-8">
                 <a style="text-shadow: 0.1em 0.1em 0.2em gray; text-decoration: none"
                    href="<c:url value='/'/>">StartUp Founder</a>
                 <c:if test="${null != pageContext.request.userPrincipal.name}">
@@ -36,6 +36,11 @@
                     <a class="btn btn-primary" role="button" href="<c:url value='/user/register'/>">Registration</a>
                     <a class="btn btn-primary" role="button" href="<c:url value='/login'/>">Login</a>
                 </sec:authorize>
+            </div>
+            <br clear="all"/>
+            <div style="float: right; margin-top: -20px" >
+                <a class="btn btn-info btn-xs" role="button"
+                   href="<c:url value='/developers'/>">Developers of the site</a>
             </div>
         </div>
         <hr>
