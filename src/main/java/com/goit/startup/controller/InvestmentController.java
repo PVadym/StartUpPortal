@@ -62,12 +62,8 @@ public class InvestmentController {
     @RequestMapping(value = "/invest", method = RequestMethod.POST)
     public String investPage(Investment investment, BindingResult bindingResult){
         long startupId = investment.getStartup().getId();
-        String investorName = investment.getInvestor().getUsername();
         Startup startup = startupService.get(startupId);
-
         User investor = userService.getAuthenticatedUser();
-
-//        User investor = userService.getByUsername(investorName);
         investment.setStartup(startup);
         investment.setInvestor(investor);
         investmentValidator.validate(investment, bindingResult);
@@ -80,17 +76,12 @@ public class InvestmentController {
 
     @RequestMapping(value = "/delete/{investmentId}", method = RequestMethod.GET)
     public String delete (@PathVariable(name = "investmentId") long investmentId){
+        Startup startup = investmentService.get(investmentId).getStartup();
         if (investmentService.get(investmentId).getInvestor().equals(userService.getAuthenticatedUser())
                 || userService.isAuthenticatedAdmin()) {
-            User investor = userService.get(investmentService.get(investmentId).getInvestor().getId());
-            investor.getInvestments().remove(investmentService.get(investmentId));
-
-//            investmentService.remove(investmentId);
-
-//            Startup startup = investmentService.get(investmentId).getStartup();
-//            startup.getInvestments().remove(investmentService.get(investmentId));
-//            startupService.update(startup);
+            startup.getInvestments().remove(investmentService.get(investmentId));
+            startupService.update(startup);
         }
-    return "redirect:/user/" + userService.getAuthenticatedUser().getUsername() +  "/false";
+    return "redirect:/user/" + userService.getAuthenticatedUser().getUsername() + "/false";
     }
 }

@@ -39,7 +39,7 @@
 
             <div class="form-group">
                 <div class="row">
-                    <input type="number" name="amount" id="amount" tabindex="1"
+                    <input type="number" name="amount" id="amount" tabindex="1" autofocus
                            class="form-control"
                            placeholder="Investment Amount">
                     <div class="text-danger" role="alert">
