@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="heroku_94e19fac0b09d9e@eu-cdbr-west-01.cleardb.com" uuid="505f39f1-f4cb-4903-87d5-9e9ab10d4176">
+    <data-source source="LOCAL" name="MySQL - startupdb@localhost" uuid="21023a7f-8e28-4dae-8036-e972ecdd674b">
       <driver-ref>mysql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://eu-cdbr-west-01.cleardb.com:3306/heroku_94e19fac0b09d9e</jdbc-url>
+      <jdbc-url>jdbc:mysql://localhost:3306/startupdb</jdbc-url>
       <driver-properties>
         <property name="autoReconnect" value="true" />
         <property name="zeroDateTimeBehavior" value="convertToNull" />
@@ -15,11 +15,11 @@
         <property name="yearIsDateType" value="false" />
       </driver-properties>
     </data-source>
-    <data-source source="LOCAL" name="startupdb@localhost" uuid="14ad7cfd-819e-49a4-888a-53a11bcdcba5">
+    <data-source source="LOCAL" name="heroku_225e084f2fb7b5b@eu-cdbr-west-01.cleardb.com" uuid="1bfda344-4c9f-4d25-b163-9dd37af534bc">
       <driver-ref>mysql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://localhost:3306/startupdb</jdbc-url>
+      <jdbc-url>jdbc:mysql://eu-cdbr-west-01.cleardb.com:3306/heroku_225e084f2fb7b5b</jdbc-url>
       <driver-properties>
         <property name="autoReconnect" value="true" />
         <property name="zeroDateTimeBehavior" value="convertToNull" />
