@@ -12,8 +12,7 @@
 <jsp:include page="/WEB-INF/views/navbar.jsp"/>
 <div class="container">
 
-
-    <div class="row" style="margin-top: 40px">
+    <div class="row">
         <%--Pavel--%>
         <h3 class="col-md-offset-5">Our Team:</h3>
             <br>
