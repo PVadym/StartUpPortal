@@ -62,12 +62,11 @@ public class Investment extends Model {
 
         Investment that = (Investment) o;
 
+        if (super.getId() != that.getId()) return false;
         if (amount != that.amount) return false;
         if (investor != null ? !investor.equals(that.investor) : that.investor != null) return false;
         return startup != null ? startup.equals(that.startup) : that.startup == null;
-
     }
-
 
     /**
      * Method for getting a hashcode value of the instance
@@ -77,6 +76,7 @@ public class Investment extends Model {
     @Override
     public int hashCode() {
         int result = amount;
+        result = 31 * result + (int)super.getId();
         result = 31 * result + (investor != null ? investor.hashCode() : 0);
         result = 31 * result + (startup != null ? startup.hashCode() : 0);
         return result;
