@@ -82,13 +82,11 @@ public class Investment extends Model {
     @Override
     public int hashCode() {
         int result = amount;
-        result = 31 * result + (int)super.getId();
+        result = 31 * result + (int) super.getId();
         result = 31 * result + (investor != null ? investor.hashCode() : 0);
         result = 31 * result + (startup != null ? startup.hashCode() : 0);
         return result;
     }
-
-
 
     /**
      * A getter for the field amount.

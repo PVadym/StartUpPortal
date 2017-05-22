@@ -36,12 +36,21 @@ public class User extends Model implements UserDetails {
     @Column(name = "password", nullable = false)
     private String password;
 
+    /**
+     * User`s confirm of password
+     */
     @Transient
     private String confirmPassword;
 
+    /**
+     * User`s contact information
+     */
     @Column(name = "contacts")
     private String contacts;
 
+    /**
+     * The unique identifier for user`s image
+     */
     @Column(name = "image_id")
     private long imageId;
 
@@ -75,13 +84,13 @@ public class User extends Model implements UserDetails {
      * Default constructor
      */
     public User() {
-        username = "";
-        password = "";
-        contacts = "";
-        role = UserRole.USER;
-        imageId = 1L;
-        startups = new HashSet<>();
-        investments = new HashSet<>();
+        this.username = "";
+        this.password = "";
+        this.contacts = "";
+        this.role = UserRole.USER;
+        this.imageId = 1L;
+        this.startups = new HashSet<>();
+        this.investments = new HashSet<>();
     }
 
     /**
@@ -137,7 +146,6 @@ public class User extends Model implements UserDetails {
         return role == user.role;
 
     }
-
 
     /**
      * Method for getting a hashcode value of the instance
@@ -211,7 +219,7 @@ public class User extends Model implements UserDetails {
     /**
      * A getter for username
      *
-     * @return username
+     * @return a user's name
      */
     @Override
     public String getUsername() {
@@ -225,7 +233,7 @@ public class User extends Model implements UserDetails {
      * @param username a user's name
      */
     public void setUsername(String username) {
-        this.username = isNotBlank(username) ? username:"";
+        this.username = isNotBlank(username) ? username : "";
     }
 
     /**
@@ -326,7 +334,7 @@ public class User extends Model implements UserDetails {
      * @param startups a list of startups.
      */
     public void setStartups(Set<Startup> startups) {
-        this.startups = (startups!=null)? startups: new HashSet<>();
+        this.startups = (startups != null) ? startups : new HashSet<>();
     }
 
     /**
@@ -344,21 +352,23 @@ public class User extends Model implements UserDetails {
      * @param investments a list of investments.
      */
     public void setInvestments(Set<Investment> investments) {
-        this.investments = (investments!=null)? investments: new HashSet<>();
+        this.investments = (investments != null) ? investments : new HashSet<>();
     }
 
-    public boolean getIsLocked() {
-        return isLocked;
-    }
-
-    public boolean setIsLocked() {
-        return isLocked;
-    }
-
+    /**
+     * A getter for the field imageId
+     *
+     * @return a unique identifier for this user`s image
+     */
     public long getImageId() {
         return imageId;
     }
 
+    /**
+     * A setter for the field imageId
+     *
+     * @param imageId a unique identifier for user`s image
+     */
     public void setImageId(long imageId) {
         this.imageId = imageId;
     }
