@@ -89,6 +89,11 @@ public class WebConfig extends WebMvcConfigurerAdapter {
                 .addResourceLocations(resourcesLocation);
     }
 
+    /**
+     * Method configures an instance of {@link MessageSource}
+     *
+     * @return  an instance of {@link MessageSource}
+     */
     @Bean
     public MessageSource messageSource() {
         ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
@@ -97,6 +102,11 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         return messageSource;
     }
 
+    /**
+     * Method configures an instance of {@link CommonsMultipartResolver}
+     *
+     * @return an instance of {@link CommonsMultipartResolver}
+     */
     @Bean
     public CommonsMultipartResolver multipartResolver() {
         CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();

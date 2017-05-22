@@ -86,7 +86,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers(this.requestAdmin).hasRole(UserRole.ADMIN.name())
-//                .antMatchers("/investments/**").hasAnyRole(UserRole.ADMIN.name(), UserRole.USER.name())
                 .antMatchers("/investments/**").authenticated()
                 .anyRequest().permitAll()
                 .and()
@@ -102,7 +101,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable();
     }
 
-
+    /**
+     * Method configures an instance of {@link SimpleUrlAuthenticationSuccessHandler}
+     *
+     * @return instance of {@link SimpleUrlAuthenticationSuccessHandler}
+     */
     @Bean
     public SimpleUrlAuthenticationSuccessHandler successHandler() {
         SimpleUrlAuthenticationSuccessHandler successHandler = new SimpleUrlAuthenticationSuccessHandler();
@@ -121,7 +124,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     /**
-     * Method define authentication bean
+     * Method defines authentication bean
+     *
+     * @return instance of {@link AuthenticationManager}
+     * @throws Exception if authentication fails
      */
     @Bean
     @Override

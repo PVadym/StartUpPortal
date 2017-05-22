@@ -21,10 +21,16 @@ public class Investment extends Model {
     @Column(name = "amount", nullable = false)
     private int amount;
 
+    /**
+     * Investor of investment
+     */
     @ManyToOne
     @JoinColumn(name = "investor_id")
     private User investor;
 
+    /**
+     * Startup in which investment was invested
+     */
     @ManyToOne
     @JoinColumn(name = "startup_id")
     private Startup startup;
@@ -102,18 +108,39 @@ public class Investment extends Model {
         this.amount = amount > 0 ? amount : 0;
     }
 
+    /**
+     * A getter for the field investor.
+     *
+     * @return Investor of investment
+     */
     public User getInvestor() {
         return investor;
     }
+
+    /**
+     * A setter for the field investor.
+     *
+     * @param investor an investor of investment
+     */
 
     public void setInvestor(User investor) {
         this.investor = investor;
     }
 
+    /**
+     * A getter for the field startup.
+     *
+     * @return startup in which investment was invested
+     */
     public Startup getStartup() {
         return startup;
     }
 
+    /**
+     * A setter for the field startup.
+     *
+     * @param startup in which investment was invested
+     */
     public void setStartup(Startup startup) {
         this.startup = startup;
     }
