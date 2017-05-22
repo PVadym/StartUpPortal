@@ -6,8 +6,8 @@
     <div class="panel-heading">
         <div class="row">
             <h2 style="font-weight: bold" class="col-md-8">
-                <a style="text-shadow: 0.1em 0.1em 0.2em gray; text-decoration: none"
-                   href="<c:url value='/'/>">StartUp Founder</a>
+                <a
+                        href="<c:url value='/'/>">StartUp Founder</a>
                 <c:if test="${null != pageContext.request.userPrincipal.name}">
                     <small>
                         <span style='padding-left:100px;'></span>
@@ -36,12 +36,11 @@
                     <a class="btn btn-primary" role="button" href="<c:url value='/user/register'/>">Registration</a>
                     <a class="btn btn-primary" role="button" href="<c:url value='/login'/>">Login</a>
                 </sec:authorize>
+                <a class="btn btn-info" role="button"
+                   href="<c:url value='/developers'/>">About us</a>
             </div>
-            <br clear="all"/>
-            <div style="float: right; margin-top: -20px" >
-                <a class="btn btn-info btn-xs" role="button"
-                   href="<c:url value='/developers'/>">Developers of the site</a>
-            </div>
+            <%--<br clear="all"/>--%>
+
         </div>
         <hr>
     </div>
