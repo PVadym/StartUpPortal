@@ -15,8 +15,17 @@ import org.springframework.stereotype.Service;
 @Service
 public class ImageServiceImpl extends DataServiceImpl<Image> implements ImageService {
 
+    /**
+     * An instance of {@link ImageRepository}
+     */
     private ImageRepository repository;
 
+    /**
+     * Constructor
+     *
+     * @param repository An instance of class that implements
+     *                   DataRepository interface for working with {@link Image}
+     */
     @Autowired
     public ImageServiceImpl(ImageRepository repository) {
         super(repository);

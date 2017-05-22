@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 /**
- * provides a set of methods for operations with entities.
+ * Interface provides a set of methods for operations with entities.
  *
  * @author Slava Makhinich
  * @version 1.0

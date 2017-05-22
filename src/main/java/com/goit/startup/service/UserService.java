@@ -8,7 +8,7 @@ import com.goit.startup.entity.User;
 import java.util.Collection;
 
 /**
- * Interface provides a set of methods for the operation with users.
+ * Interface provides a set of methods for the operation with {@link User}.
  *
  * @author Slava Makhinich
  * @version 1.0

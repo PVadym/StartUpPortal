@@ -17,16 +17,34 @@ import org.springframework.stereotype.Service;
 @Service
 public class SecurityServiceImpl implements SecurityService {
 
-
+    /**
+     * An instance of {@link AuthenticationManager}
+     */
     private AuthenticationManager authenticationManager;
+
+    /**
+     * An instance of {@link UserService}
+     */
     private UserService userService;
 
+    /**
+     * Constructor
+     *
+     * @param authenticationManager an instance of class that implements {@link AuthenticationManager} interface
+     * @param userService an instance of {@link UserService}
+     */
     @Autowired
     public SecurityServiceImpl(AuthenticationManager authenticationManager, UserService userService) {
         this.authenticationManager = authenticationManager;
         this.userService = userService;
     }
 
+    /**
+     * Method performs autologin
+     *
+     * @param username a user`s name
+     * @param password a user`s password
+     */
     @Override
     public void autoLogin(String username, String password) {
         UserDetails userDetails = userService.loadUserByUsername(username);

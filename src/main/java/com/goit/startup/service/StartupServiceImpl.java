@@ -12,7 +12,7 @@ import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 /**
- * A class provides a set of methods for the operation with startups
+ * A class provides a set of methods for the operation with {@link Startup}
  * implements {@link StartupService}
  *
  * @author Vadym Pylypchenko
@@ -23,7 +23,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
 public class StartupServiceImpl extends DataServiceImpl<Startup> implements StartupService {
 
     /**
-     * An instance of StartupRepository
+     * An instance of {@link StartupRepository}
      */
     private StartupRepository repository;
 
@@ -31,7 +31,7 @@ public class StartupServiceImpl extends DataServiceImpl<Startup> implements Star
      * Constructor
      *
      * @param repository An instance of class that implements
-     *                   DataRepository interface for working with startups
+     *                   DataRepository interface for working with {@link Startup}
      */
     @Autowired
     public StartupServiceImpl(StartupRepository repository) {

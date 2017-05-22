@@ -15,16 +15,16 @@ import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 /**
- * The class provides a set of methods for operations with Users.
+ * The class provides a set of methods for operations with {@link User}.
  *
- * @author Вадим
+ * @author Pylpchenko Vadym
  * @version 1.0
  */
 @Service
 public class UserServiceImpl extends DataServiceImpl<User> implements UserService {
 
     /**
-     * An instance of UserRepository
+     * An instance of {@link UserRepository}
      */
     private UserRepository repository;
 
@@ -32,7 +32,7 @@ public class UserServiceImpl extends DataServiceImpl<User> implements UserServic
      * Constructor
      *
      * @param repository An instance of class that implements
-     *                   DataRepository interface for working with User
+     *                   DataRepository interface for working with {@link User}
      */
     @Autowired
     public UserServiceImpl(UserRepository repository) {
@@ -41,7 +41,7 @@ public class UserServiceImpl extends DataServiceImpl<User> implements UserServic
     }
 
     /**
-     * The method founds user in database by username
+     * The method founds {@link User} in database by username
      *
      * @param username a name of user
      * @return founded user with entered name

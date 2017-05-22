@@ -1,9 +1,7 @@
 package com.goit.startup.service;
 
-import org.springframework.stereotype.Service;
-
 /**
- * The class is responsible for autologin
+ * The interface is responsible for autologin
  *
  * @author Perevoznyk Pavlo
  *         created on 15 may 2017
@@ -12,5 +10,11 @@ import org.springframework.stereotype.Service;
 
 public interface SecurityService {
 
-    public void autoLogin(String username, String password);
+    /**
+     * Method performs autologin
+     *
+     * @param username a user`s name
+     * @param password a user`s password
+     */
+    void autoLogin(String username, String password);
 }

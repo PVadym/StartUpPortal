@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
- * A class provides a set of methods for the operation with investments
+ * A class provides a set of methods for the operation with {@link Investment}
  * implements {@link InvestmentService}
  *
  * @author Vadym Pylypchenko
@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 public class InvestmentServiceImpl extends DataServiceImpl<Investment> implements InvestmentService {
 
     /**
-     * An instance of InvestmentRepository
+     * An instance of {@link InvestmentRepository}
      */
     private InvestmentRepository repository;
 
@@ -24,7 +24,7 @@ public class InvestmentServiceImpl extends DataServiceImpl<Investment> implement
      * Constructor
      *
      * @param repository An instance of class that implements
-     *                   DataRepository interface for working with investments
+     *                   DataRepository interface for working with {@link Investment}
      */
     @Autowired
     public InvestmentServiceImpl(InvestmentRepository repository) {
