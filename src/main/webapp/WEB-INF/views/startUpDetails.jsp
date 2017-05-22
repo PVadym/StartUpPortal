@@ -104,11 +104,13 @@
                                 <td>${investment.amount}</td>
                                 <td>${investment.investor.username}</td>
                                 <td>${investment.investor.contacts}</td>
-                                <td>
-                                    <a class="btn btn-xs btn-danger" role="button" style="margin: 5px"
-                                       onclick="if(confirm('Delete this investment?')) this.submit"
-                                       href="<c:url value="/investments/delete/${investment.id}"/>">Delete</a>
-                                </td>
+                                <c:if test="${is_admin}">
+                                    <td>
+                                        <a class="btn btn-xs btn-danger" role="button" style="margin: 5px"
+                                           onclick="if(confirm('Delete this investment?')) this.submit"
+                                           href="<c:url value="/investments/delete/${investment.id}"/>">Delete</a>
+                                    </td>
+                                </c:if>
                             </tr>
                         </c:forEach>
                     </table>
