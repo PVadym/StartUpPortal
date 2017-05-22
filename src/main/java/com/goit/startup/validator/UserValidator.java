@@ -14,7 +14,7 @@ import org.springframework.validation.Validator;
 
 /**
  * Validator for {@link User} class,
- * implements {@link UserValidator} interface.
+ * implements {@link Validator} interface.
  *
  * @author Pavel Perevoznyk
  * @version 1.0
@@ -24,31 +24,64 @@ import org.springframework.validation.Validator;
 @PropertySource(value = "classpath:validation.properties")
 public class UserValidator implements Validator {
 
+    /**
+     * An instance of implementation {@link UserService} interface.
+     */
     private UserService userService;
 
+    /**
+     * A minimal length of user`s name
+     */
     @Value("${Size.user.username.min}")
     private int minUsernameLength;
 
+    /**
+     * A maximal length of user`s name
+     */
     @Value("${Size.user.username.max}")
     private int maxUsernameLength;
 
-
+    /**
+     * A minimal length of user`s password
+     */
     @Value("${Size.user.password.min}")
     private int minPasswordLength;
 
+    /**
+     * A maximal length of user`s password
+     */
     @Value("${Size.user.password.max}")
     private int maxPasswordLength;
 
+    /**
+     * Constructor
+     *
+     * @param userService an instance of implementation {@link UserService} interface.
+     */
     @Autowired
     public UserValidator(UserService userService) {
         this.userService = userService;
     }
 
+    /**
+     * Method determines which classes can support this {@link Validator}
+     *
+     * @param aClass the {@link Class} that this {@link Validator} is
+     * being asked if it can
+     * @return true if this {@link Validator} can indeed instances of the
+     * supplied aClass or false otherwise
+     */
     @Override
     public boolean supports(Class<?> aClass) {
         return User.class.equals(aClass);
     }
 
+    /**
+     * Method validates the supplied  object
+     *
+     * @param o an instance of {@link User} that is to be validated
+     * @param errors contextual state about the validation process
+     */
     @Override
     public void validate(Object o, Errors errors) {
         User user = (User) o;
