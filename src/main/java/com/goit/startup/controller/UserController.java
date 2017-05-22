@@ -18,9 +18,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 /**
- * The class provides a set of methods for operations with User entity
+ * The class provides a set of methods for operations with User entity.
  *
- * @author Slava Makhinich, Pavel Perevoznyk
+ * @author Slava Makhinich, Pavel Perevoznyk.
+ * @version 1.0
  */
 
 @Controller
@@ -29,21 +30,26 @@ import org.springframework.web.servlet.ModelAndView;
 public class UserController {
 
     /**
-     * An instance of implementation {@link UserService} interface
+     * An instance of implementation {@link UserService} interface.
      */
     private final UserService userService;
 
     /**
-     * An instance of implementation {@link SecurityService} interface
+     * An instance of implementation {@link SecurityService} interface.
      */
     private SecurityService securityService;
 
+    /**
+     * An instance of {@link UserValidator}.
+     */
     private UserValidator userValidator;
 
     /**
      * Constructor.
      *
-     * @param userService An instance of implementation UserService interface.
+     * @param userService     an instance of implementation {@link UserService} interface.
+     * @param securityService an instance of implementation {@link SecurityService} interface.
+     * @param userValidator   an instance of {@link UserValidator}.
      */
     @Autowired
     public UserController(UserService userService, SecurityService securityService, UserValidator userValidator) {
@@ -52,6 +58,11 @@ public class UserController {
         this.userValidator = userValidator;
     }
 
+    /**
+     * Method defines models and view for page with information about all users.
+     *
+     * @return model and view for page with information about all users.
+     */
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView getAllUsersPage() {
         ModelAndView modelAndView = new ModelAndView();
@@ -61,6 +72,14 @@ public class UserController {
         return modelAndView;
     }
 
+    /**
+     * Method defines models and view for page with information about user.
+     *
+     * @param userName  a name of user.
+     * @param isStartUp boolean parameter on which depends what information will be shown,
+     *                  the user's startups, or the user's investments.
+     * @return model and view for page with information about user.
+     */
     @RequestMapping(value = "/{userName}/{isStartUp}")
     public ModelAndView getUserPage(@PathVariable(name = "userName") String userName,
                                     @PathVariable(name = "isStartUp") boolean isStartUp) {
@@ -86,9 +105,9 @@ public class UserController {
     }
 
     /**
-     * Method creates a page to add a new user
+     * Method defines models and view for page to add a new user.
      *
-     * @return a page to add a new user
+     * @return model and view for page to add a new user.
      */
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public ModelAndView getRegistrationPage() {
@@ -101,11 +120,11 @@ public class UserController {
     }
 
     /**
-     * Method to add a new user
+     * Method to add a new user.
      *
-     * @param user          is a {@link User} entity from request
-     * @param bindingResult is a {@link BindingResult}
-     * @return an address of users page
+     * @param user          is a {@link User} entity from request.
+     * @param bindingResult is a {@link BindingResult} with information about user.
+     * @return an address of users page.
      */
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String registerUser(User user, BindingResult bindingResult) {
@@ -119,6 +138,12 @@ public class UserController {
         return "redirect:/user/" + user.getUsername() + "/true";
     }
 
+    /**
+     * Method defines models and view for page to update user's data.
+     *
+     * @param userId id of user.
+     * @return models and view for page to update user's data.
+     */
     @RequestMapping(value = "/edit/{userId}", method = RequestMethod.GET)
     public ModelAndView editUserInfoPage(@PathVariable(name = "userId") long userId) {
         ModelAndView modelAndView = new ModelAndView();
@@ -129,8 +154,17 @@ public class UserController {
         return modelAndView;
     }
 
+    /**
+     * Method to edit user.
+     *
+     * @param user          a {@link User} entity with new information.
+     * @param bindingResult is a {@link BindingResult}.
+     * @param isLocked      boolean value with information about locking user.
+     * @return address of user's page if user was updating successfully, or address of page for updating user otherwise.
+     */
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
-    public String editUserInfo(User user, BindingResult bindingResult, @RequestParam(value = "locked", defaultValue = "false") boolean isLocked) {
+    public String editUserInfo(User user, BindingResult bindingResult,
+                               @RequestParam(value = "locked", defaultValue = "false") boolean isLocked) {
         User oldUser = userService.get(user.getId());
         oldUser.setUsername(user.getUsername());
         oldUser.setContacts(user.getContacts());
@@ -150,7 +184,14 @@ public class UserController {
         return "redirect:/user";
     }
 
-    @RequestMapping(value = "/delete/{userId}", method = RequestMethod.GET) // TODO: should be POST
+    /**
+     * Method for removing user.
+     *
+     * @param userId an id of user to removing.
+     * @return an address of page with all users if user was deleted successfully.
+     * @throws IllegalAccessException if user who wants to delete another user is not administrator.
+     */
+    @RequestMapping(value = "/delete/{userId}", method = RequestMethod.GET)
     public String deleteUser(@PathVariable(name = "userId") long userId) throws IllegalAccessException {
         if (userService.isAuthenticatedAdmin()) {
             userService.remove(userId);

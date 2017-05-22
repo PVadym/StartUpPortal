@@ -14,6 +14,9 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  * Class intercepts exceptions that are thrown by another classes methods
+ *
+ * @author Vadym Pylypchenko
+ * @version 1.0
  */
 @ControllerAdvice
 public class AdviceController {

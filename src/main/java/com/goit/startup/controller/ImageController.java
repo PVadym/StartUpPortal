@@ -30,14 +30,33 @@ import java.io.IOException;
 @RequestMapping("/images")
 public class ImageController {
 
+    /**
+     * Id of image which will be used by default
+     */
     private long defaultImageId = 1L;
 
+    /**
+     * An instance of implementation {@link ImageService} interface.
+     */
     private ImageService imageService;
 
+    /**
+     * An instance of implementation {@link UserService} interface.
+     */
     private UserService userService;
 
+    /**
+     * An instance of implementation {@link StartupService} interface.
+     */
     private StartupService startupService;
 
+    /**
+     * Constructor
+     *
+     * @param imageService   startupService an instance of implementation {@link ImageService} interface
+     * @param userService    startupService an instance of implementation {@link UserService} interface
+     * @param startupService startupService an instance of implementation {@link StartupService} interface
+     */
     @Autowired
     public ImageController(ImageService imageService, UserService userService, StartupService startupService) {
         this.imageService = imageService;
@@ -45,6 +64,15 @@ public class ImageController {
         this.startupService = startupService;
     }
 
+    /**
+     * Method for getting image from DB.
+     *
+     * @param imageId  an instance of implementation {@link ImageService} interface.
+     * @param response an instance of {@link HttpServletResponse}.
+     * @param request  an instance of {@link HttpServletResponse}.
+     * @throws ServletException in case of problems with servlet.
+     * @throws IOException      in case of problems with input/output.
+     */
     @RequestMapping(value = "/{imageId}", method = RequestMethod.GET)
     public void getImage(@PathVariable(name = "imageId") long imageId,
                          HttpServletResponse response, HttpServletRequest request)
@@ -54,6 +82,16 @@ public class ImageController {
         response.getOutputStream().write(image.getData());
     }
 
+    /**
+     * Method for uploading user's image.
+     *
+     * @param file    an image that user uploads.
+     * @param userId  user's id.
+     * @param imageId id of user's image from DB.
+     * @return an address of user's page.
+     * @throws ServletException in case of problems with servlet.
+     * @throws IOException      in case of problems with input/output.
+     */
     @RequestMapping(value = "/uploadUserImage/{userId}/{imageId}", method = RequestMethod.POST)
     public String uploadUserImage(@RequestParam("file") MultipartFile file, @PathVariable("userId") long userId, @PathVariable("imageId") long imageId)
             throws ServletException, IOException {
@@ -79,6 +117,16 @@ public class ImageController {
         return "redirect:/user/" + user.getUsername() + "/true";
     }
 
+    /**
+     * Method for uploading startup's image.
+     *
+     * @param file      an image that user uploads.
+     * @param startupId startup's id.
+     * @param imageId   id of startup's image from DB.
+     * @return an address of startup's page.
+     * @throws ServletException in case of problems with servlet.
+     * @throws IOException      in case of problems with input/output.
+     */
     @RequestMapping(value = "/uploadStartupImage/{startupId}/{imageId}", method = RequestMethod.POST)
     public String uploadStartupImage(@RequestParam("file") MultipartFile file, @PathVariable("startupId") long startupId, @PathVariable("imageId") long imageId)
             throws ServletException, IOException {

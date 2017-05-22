@@ -16,7 +16,6 @@ import org.springframework.web.servlet.ModelAndView;
  * @author Perevoznyk Pavel
  * @version 1.0
  */
-
 @Controller
 @ComponentScan(basePackages = "com.goit.startup.service")
 public class FrontController {
@@ -49,7 +48,7 @@ public class FrontController {
      * @return model and view of index page
      */
     @RequestMapping(
-            value = { "", "/", "/index", "home" },
+            value = {"", "/", "/index", "home"},
             method = RequestMethod.GET
     )
     public ModelAndView getIndexPage(@RequestParam(value = "searchWord", defaultValue = "") String searchWord) {

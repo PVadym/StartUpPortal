@@ -12,7 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Class provides a set of methods for authorization of users in the system
  *
- * @author Вадим
+ * @author Vadym Pylypchenko
+ * @version 1.0
  */
 @Controller
 public class AuthorizationController {

@@ -26,14 +26,34 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping(value = "/investments")
 public class InvestmentController {
 
+    /**
+     * An instance of implementation {@link StartupService} interface.
+     */
     private StartupService startupService;
 
+    /**
+     * An instance of implementation {@link UserService} interface.
+     */
     private UserService userService;
 
+    /**
+     * An instance of implementation {@link InvestmentService} interface.
+     */
     private InvestmentService investmentService;
 
+    /**
+     * An instance of {@link InvestmentValidator}.
+     */
     private InvestmentValidator investmentValidator;
 
+    /**
+     * Constructor
+     *
+     * @param startupService      an instance of implementation {@link StartupService} interface.
+     * @param userService         an instance of implementation {@link UserService} interface.
+     * @param investmentService   An instance of implementation {@link InvestmentService} interface.
+     * @param investmentValidator an instance of {@link InvestmentValidator}.
+     */
     @Autowired
     public InvestmentController(StartupService startupService, UserService userService,
                                 InvestmentService investmentService, InvestmentValidator investmentValidator) {
@@ -43,8 +63,14 @@ public class InvestmentController {
         this.investmentValidator = investmentValidator;
     }
 
+    /**
+     * The method defines models and view for page to making investment.
+     *
+     * @param startupId id of start-p to which user wants to invest.
+     * @return models and view for page to making investment.
+     */
     @RequestMapping(value = "/invest/{startupId}", method = RequestMethod.GET)
-    public ModelAndView investPage(@PathVariable(name = "startupId") long startupId){
+    public ModelAndView investPage(@PathVariable(name = "startupId") long startupId) {
         ModelAndView modelAndView = new ModelAndView();
         Startup startup = startupService.get(startupId);
 
@@ -59,8 +85,15 @@ public class InvestmentController {
         return modelAndView;
     }
 
+    /**
+     * The method adds a new investment into DB.
+     *
+     * @param investment    a new investment, instance of {@link Investment}.
+     * @param bindingResult an instance of implementation {@link BindingResult}.
+     * @return an address of startup if investment was added successfully, or address for making investment otherwise.
+     */
     @RequestMapping(value = "/invest", method = RequestMethod.POST)
-    public String investPage(Investment investment, BindingResult bindingResult){
+    public String investPage(Investment investment, BindingResult bindingResult) {
         long startupId = investment.getStartup().getId();
         Startup startup = startupService.get(startupId);
         User investor = userService.getAuthenticatedUser();
@@ -74,14 +107,20 @@ public class InvestmentController {
         return "redirect:/startups/" + startup.getId();
     }
 
+    /**
+     * Method for removing investment.
+     *
+     * @param investmentId an id of investment to removing.
+     * @return an address of user's page.
+     */
     @RequestMapping(value = "/delete/{investmentId}", method = RequestMethod.GET)
-    public String delete (@PathVariable(name = "investmentId") long investmentId){
+    public String delete(@PathVariable(name = "investmentId") long investmentId) {
         Startup startup = investmentService.get(investmentId).getStartup();
         if (investmentService.get(investmentId).getInvestor().equals(userService.getAuthenticatedUser())
                 || userService.isAuthenticatedAdmin()) {
             startup.getInvestments().remove(investmentService.get(investmentId));
             startupService.update(startup);
         }
-    return "redirect:/user/" + userService.getAuthenticatedUser().getUsername() + "/false";
+        return "redirect:/user/" + userService.getAuthenticatedUser().getUsername() + "/false";
     }
 }
