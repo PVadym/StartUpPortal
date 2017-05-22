@@ -12,6 +12,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 public class FaviconController {
+
+    /**
+     * Method returns a location of website logo
+     *
+     * @return an address of location a website ico
+     */
     @RequestMapping("favicon.ico")
     String favicon() {
         return "forward:/resources/favicon.ico";
