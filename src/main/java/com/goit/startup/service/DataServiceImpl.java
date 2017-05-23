@@ -125,8 +125,7 @@ public abstract class DataServiceImpl<T extends Model> implements DataService<T>
     @Override
     @Transactional
     public void remove(long id) {
-        T value = repository.getOne(id);
-        repository.delete(value);
+        repository.delete(id);
     }
 
     /**
