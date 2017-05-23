@@ -86,7 +86,7 @@ public class Startup extends Model {
                 ", minInvestment=" + minInvestment +
                 ", needInvestment=" + needInvestment +
                 ", investments=" + investments +
-                ", authorId=" + author.getId() +
+                ", authorId=" + author +
                 '}';
     }
 
@@ -98,8 +98,7 @@ public class Startup extends Model {
      */
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+
         if (!super.equals(o)) return false;
 
         Startup startup = (Startup) o;
@@ -107,8 +106,8 @@ public class Startup extends Model {
         if (minInvestment != startup.minInvestment) return false;
         if (needInvestment != startup.needInvestment) return false;
         if (imageId != startup.imageId) return false;
-        if (name != null ? !name.equals(startup.name) : startup.name != null) return false;
-        if (description != null ? !description.equals(startup.description) : startup.description != null) return false;
+        if (!name.equals(startup.name)) return false;
+        if (!description.equals(startup.description)) return false;
         return author != null ? author.equals(startup.author) : startup.author == null;
 
     }
@@ -120,8 +119,8 @@ public class Startup extends Model {
      */
     @Override
     public int hashCode() {
-        int result = name != null ? name.hashCode() : 0;
-        result = 31 * result + (description != null ? description.hashCode() : 0);
+        int result = name.hashCode();
+        result = 31 * result + description.hashCode();
         result = 31 * result + minInvestment;
         result = 31 * result + needInvestment;
         result = 31 * result + (int) (imageId ^ (imageId >>> 32));

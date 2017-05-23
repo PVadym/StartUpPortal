@@ -39,12 +39,14 @@ public class UserTest {
         //transitive
         assertEquals(testUser1,testUser2);
         assertEquals(testUser2,testUser3);
+        assertEquals(testUser1,testUser3);
 
 
         testUser1.setLocked(true);
         assertNotEquals(testUser1, testUser2);
         testUser2.setLocked(true);
         assertEquals(testUser1, testUser2);
+
         testUser1.setUsername("newName");
         assertNotEquals(testUser1, testUser2);
         testUser2.setUsername("newName");
@@ -77,20 +79,26 @@ public class UserTest {
         User testUser1 = new User("name", "pass", UserRole.ADMIN);
         User testUser2 = new User("name", "pass", UserRole.ADMIN);
         assertTrue(testUser1.hashCode() == testUser2.hashCode());
+
         testUser1.setLocked(true);
         assertFalse(testUser1.hashCode() == testUser2.hashCode());
         testUser2.setLocked(true);
+
         testUser1.setPassword("pass1");
         assertFalse(testUser1.hashCode() == testUser2.hashCode());
+
         testUser1.setPassword(null);
         assertFalse(testUser1.hashCode() == testUser2.hashCode());
     }
 
     @Test
     public void isAccountNonExpired() throws Exception {
+
         User testUser = new User("name", "pass", UserRole.USER);
+
         testUser.setLocked(false);
         assertTrue(testUser.isAccountNonExpired());
+
         testUser.setLocked(true);
         assertFalse(testUser.isAccountNonExpired());
     }
@@ -198,11 +206,14 @@ public class UserTest {
         Set<Startup> startups = new HashSet<>();
         startups.add(startup1);
         startups.add(startup2);
+
         User testUser = new User();
         assertTrue(testUser.getStartups().size()==0);
+
         testUser.setStartups(startups);
         assertTrue(testUser.getStartups().size()==2);
         assertTrue(testUser.getStartups().contains(startup1)&&testUser.getStartups().contains(startup2));
+
         testUser.setStartups(null);
         assertTrue(testUser.getStartups().isEmpty());
     }
