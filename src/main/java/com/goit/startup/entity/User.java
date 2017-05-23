@@ -133,16 +133,14 @@ public class User extends Model implements UserDetails {
      */
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
 
         User user = (User) o;
 
         if (isLocked != user.isLocked) return false;
-        if (username != null ? !username.equals(user.username) : user.username != null) return false;
+        if (!username.equals(user.username)) return false;
         if (password != null ? !password.equals(user.password) : user.password != null) return false;
-        if (contacts != null ? !contacts.equals(user.contacts) : user.contacts != null) return false;
+        if (!contacts.equals(user.contacts)) return false;
         return role == user.role;
 
     }
@@ -154,10 +152,10 @@ public class User extends Model implements UserDetails {
      */
     @Override
     public int hashCode() {
-        int result = username != null ? username.hashCode() : 0;
+        int result = username.hashCode();
         result = 31 * result + (password != null ? password.hashCode() : 0);
-        result = 31 * result + (contacts != null ? contacts.hashCode() : 0);
-        result = 31 * result + (role != null ? role.hashCode() : 0);
+        result = 31 * result + contacts.hashCode();
+        result = 31 * result + role.hashCode();
         result = 31 * result + (isLocked ? 1 : 0);
         return result;
     }
