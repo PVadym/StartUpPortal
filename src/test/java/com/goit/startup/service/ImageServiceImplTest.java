@@ -87,6 +87,6 @@ public class ImageServiceImplTest extends DataServiceImplTest<Image>{
      */
     @Override
     protected DataRepository<Image> getRepository() {
-        return repository;
+        return this.repository;
     }
 }
