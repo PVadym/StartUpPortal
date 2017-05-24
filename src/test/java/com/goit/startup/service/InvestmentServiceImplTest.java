@@ -10,7 +10,7 @@ import java.util.List;
 import static org.mockito.Mockito.mock;
 
 /**
- * Class for testing {@link InvestmentServiceImplTest}.
+ * Class for testing {@link InvestmentServiceImpl}.
  *
  * @author Slava Makhinich
  * Created on 24.05.2017.
