@@ -12,7 +12,7 @@ import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 /**
- * Abstract lass for testing {@link StartupServiceImpl}.
+ * Class for testing {@link StartupServiceImpl}.
  *
  * @author Slava Makhinich
  * Created on 23.05.2017.

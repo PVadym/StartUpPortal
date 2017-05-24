@@ -10,7 +10,7 @@ import java.util.List;
 import static org.mockito.Mockito.mock;
 
 /**
- * Abstract lass for testing {@link ImageServiceImplTest}.
+ * Class for testing {@link ImageServiceImplTest}.
  *
  * @author Slava Makhinich
  * Created on 24.05.2017.
