@@ -8,6 +8,7 @@ import com.goit.startup.service.UserService;
 import com.goit.startup.validator.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -45,6 +46,11 @@ public class UserController {
     private UserValidator userValidator;
 
     /**
+     * An instance of {@link PasswordEncoder}.
+     */
+    private PasswordEncoder passwordEncoder;
+
+    /**
      * Constructor.
      *
      * @param userService     an instance of implementation {@link UserService} interface.
@@ -52,10 +58,11 @@ public class UserController {
      * @param userValidator   an instance of {@link UserValidator}.
      */
     @Autowired
-    public UserController(UserService userService, SecurityService securityService, UserValidator userValidator) {
+    public UserController(UserService userService, SecurityService securityService, UserValidator userValidator, PasswordEncoder passwordEncoder) {
         this.userService = userService;
         this.securityService = securityService;
         this.userValidator = userValidator;
+        this.passwordEncoder = passwordEncoder;
     }
 
     /**
@@ -133,8 +140,10 @@ public class UserController {
             return "registration";
         }
         user.setImageId(1L);
+        String oldPassword = user.getPassword();
+        user.setPassword(passwordEncoder.encode(oldPassword));
         userService.add(user);
-        securityService.autoLogin(user.getUsername(), user.getPassword());
+        securityService.autoLogin(user.getUsername(), oldPassword);
         return "redirect:/user/" + user.getUsername() + "/true";
     }
 
@@ -176,6 +185,7 @@ public class UserController {
         if (bindingResult.hasErrors()) {
             return "editUser";
         }
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userService.update(oldUser);
         if (userService.getAuthenticatedUser().getId() == oldUser.getId()) {
             securityService.autoLogin(oldUser.getUsername(), oldUser.getPassword());

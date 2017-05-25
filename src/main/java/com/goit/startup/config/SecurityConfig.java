@@ -13,6 +13,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 
 /**
@@ -66,6 +68,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Value("${parameter.password}")
     private String parameterPassword;
 
+    @Value("${parameter.password.encryptionStrength}")
+    private int encryptionStrength;
     /**
      * An instance of UserDetailsService for working with registered users.
      */
@@ -120,7 +124,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Override
     protected void configure(final AuthenticationManagerBuilder builder) throws Exception {
-        builder.userDetailsService(this.userDetailsService);
+        builder.userDetailsService(this.userDetailsService).passwordEncoder(passwordEncoder());
     }
 
     /**
@@ -133,5 +137,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder(encryptionStrength);
     }
 }
