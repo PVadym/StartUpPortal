@@ -45,6 +45,9 @@ public class UserController {
      */
     private UserValidator userValidator;
 
+    /**
+     * An instance of {@link PasswordEncoder}.
+     */
     private PasswordEncoder passwordEncoder;
 
     /**
