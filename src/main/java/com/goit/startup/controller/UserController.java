@@ -139,7 +139,6 @@ public class UserController {
         user.setImageId(1L);
         String oldPassword = user.getPassword();
         user.setPassword(passwordEncoder.encode(oldPassword));
-        System.out.println(user.getPassword());
         userService.add(user);
         securityService.autoLogin(user.getUsername(), oldPassword);
         return "redirect:/user/" + user.getUsername() + "/true";
