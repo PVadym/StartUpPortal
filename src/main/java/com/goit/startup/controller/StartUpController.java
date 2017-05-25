@@ -65,7 +65,6 @@ public class StartUpController {
         Startup startup = new Startup();
         startup.setAuthor(userService.get(userId));
         modelAndView.addObject("startup", startup);
-        modelAndView.addObject("is_admin", this.userService.isAuthenticatedAdmin());
         modelAndView.setViewName("addStartUp");
         return modelAndView;
     }
@@ -86,7 +85,6 @@ public class StartUpController {
         }
         long userId = startup.getAuthor().getId();
         User user = userService.get(userId);
-        startup.setAuthor(user);
         startup.setImageId(1L);
         user.getStartups().add(startup);
         userService.update(user);
