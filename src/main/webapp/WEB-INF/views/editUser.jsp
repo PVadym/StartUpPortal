@@ -69,12 +69,12 @@
                     <div class="form-group">
                         <label>
                             <input type="radio" name="locked" value="true" tabindex="4"
-                                   <c:if test="${user.isLocked}">checked</c:if>/>Locked
+                                   <c:if test="${user.locked}">checked</c:if>/>Locked
                         </label>
                         &nbsp;&nbsp;
                         <label>
                             <input type="radio" name="locked" value="false" tabindex="5"
-                                   <c:if test="${!user.isLocked}">checked</c:if>/>Not locked
+                                   <c:if test="${!user.locked}">checked</c:if>/>Not locked
                         </label>
                     </div>
                 </c:if>

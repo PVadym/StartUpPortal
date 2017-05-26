@@ -107,7 +107,6 @@ public class UserController {
         } else {
             modelAndView.setViewName("redirect:/login");
         }
-
         return modelAndView;
     }
 
@@ -185,10 +184,10 @@ public class UserController {
         if (bindingResult.hasErrors()) {
             return "editUser";
         }
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        oldUser.setPassword(passwordEncoder.encode(user.getPassword()));
         userService.update(oldUser);
         if (userService.getAuthenticatedUser().getId() == oldUser.getId()) {
-            securityService.autoLogin(oldUser.getUsername(), oldUser.getPassword());
+            securityService.autoLogin(oldUser.getUsername(), user.getPassword());
             return "redirect:/user/" + oldUser.getUsername() + "/true";
         }
         return "redirect:/user";
