@@ -180,15 +180,19 @@ public class UserController {
      * @return models and view for page to update user's data.
      */
     @RequestMapping(value = "/edit/{userId}", method = RequestMethod.GET)
-    public ModelAndView editUserInfoPage(@PathVariable(name = "userId") long userId) {
+    public ModelAndView editUserInfoPage(@PathVariable(name = "userId") long userId) throws IllegalAccessException {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("user", userService.get(userId));
-        modelAndView.addObject("roles", UserRole.values());
-        modelAndView.addObject("is_admin", this.userService.isAuthenticatedAdmin());
-        modelAndView.setViewName("editUser");
+        if (userService.get(userId).equals(userService.getAuthenticatedUser()) || userService.isAuthenticatedAdmin()) {
+            modelAndView.addObject("user", userService.get(userId));
+            modelAndView.addObject("roles", UserRole.values());
+            modelAndView.addObject("is_admin", this.userService.isAuthenticatedAdmin());
+            modelAndView.setViewName("editUser");
+        }
+        else {
+            throw new IllegalAccessException("Private access only!");
+        }
         return modelAndView;
     }
-
     /**
      * Method to edit user.
      *
@@ -261,7 +265,7 @@ public class UserController {
 
         authenticatedUser.setPassword(passwordEncoder.encode(password));
         userService.update(authenticatedUser);
-        return "redirect:/user"+ authenticatedUser.getUsername() + "/true";
+        return "redirect:/user/"+ authenticatedUser.getUsername() + "/true";
     }
 
     /**

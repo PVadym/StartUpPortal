@@ -14,7 +14,7 @@ import static org.mockito.Mockito.when;
 /**
  * Class for testing {@link DevelopersController}.
  *
- * @author Slava Makhinich
+ * @author Slava Makhinich.
  * Created on 24.05.2017.
  * @version 1.0
  */
