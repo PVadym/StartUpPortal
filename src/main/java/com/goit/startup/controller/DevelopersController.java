@@ -1,7 +1,10 @@
 package com.goit.startup.controller;
 
+import com.goit.startup.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  * Class for directing to the developers page
@@ -14,12 +17,30 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class DevelopersController {
 
     /**
-     * Method returns developers page
+     * An instance of implementation {@link UserService} interface.
+     */
+    private UserService userService;
+
+    /**
+     * Constructor
      *
-     * @return an address of developers page
+     * @param userService an instance of implementation {@link UserService} interface
+     */
+    @Autowired
+    public DevelopersController(UserService userService) {
+        this.userService = userService;
+    }
+
+    /**
+     * Method creates ModelAndView for developers page.
+     *
+     * @return an ModelAndView for developers page.
      */
     @RequestMapping(value = "/developers")
-    public String developersPage() {
-        return "/developers";
+    public ModelAndView developersPage() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("is_admin", userService.isAuthenticatedAdmin());
+        modelAndView.setViewName("/developers");
+        return modelAndView;
     }
 }
