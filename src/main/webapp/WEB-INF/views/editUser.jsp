@@ -39,21 +39,7 @@
                     <textarea class="form-control" rows="5" id="contacts" name="contacts"
                               tabindex="2">${user.contacts}</textarea>
                 </div>
-                <div class="form-group">
-                    <label for="password">Password:</label>
-                    <input type="password" class="form-control" name="password" id="password" tabindex="3"
-                           required placeholder="Password" value="${user.password}"/>
-                    <div class="text-danger" role="alert">
-                        <form:errors path="password"></form:errors>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <input type="password" class="form-control" name="confirmPassword" required
-                           placeholder="Confirm Password" value="${user.password}"/>
-                    <div class="text-danger" role="alert">
-                        <form:errors path="confirmPassword"></form:errors>
-                    </div>
-                </div>
+
 
                 <c:if test="${is_admin}">
                     <div class="form-group">
@@ -78,6 +64,15 @@
                         </label>
                     </div>
                 </c:if>
+                
+                <div class="form-group ">
+                    <div class="row">
+                        <div class="col-sm-6 col-sm-offset-2">
+                            <a class="btn " role="button"
+                               href="<c:url value='/user/changePassword'/>">Change Password</a>
+                        </div>
+                    </div>
+                </div>
 
                 <div class="form-group ">
                     <div class="row">

@@ -5,17 +5,23 @@ import com.goit.startup.entity.User;
 import com.goit.startup.enums.UserRole;
 import com.goit.startup.service.SecurityService;
 import com.goit.startup.service.UserService;
+import com.goit.startup.validator.PasswordChangeValidator;
 import com.goit.startup.validator.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletRequest;
 
 
 /**
@@ -27,6 +33,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @ComponentScan(basePackages = "com.goit.startup.service")
+@PropertySource(value = "classpath:validation.properties")
 @RequestMapping(value = "/user")
 public class UserController {
 
@@ -46,9 +53,16 @@ public class UserController {
     private UserValidator userValidator;
 
     /**
+     * An instance of {@link PasswordChangeValidator}.
+     */
+    private PasswordChangeValidator passwordChangeValidator;
+
+    /**
      * An instance of {@link PasswordEncoder}.
      */
     private PasswordEncoder passwordEncoder;
+
+
 
     /**
      * Constructor.
@@ -56,12 +70,17 @@ public class UserController {
      * @param userService     an instance of implementation {@link UserService} interface.
      * @param securityService an instance of implementation {@link SecurityService} interface.
      * @param userValidator   an instance of {@link UserValidator}.
+     * @param passwordChangeValidator   an instance of {@link PasswordChangeValidator}.
+     * @param passwordEncoder   an instance of {@link PasswordEncoder}.
+     *
      */
     @Autowired
-    public UserController(UserService userService, SecurityService securityService, UserValidator userValidator, PasswordEncoder passwordEncoder) {
+    public UserController(UserService userService, SecurityService securityService, UserValidator userValidator,
+                          PasswordChangeValidator passwordChangeValidator, PasswordEncoder passwordEncoder) {
         this.userService = userService;
         this.securityService = securityService;
         this.userValidator = userValidator;
+        this.passwordChangeValidator = passwordChangeValidator;
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -176,20 +195,63 @@ public class UserController {
         User oldUser = userService.get(user.getId());
         oldUser.setUsername(user.getUsername());
         oldUser.setContacts(user.getContacts());
-        oldUser.setPassword(user.getPassword());
-        oldUser.setConfirmPassword(user.getConfirmPassword());
+        oldUser.setConfirmPassword(oldUser.getPassword());
         oldUser.setRole(user.getRole());
         oldUser.setLocked(isLocked);
         userValidator.validate(oldUser, bindingResult);
         if (bindingResult.hasErrors()) {
             return "editUser";
         }
-        oldUser.setPassword(passwordEncoder.encode(user.getPassword()));
         userService.update(oldUser);
         if (userService.getAuthenticatedUser().getId() == oldUser.getId()) {
-            securityService.autoLogin(oldUser.getUsername(), user.getPassword());
+            securityService.autoLogin(oldUser.getUsername(), oldUser.getPassword());
             return "redirect:/user/" + oldUser.getUsername() + "/true";
         }
+        return "redirect:/user";
+    }
+
+    /**
+     * Method defines models and view for page to change user's password.
+     *
+     * @return models and view for page to change user's password.
+     */
+    @RequestMapping(value = "/changePassword", method = RequestMethod.GET)
+    public ModelAndView changePasswordPage() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("user", userService.getAuthenticatedUser());
+        modelAndView.addObject("is_admin", this.userService.isAuthenticatedAdmin());
+        modelAndView.setViewName("changePassword");
+        return modelAndView;
+    }
+
+    /**
+     * Method to edit user's password.
+     *
+     * @param oldPassword is user's old password
+     * @param password is user's new password
+     * @param confirmPassword is user's new password confirmation
+     * @param request is a {@link HttpServletRequest}.
+     * @return address of user's page if user was updating successfully, or address of page for updating user otherwise.
+     */
+    @RequestMapping(value = "/changePassword", method = RequestMethod.POST)
+    public String changePassword(@RequestParam(value = "oldPassword", defaultValue = "") String oldPassword,
+                                 @RequestParam(value = "password", defaultValue = "") String password,
+                                 @RequestParam(value = "confirmPassword", defaultValue = "") String confirmPassword,
+                                 HttpServletRequest request) {
+
+        User authenticatedUser = userService.getAuthenticatedUser();
+        if(!BCrypt.checkpw(oldPassword, authenticatedUser.getPassword())){
+            request.setAttribute("errorMessageOldPassword", "Wrong old password");
+            return "changePassword";
+        }
+        String validationResult = passwordChangeValidator.validate(password, confirmPassword);
+        if (!validationResult.equals("")) {
+            request.setAttribute("errorMessagePassword", validationResult);
+            return "changePassword";
+        }
+
+        authenticatedUser.setPassword(passwordEncoder.encode(password));
+        userService.update(authenticatedUser);
         return "redirect:/user";
     }
 
