@@ -6,7 +6,7 @@ import com.goit.startup.entity.User;
 import com.goit.startup.enums.UserRole;
 import com.goit.startup.service.SecurityService;
 import com.goit.startup.service.UserService;
-import com.goit.startup.validator.UserValidator;
+import com.goit.startup.validator.UserRegisterValidator;
 import org.junit.Test;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.BindingResult;

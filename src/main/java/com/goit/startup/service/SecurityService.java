@@ -17,4 +17,11 @@ public interface SecurityService {
      * @param password a user`s password
      */
     void autoLogin(String username, String password);
+
+    /**
+     * Method performs username change for loggedin user
+     *
+     * @param username a user`s name
+     */
+    void changeAuthenticatedUserName(String username);
 }

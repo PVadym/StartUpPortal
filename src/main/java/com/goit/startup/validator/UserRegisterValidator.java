@@ -22,7 +22,7 @@ import org.springframework.validation.Validator;
 
 @Component
 @PropertySource(value = "classpath:validation.properties")
-public class UserValidator implements Validator {
+public class UserRegisterValidator implements Validator {
 
     /**
      * An instance of implementation {@link UserService} interface.
@@ -59,7 +59,7 @@ public class UserValidator implements Validator {
      * @param userService an instance of implementation {@link UserService} interface.
      */
     @Autowired
-    public UserValidator(UserService userService) {
+    public UserRegisterValidator(UserService userService) {
         this.userService = userService;
     }
 

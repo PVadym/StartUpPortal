@@ -6,7 +6,8 @@ import com.goit.startup.enums.UserRole;
 import com.goit.startup.service.SecurityService;
 import com.goit.startup.service.UserService;
 import com.goit.startup.validator.PasswordChangeValidator;
-import com.goit.startup.validator.UserValidator;
+import com.goit.startup.validator.UserEditValidator;
+import com.goit.startup.validator.UserRegisterValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.PropertySource;
@@ -14,7 +15,6 @@ import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -48,9 +48,15 @@ public class UserController {
     private SecurityService securityService;
 
     /**
-     * An instance of {@link UserValidator}.
+     * An instance of {@link UserRegisterValidator}.
      */
-    private UserValidator userValidator;
+    private UserRegisterValidator userRegisterValidator;
+
+
+    /**
+     * An instance of {@link UserEditValidator}.
+     */
+    private UserEditValidator userEditValidator;
 
     /**
      * An instance of {@link PasswordChangeValidator}.
@@ -64,22 +70,24 @@ public class UserController {
 
 
 
+
     /**
      * Constructor.
      *
      * @param userService     an instance of implementation {@link UserService} interface.
      * @param securityService an instance of implementation {@link SecurityService} interface.
-     * @param userValidator   an instance of {@link UserValidator}.
+     * @param userRegisterValidator   an instance of {@link UserRegisterValidator}.
+     * @param userEditValidator   an instance of {@link UserEditValidator}.
      * @param passwordChangeValidator   an instance of {@link PasswordChangeValidator}.
      * @param passwordEncoder   an instance of {@link PasswordEncoder}.
      *
      */
     @Autowired
-    public UserController(UserService userService, SecurityService securityService, UserValidator userValidator,
-                          PasswordChangeValidator passwordChangeValidator, PasswordEncoder passwordEncoder) {
+    public UserController(UserService userService, SecurityService securityService, UserRegisterValidator userRegisterValidator, UserEditValidator userEditValidator, PasswordChangeValidator passwordChangeValidator, PasswordEncoder passwordEncoder) {
         this.userService = userService;
         this.securityService = securityService;
-        this.userValidator = userValidator;
+        this.userRegisterValidator = userRegisterValidator;
+        this.userEditValidator = userEditValidator;
         this.passwordChangeValidator = passwordChangeValidator;
         this.passwordEncoder = passwordEncoder;
     }
@@ -153,7 +161,7 @@ public class UserController {
      */
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String registerUser(User user, BindingResult bindingResult) {
-        userValidator.validate(user, bindingResult);
+        userRegisterValidator.validate(user, bindingResult);
         if (bindingResult.hasErrors()) {
             return "registration";
         }
@@ -198,13 +206,13 @@ public class UserController {
         oldUser.setConfirmPassword(oldUser.getPassword());
         oldUser.setRole(user.getRole());
         oldUser.setLocked(isLocked);
-        userValidator.validate(oldUser, bindingResult);
+        userEditValidator.validate(oldUser, bindingResult);
         if (bindingResult.hasErrors()) {
             return "editUser";
         }
         userService.update(oldUser);
         if (userService.getAuthenticatedUser().getId() == oldUser.getId()) {
-            securityService.autoLogin(oldUser.getUsername(), oldUser.getPassword());
+            securityService.changeAuthenticatedUserName(oldUser.getUsername());
             return "redirect:/user/" + oldUser.getUsername() + "/true";
         }
         return "redirect:/user";
@@ -252,7 +260,7 @@ public class UserController {
 
         authenticatedUser.setPassword(passwordEncoder.encode(password));
         userService.update(authenticatedUser);
-        return "redirect:/user";
+        return "redirect:/user"+ authenticatedUser.getUsername() + "/true";
     }
 
     /**

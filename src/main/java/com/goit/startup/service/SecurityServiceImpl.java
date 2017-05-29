@@ -1,8 +1,10 @@
 package com.goit.startup.service;
 
+import com.goit.startup.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
@@ -31,7 +33,7 @@ public class SecurityServiceImpl implements SecurityService {
      * Constructor
      *
      * @param authenticationManager an instance of class that implements {@link AuthenticationManager} interface
-     * @param userService an instance of {@link UserService}
+     * @param userService           an instance of {@link UserService}
      */
     @Autowired
     public SecurityServiceImpl(AuthenticationManager authenticationManager, UserService userService) {
@@ -51,8 +53,19 @@ public class SecurityServiceImpl implements SecurityService {
         UsernamePasswordAuthenticationToken authenticationToken =
                 new UsernamePasswordAuthenticationToken(userDetails, password, userDetails.getAuthorities());
         authenticationManager.authenticate(authenticationToken);
-        if(authenticationToken.isAuthenticated()){
+        if (authenticationToken.isAuthenticated()) {
             SecurityContextHolder.getContext().setAuthentication(authenticationToken);
         }
+    }
+
+    /**
+     * Method performs username change for loggedin user
+     *
+     * @param username a user`s name
+     */
+    public void changeAuthenticatedUserName(String username) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User userDetails = (User) authentication.getPrincipal();
+        userDetails.setUsername(username);
     }
 }
