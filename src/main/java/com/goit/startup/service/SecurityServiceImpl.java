@@ -61,11 +61,14 @@ public class SecurityServiceImpl implements SecurityService {
     /**
      * Method performs username change for loggedin user
      *
-     * @param username a user`s name
+     * @param user a user
      */
-    public void changeAuthenticatedUserName(String username) {
+    public void changeAuthenticatedUser(User user) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        User userDetails = (User) authentication.getPrincipal();
-        userDetails.setUsername(username);
+        User authenticationPrincipal = (User) authentication.getPrincipal();
+        authenticationPrincipal.setUsername(user.getUsername());
+        authenticationPrincipal.setContacts(user.getContacts());
+        authenticationPrincipal.setRole(user.getRole());
+        authenticationPrincipal.setLocked(user.isLocked());
     }
 }

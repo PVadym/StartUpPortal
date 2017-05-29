@@ -201,6 +201,7 @@ public class UserController {
     public String editUserInfo(User user, BindingResult bindingResult,
                                @RequestParam(value = "locked", defaultValue = "false") boolean isLocked) {
         User oldUser = userService.get(user.getId());
+        String oldName = oldUser.getUsername();
         oldUser.setUsername(user.getUsername());
         oldUser.setContacts(user.getContacts());
         oldUser.setConfirmPassword(oldUser.getPassword());
@@ -212,7 +213,7 @@ public class UserController {
         }
         userService.update(oldUser);
         if (userService.getAuthenticatedUser().getId() == oldUser.getId()) {
-            securityService.changeAuthenticatedUserName(oldUser.getUsername());
+            securityService.changeAuthenticatedUser(oldUser);
             return "redirect:/user/" + oldUser.getUsername() + "/true";
         }
         return "redirect:/user";
