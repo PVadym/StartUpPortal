@@ -83,7 +83,7 @@ public class UserEditValidatorTest {
     }
 
     @Test
-    public void validateExistNameAndDifferentId() throws Exception {
+    public void validateDifferentIdAndExeption() throws Exception {
 
         user.setUsername("Tester");
         user.setId(1L);
@@ -96,6 +96,7 @@ public class UserEditValidatorTest {
         userEditValidator.validate(user, errors);
         userEditValidator.validate(user, errors);
         verify(errors, times(2)).rejectValue("username", "Required", null, null);
+        verify(errors,times(1)).rejectValue("username", "Duplicate.user.username");
     }
 
 
