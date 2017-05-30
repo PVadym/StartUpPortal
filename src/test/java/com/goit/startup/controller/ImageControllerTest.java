@@ -125,10 +125,12 @@ public class ImageControllerTest {
         MultipartFile fileOk = new MockMultipartFile("mockfile", "file","image/jpg", data);
         MultipartFile fileNameTypePng = new MockMultipartFile("mockfile", "file","image/png", data);
         MultipartFile fileNameTypeGif = new MockMultipartFile("mockfile", "file","image/gif", data);
+        MultipartFile fileNameTypeJpeg = new MockMultipartFile("mockfile", "file","image/jpeg", data);
 
         assertEquals(imageController.uploadUserImage(fileNameTypePng,1L,1L),"redirect:/user/" + user.getUsername() + "/true");
         assertEquals(imageController.uploadUserImage(fileNameTypeGif,1L,1L),"redirect:/user/" + user.getUsername() + "/true");
-        verify(userService,times(2)).update(user);
+        assertEquals(imageController.uploadUserImage(fileNameTypeJpeg,1L,1L),"redirect:/user/" + user.getUsername() + "/true");
+        verify(userService,times(3)).update(user);
         imageController.uploadUserImage(fileOk,1L,111L);
         verify(imageService).update(image);
 
