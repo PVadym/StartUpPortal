@@ -1,4 +1,5 @@
-StartUp Portal(SUP)
+StartUp Portal(SUP).
+
 The SUP provides users with convenient tools to found startups, find investors for user’s
 startups and become an investor of existing startups.
 The core of the SUP is a Java application and a SQL (MySQL) database.
